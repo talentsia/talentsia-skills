@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+Strengthens the shared method across the same ten skills: novice capture and optional mind sweep; trusted-store bootstrap with verified writes and honest fallbacks; explicit state handoffs; useful contexts, person agendas and bring-forward tied to a real mechanism; context/time/energy filtering before priority; predefined, incoming and defining work; independent executable next actions; guided eleven-function weekly review with coverage gaps; five-step natural planning, six horizons and reference-read failure behavior.
+
+Adds an indexed Project reference and expands synthetic regression fixtures from 32 to 64. Package validation, isolated reference closure and fresh local runtime discovery/source reads were checked on the reviewed candidate. Behavior fixtures and real mobile app behavior remain unexecuted. Version promotion does not imply broader behavioral validation.
+
+Existing records, personal context and external automation remain outside the public package. No backend, permission expansion, new license or guaranteed result is introduced. Prior tags/releases are preserved.
+
 ## 0.2.0
 
 Replaces the broad legacy `skills/talentsia-do/SKILL.md` entrypoint with exactly ten skills in the same Talentsia Do plugin. No legacy eleventh skill remains. Names: `clear-my-head`, `organize-my-work`, `plan-my-day`, `move-forward`, `prepare`, `do-with-me`, `follow-through`, `make-room`, `resume`, `review`.

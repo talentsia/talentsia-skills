@@ -514,6 +514,630 @@
         "Clarify accepted vs proposed; draft/proposed action only; no automatic message or calendar event."
       ],
       "status": "not_run"
+    },
+    {
+      "id": "bare-capture-pt",
+      "expected_skill": "clear-my-head",
+      "language": "pt",
+      "prompt": "Clear my head. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Brief purpose plus open capture invitation; no invented input, questionnaire or setup prerequisite."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "bare-capture-en",
+      "expected_skill": "clear-my-head",
+      "language": "en",
+      "prompt": "Clear my head. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Brief purpose plus open capture invitation; no invented input, questionnaire or setup prerequisite."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "mindsweep-pt",
+      "expected_skill": "clear-my-head",
+      "language": "pt",
+      "prompt": "That is my first dump. Help me check for anything else. Responda em português.",
+      "records": [
+        {
+          "id": "I-899",
+          "state": "inbox",
+          "text": "Garage is on my mind; maybe take a course"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Optional small group of work/home/people prompts; no invented obligations; retain raw inputs."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "mindsweep-en",
+      "expected_skill": "clear-my-head",
+      "language": "en",
+      "prompt": "That is my first dump. Help me check for anything else. Respond in English.",
+      "records": [
+        {
+          "id": "I-899",
+          "state": "inbox",
+          "text": "Garage is on my mind; maybe take a course"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Optional small group of work/home/people prompts; no invented obligations; retain raw inputs."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "bootstrap-pt",
+      "expected_skill": "organize-my-work",
+      "language": "pt",
+      "prompt": "I have no system. Organize this accepted task; no storage tools. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Useful portable record marked not saved, proposed ID; no false setup/save."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "bootstrap-en",
+      "expected_skill": "organize-my-work",
+      "language": "en",
+      "prompt": "I have no system. Organize this accepted task; no storage tools. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Useful portable record marked not saved, proposed ID; no false setup/save."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "handoff-chain-pt",
+      "expected_skill": "multiple_existing",
+      "language": "pt",
+      "prompt": "Capture the promised draft, organize it, choose an action, review the draft with me, then review the same system. Responda em português.",
+      "records": [
+        {
+          "id": "I-900",
+          "sourceId": "S-900",
+          "state": "inbox",
+          "text": "I promised a reviewed draft",
+          "draft": "The meeting was postponed."
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Same source/item/project/action IDs through all stages; actual draft artifact; revisions and evidence reconciled; no competing lists."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "handoff-chain-en",
+      "expected_skill": "multiple_existing",
+      "language": "en",
+      "prompt": "Capture the promised draft, organize it, choose an action, review the draft with me, then review the same system. Respond in English.",
+      "records": [
+        {
+          "id": "I-900",
+          "sourceId": "S-900",
+          "state": "inbox",
+          "text": "I promised a reviewed draft",
+          "draft": "The meeting was postponed."
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Same source/item/project/action IDs through all stages; actual draft artifact; revisions and evidence reconciled; no competing lists."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "agenda-context-pt",
+      "expected_skill": "organize-my-work",
+      "language": "pt",
+      "prompt": "Keep two topics to discuss with my manager; neither was delegated. Responda em português.",
+      "records": [
+        {
+          "id": "I-905",
+          "state": "inbox",
+          "text": "Discuss workload and ask about the meeting format with manager",
+          "acceptance": "User wants topics retained; no promise from manager"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Person agenda linked to outcomes, not fabricated Waiting For; no contact."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "agenda-context-en",
+      "expected_skill": "organize-my-work",
+      "language": "en",
+      "prompt": "Keep two topics to discuss with my manager; neither was delegated. Respond in English.",
+      "records": [
+        {
+          "id": "I-905",
+          "state": "inbox",
+          "text": "Discuss workload and ask about the meeting format with manager",
+          "acceptance": "User wants topics retained; no promise from manager"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Person agenda linked to outcomes, not fabricated Waiting For; no contact."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "tickler-pt",
+      "expected_skill": "organize-my-work",
+      "language": "pt",
+      "prompt": "Keep this option to reconsider next month; no reminders or storage available. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Proposed dated bring-forward not saved; distinguish mechanism from date; no monitoring promise."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "tickler-en",
+      "expected_skill": "organize-my-work",
+      "language": "en",
+      "prompt": "Keep this option to reconsider next month; no reminders or storage available. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Proposed dated bring-forward not saved; distinguish mechanism from date; no monitoring promise."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "due-bringforward-pt",
+      "expected_skill": "review",
+      "language": "pt",
+      "prompt": "This existing user-reviewed tickler item became due today. Responda em português.",
+      "records": [
+        {
+          "id": "T-901",
+          "state": "incubated",
+          "text": "Reconsider optional course",
+          "reviewDate": "2030-04-03",
+          "mechanism": "User-maintained list inspected during review"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Revisit material, clarify disposition, preserve source and report actual coverage; no assumed automatic alert."
+      ],
+      "status": "not_run",
+      "current_date": "2030-04-03"
+    },
+    {
+      "id": "due-bringforward-en",
+      "expected_skill": "review",
+      "language": "en",
+      "prompt": "This existing user-reviewed tickler item became due today. Respond in English.",
+      "records": [
+        {
+          "id": "T-901",
+          "state": "incubated",
+          "text": "Reconsider optional course",
+          "reviewDate": "2030-04-03",
+          "mechanism": "User-maintained list inspected during review"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Revisit material, clarify disposition, preserve source and report actual coverage; no assumed automatic alert."
+      ],
+      "status": "not_run",
+      "current_date": "2030-04-03"
+    },
+    {
+      "id": "filter-order-pt",
+      "expected_skill": "plan-my-day",
+      "language": "pt",
+      "prompt": "High-priority task requires a computer; I only have a phone and ten low-energy minutes. Responda em português.",
+      "records": [
+        {
+          "id": "A-910",
+          "state": "ready",
+          "action": "Edit spreadsheet on computer",
+          "context": "computer",
+          "minutes": 20,
+          "priority": "high"
+        },
+        {
+          "id": "A-911",
+          "state": "ready",
+          "action": "Read supplied short note on phone",
+          "context": "phone",
+          "minutes": 5,
+          "energy": "low"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Filter context/time/energy before priority; choose feasible work, preserve unavailable important task."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "filter-order-en",
+      "expected_skill": "plan-my-day",
+      "language": "en",
+      "prompt": "High-priority task requires a computer; I only have a phone and ten low-energy minutes. Respond in English.",
+      "records": [
+        {
+          "id": "A-910",
+          "state": "ready",
+          "action": "Edit spreadsheet on computer",
+          "context": "computer",
+          "minutes": 20,
+          "priority": "high"
+        },
+        {
+          "id": "A-911",
+          "state": "ready",
+          "action": "Read supplied short note on phone",
+          "context": "phone",
+          "minutes": 5,
+          "energy": "low"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Filter context/time/energy before priority; choose feasible work, preserve unavailable important task."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "threefold-pt",
+      "expected_skill": "plan-my-day",
+      "language": "pt",
+      "prompt": "I have planned work, fresh requests and an unclarified inbox. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Account for predefined/incoming/defining work without making fresh inputs automatically highest priority."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "threefold-en",
+      "expected_skill": "plan-my-day",
+      "language": "en",
+      "prompt": "I have planned work, fresh requests and an unclarified inbox. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Account for predefined/incoming/defining work without making fresh inputs automatically highest priority."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "parallel-actions-pt",
+      "expected_skill": "move-forward",
+      "language": "pt",
+      "prompt": "Project P-901 has two independent ready actions and a third blocked by approval. Responda em português.",
+      "records": [
+        {
+          "id": "P-901",
+          "state": "active",
+          "outcome": "Approved launch material",
+          "actions": [
+            {
+              "id": "A-901",
+              "state": "ready",
+              "action": "Review existing copy"
+            },
+            {
+              "id": "A-902",
+              "state": "ready",
+              "action": "Check supplied image dimensions"
+            },
+            {
+              "id": "A-903",
+              "state": "blocked",
+              "action": "Publish approved material",
+              "dependency": "Approval not received"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Keep both ready fronts executable; blocked step remains support/dependency; same project ID."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "parallel-actions-en",
+      "expected_skill": "move-forward",
+      "language": "en",
+      "prompt": "Project P-901 has two independent ready actions and a third blocked by approval. Respond in English.",
+      "records": [
+        {
+          "id": "P-901",
+          "state": "active",
+          "outcome": "Approved launch material",
+          "actions": [
+            {
+              "id": "A-901",
+              "state": "ready",
+              "action": "Review existing copy"
+            },
+            {
+              "id": "A-902",
+              "state": "ready",
+              "action": "Check supplied image dimensions"
+            },
+            {
+              "id": "A-903",
+              "state": "blocked",
+              "action": "Publish approved material",
+              "dependency": "Approval not received"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Keep both ready fronts executable; blocked step remains support/dependency; same project ID."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "weekly-eleven-pt",
+      "expected_skill": "review",
+      "language": "pt",
+      "prompt": "Guide a weekly review; inbox and projects accessible, calendar and checklists inaccessible. Responda em português.",
+      "records": [
+        {
+          "id": "I-920",
+          "state": "inbox",
+          "text": "Maybe take a course"
+        },
+        {
+          "id": "P-920",
+          "state": "active",
+          "outcome": "Reviewed internal draft",
+          "nextAction": null
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Eleven coverage functions addressed progressively; missing sources explicitly unavailable, not full-review claim."
+      ],
+      "status": "not_run",
+      "unavailable_sources": [
+        "calendar",
+        "checklists"
+      ]
+    },
+    {
+      "id": "weekly-eleven-en",
+      "expected_skill": "review",
+      "language": "en",
+      "prompt": "Guide a weekly review; inbox and projects accessible, calendar and checklists inaccessible. Respond in English.",
+      "records": [
+        {
+          "id": "I-920",
+          "state": "inbox",
+          "text": "Maybe take a course"
+        },
+        {
+          "id": "P-920",
+          "state": "active",
+          "outcome": "Reviewed internal draft",
+          "nextAction": null
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Eleven coverage functions addressed progressively; missing sources explicitly unavailable, not full-review claim."
+      ],
+      "status": "not_run",
+      "unavailable_sources": [
+        "calendar",
+        "checklists"
+      ]
+    },
+    {
+      "id": "natural-five-pt",
+      "expected_skill": "move-forward",
+      "language": "pt",
+      "prompt": "The purpose and success of P-902 are unclear. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Load planning reference; guide purpose/success/possibilities/organization/actions progressively; no invented values."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "natural-five-en",
+      "expected_skill": "move-forward",
+      "language": "en",
+      "prompt": "The purpose and success of P-902 are unclear. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Load planning reference; guide purpose/success/possibilities/organization/actions progressively; no invented values."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "horizons-six-pt",
+      "expected_skill": "make-room",
+      "language": "pt",
+      "prompt": "My active projects conflict with a stated ongoing responsibility and long-term goal. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Load horizons; distinguish ongoing area from project, use stated goals; changes remain proposed."
+      ],
+      "status": "not_run",
+      "user_context": {
+        "ongoing_area": "Maintain health",
+        "stated_goal": "Finish a professional qualification",
+        "constraint": "Current project load leaves no study or exercise time"
+      }
+    },
+    {
+      "id": "horizons-six-en",
+      "expected_skill": "make-room",
+      "language": "en",
+      "prompt": "My active projects conflict with a stated ongoing responsibility and long-term goal. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Load horizons; distinguish ongoing area from project, use stated goals; changes remain proposed."
+      ],
+      "status": "not_run",
+      "user_context": {
+        "ongoing_area": "Maintain health",
+        "stated_goal": "Finish a professional qualification",
+        "constraint": "Current project load leaves no study or exercise time"
+      }
+    },
+    {
+      "id": "reference-failure-pt",
+      "expected_skill": "review",
+      "language": "pt",
+      "prompt": "Run weekly review, but the required planning reference cannot be read. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Name missing reference; ask relevant section; useful bounded partial work; no claim full method applied."
+      ],
+      "status": "not_run",
+      "harness_setup": {
+        "reference_reads": {
+          "references/review-and-planning.md": "permission_denied"
+        },
+        "must_inject_failure": true
+      }
+    },
+    {
+      "id": "reference-failure-en",
+      "expected_skill": "review",
+      "language": "en",
+      "prompt": "Run weekly review, but the required planning reference cannot be read. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Name missing reference; ask relevant section; useful bounded partial work; no claim full method applied."
+      ],
+      "status": "not_run",
+      "harness_setup": {
+        "reference_reads": {
+          "references/review-and-planning.md": "permission_denied"
+        },
+        "must_inject_failure": true
+      }
+    },
+    {
+      "id": "storage-failure-pt",
+      "expected_skill": "organize-my-work",
+      "language": "pt",
+      "prompt": "Update I-904, but the designated record cannot be read. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "No blind write; request supplied/current snapshot or not-saved proposed changes."
+      ],
+      "status": "not_run",
+      "harness_setup": {
+        "record_reads": {
+          "I-904": "permission_denied"
+        },
+        "must_inject_failure": true
+      }
+    },
+    {
+      "id": "storage-failure-en",
+      "expected_skill": "organize-my-work",
+      "language": "en",
+      "prompt": "Update I-904, but the designated record cannot be read. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "No blind write; request supplied/current snapshot or not-saved proposed changes."
+      ],
+      "status": "not_run",
+      "harness_setup": {
+        "record_reads": {
+          "I-904": "permission_denied"
+        },
+        "must_inject_failure": true
+      }
+    },
+    {
+      "id": "calendar-info-pt",
+      "expected_skill": "plan-my-day",
+      "language": "pt",
+      "prompt": "My note is information relevant only to tomorrow, not an appointment. Responda em português.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Retain day-specific information distinct from events, deadlines and discretionary actions."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "calendar-info-en",
+      "expected_skill": "plan-my-day",
+      "language": "en",
+      "prompt": "My note is information relevant only to tomorrow, not an appointment. Respond in English.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Retain day-specific information distinct from events, deadlines and discretionary actions."
+      ],
+      "status": "not_run"
     }
   ]
 }

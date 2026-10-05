@@ -2,7 +2,7 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.2.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
+Talentsia Do 0.3.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
@@ -31,7 +31,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.2.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.3.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -39,12 +39,12 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.2.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.3.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.2.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.3.0
 claude plugin install talentsia-do@talentsia-skills
 ```
 
@@ -52,7 +52,7 @@ Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Ex
 
 ## Individual skill ZIPs and other clients
 
-The [0.2.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.2.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.2.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
+The [0.3.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.3.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.3.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
 
 In Claude web/desktop, upload each desired individual skill ZIP through **Customize → Skills → + → Create skill → Upload a skill**, then enable it. Do not upload the whole plugin ZIP as a single skill. [Official skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
@@ -77,3 +77,5 @@ This instructions-only plugin creates no storage backend, connected account, wor
 ## Maintain the package
 
 Canonical shared references live under `plugins/talentsia-do/references/`. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build ZIPs outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
+
+Generate the indexed Project adaptation with `python3 scripts/mobile_reference.py --output /tmp/talentsia-do-release/talentsia-do-project-reference-0.3.0.md`, then check archives and reference closure with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release`. The Project reference is context, not native installation or automatic storage. The release includes 64 authored behavior cases; model runs and real mobile app behavior remain unexecuted.

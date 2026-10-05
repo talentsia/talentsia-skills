@@ -12,3 +12,5 @@ Read commitments, capacity constraints and the user's priorities. Identify exces
 Offer a small set of stop/defer/reduce/delegate/renegotiate proposals with affected existing IDs, likely capacity freed, what would be lost and the decision needed. Avoid fabricated precision. Keep possibilities separate from promises. Do not silently cancel a project, downgrade a deadline, move events or assign another person. Once the human decides, apply only authorized record changes, preserving evidence/history; draft external renegotiation separately from dispatch.
 
 **PT:** “Não cabe tudo esta semana; o que posso renegociar?” Show options while promises stay intact. **EN:** “I'm overcommitted; help me make room.” A recommendation is not approval to cancel work or email anyone.
+
+When overload reflects conflicting priorities, responsibilities or goals, read review-and-planning and examine the relevant horizons with stated evidence. Areas are ongoing standards, not automatically projects. Keep resulting scope/priority changes proposed until the human decides.

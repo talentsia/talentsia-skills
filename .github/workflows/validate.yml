@@ -1,0 +1,24 @@
+name: Validate release package
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Package and verify isolated exports
+        run: |
+          python3 scripts/package.py --output /tmp/talentsia-do-ci
+          VERSION=$(python3 -c 'import json; print(json.load(open("plugins/talentsia-do/plugin.json"))["version"])')
+          python3 scripts/mobile_reference.py --output "/tmp/talentsia-do-ci/talentsia-do-project-reference-${VERSION}.md"
+          python3 scripts/check_candidate.py --output /tmp/talentsia-do-ci
+          python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
+          git diff --exit-code
