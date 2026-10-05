@@ -1,8 +1,9 @@
 {
   "name": "talentsia-do",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Clarify commitments, next actions and follow-up in PT or EN.",
   "author": {
     "name": "Talentsia"
-  }
+  },
+  "homepage": "https://skills.talentsia.com"
 }

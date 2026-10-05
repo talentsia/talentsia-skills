@@ -14,9 +14,9 @@ On a supported installation with the Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-For **Add → Marketplace** in the desktop app, select repository `talentsia/talentsia-skills`, branch `main`, and catalog path `.agents/plugins`. The catalog fetches the plugin separately from the repository's `v0.1.0` tag, so catalog-only sparse checkouts contain everything needed to discover it.
+For **Add → Marketplace** in the desktop app, select repository `talentsia/talentsia-skills`, branch `main`, and catalog path `.agents/plugins`. The catalog fetches the plugin separately from the repository's `v0.1.1` tag, so catalog-only sparse checkouts contain everything needed to discover it.
 
-If this source was added before the catalog correction, run `codex plugin marketplace upgrade talentsia-skills` and restart the app. Keep the marketplace on `main`; the original `v0.1.0` catalog has not been rewritten.
+If this source was added before the catalog correction, run `codex plugin marketplace upgrade talentsia-skills` and restart the app. Keep the marketplace on `main`; earlier release tags have not been rewritten.
 
 Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia Skills**, and install **Talentsia Do**. Adding a marketplace makes a catalog available; it does not install its plugins. Client and workspace support may vary. This repository is a marketplace source, not a listing in OpenAI's universal public directory.
 
@@ -25,7 +25,7 @@ Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.1
 claude plugin install talentsia-do@talentsia-skills
 ```
 
@@ -33,9 +33,9 @@ Then try `/talentsia-do:talentsia-do` with a small synthetic inbox. [Official Cl
 
 ## Claude web / desktop and other clients
 
-Download `talentsia-do-skill-0.1.0.zip` from [Releases](https://github.com/talentsia/talentsia-skills/releases/tag/v0.1.0). In Claude, upload the skill ZIP using **Customize → Skills → + → Create skill → Upload a skill**, then enable it. [Official Claude skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+Download `talentsia-do-skill-0.1.1.zip` from [Releases](https://github.com/talentsia/talentsia-skills/releases/tag/v0.1.1). In Claude, upload the skill ZIP using **Customize → Skills → + → Create skill → Upload a skill**, then enable it. [Official Claude skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
-For another Agent Skills-compatible client, follow its own installation procedure using `plugins/talentsia-do/skills/talentsia-do`. A Git repository or chat attachment is not a universal installer. `talentsia-do-plugin-0.1.0.zip` contains the plugin for clients supporting local plugin installation.
+For another Agent Skills-compatible client, follow its own installation procedure using `plugins/talentsia-do/skills/talentsia-do`. A Git repository or chat attachment is not a universal installer. `talentsia-do-plugin-0.1.1.zip` contains the plugin for clients supporting local plugin installation.
 
 ## First use
 

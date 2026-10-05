@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "talentsia-do",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Talentsia Do clarifies commitments, next actions, and follow-up in English or Portuguese.",
   "author": {
     "name": "Talentsia"
@@ -25,8 +25,10 @@
           "Use Talentsia Do to review my active projects."
         ],
         "logo": "./assets/talentsia-do.svg",
-        "composerIcon": "./assets/talentsia-do.svg"
+        "composerIcon": "./assets/talentsia-do.svg",
+        "websiteURL": "https://skills.talentsia.com"
       }
     }
-  }
+  },
+  "homepage": "https://skills.talentsia.com"
 }

@@ -2,7 +2,7 @@
 
 Your productivity multiplier. / Seu multiplicador de produtividade.
 
-Talentsia Do is a skills-only plugin from Talentsia for turning accepted commitments into clear outcomes, practical next actions, and reliable follow-up. Version 0.1.0. It responds in English or Portuguese and keeps ideas separate from commitments.
+Talentsia Do is a skills-only plugin from Talentsia for turning accepted commitments into clear outcomes, practical next actions, and reliable follow-up. Version 0.1.1. It responds in English or Portuguese and keeps ideas separate from commitments.
 
 ## Install from the marketplace
 
@@ -11,7 +11,7 @@ The public marketplace is [talentsia/talentsia-skills](https://github.com/talent
 For ChatGPT desktop / Codex, on a supported installation with the Codex CLI:
 
 ```sh
-codex plugin marketplace add talentsia/talentsia-skills --ref v0.1.0
+codex plugin marketplace add talentsia/talentsia-skills --ref v0.1.1
 ```
 
 Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia Skills**, and install **Talentsia Do**. Availability varies by client; adding a marketplace is not installing its plugins. See [official guidance](https://developers.openai.com/plugins/build/plugins).
@@ -19,7 +19,7 @@ Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia 
 For Claude Code:
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.1
 claude plugin install talentsia-do@talentsia-skills
 ```
 
