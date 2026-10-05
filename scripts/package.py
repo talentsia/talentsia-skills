@@ -61,7 +61,6 @@ if __name__=='__main__':
     version,skills=validate();out=Path(args.output).resolve();out.mkdir(parents=True,exist_ok=True)
     assert not out.is_relative_to(ROOT),'Archives must be outside repository'
     archive(PLUGIN,out/f'talentsia-do-plugin-{version}.zip')
-    for skill in skills:archive(skill.parent,out/f'{skill.parent.name}-{version}.zip')
     with zipfile.ZipFile(out/f'talentsia-do-plugin-{version}.zip') as z:
         assert len([n for n in z.namelist() if n.endswith('/SKILL.md')])==10
-    print(f'PASS static discovery/frontmatter/metadata/references/archives: ten skills, one plugin, {version}. Behavior evals not executed.')
+    print(f'PASS static discovery/frontmatter/metadata/references/archive: ten skills, one plugin, {version}. Behavior evals not executed.')

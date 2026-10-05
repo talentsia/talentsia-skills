@@ -14,12 +14,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Package and verify isolated exports
+      - name: Package and verify release artifacts
         run: |
           python3 scripts/package.py --output /tmp/talentsia-do-ci
-          VERSION=$(python3 -c 'import json; print(json.load(open("plugins/talentsia-do/plugin.json"))["version"])')
-          python3 scripts/mobile_reference.py --output "/tmp/talentsia-do-ci/talentsia-do-project-reference-${VERSION}.md"
-          python3 scripts/pocket.py --output /tmp/talentsia-do-ci
+          python3 scripts/skill_file.py --output /tmp/talentsia-do-ci
           python3 scripts/check_candidate.py --output /tmp/talentsia-do-ci
           python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
           git diff --exit-code

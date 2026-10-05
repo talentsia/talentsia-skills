@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+**One skill, three artifacts, a license.** Each release now publishes exactly `SKILL-talentsia-do-<version>.md` (the complete pack as one skill file, for attaching to chats or Projects), `talentsia-do-skill-<version>.zip` (the same file as `talentsia-do/SKILL.md` for clients that upload skill ZIPs, such as Claude web/desktop) and `talentsia-do-plugin-<version>.zip` (the native ten-skill plugin). Removed: the ten individual skill ZIPs, the Project reference and Project instructions files, the start text, the pocket ZIP and `scripts/mobile_reference.py` / `scripts/pocket.py`, replaced by `scripts/skill_file.py`. The Project route now uses the skill file itself with a one-sentence Project instruction. Fewer files means one version to track and one thing to replace when updating.
+
+Adds the repository license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (`LICENSE`, summary in `NOTICE.md`). Use freely, share and adapt with attribution under the same terms, not for sale; premium packs and membership services are offered separately. Replaces earlier “no open-source license is designated” statements.
+
+The ten skills, shared references, plugin manifests, catalog identities and installation commands are unchanged apart from the version. Model behavior and real app behavior remain unexecuted. Prior tags and their assets remain available.
+
 ## 0.4.3
 
 The pocket edition now ships the ten skills as one pack file, `SKILL-talentsia-do-<version>.md`: `SKILL.md`-style frontmatter, the shared method, the full instructions of all ten skills, and the review-and-planning and authority references, meant to be attached to a new chat. The per-skill `SKILL-<skill>-*.md` files from 0.4.2 are dropped: the skills hand work to each other and are more useful together. `SKILL-talentsia-do-start-<version>.md` remains as the short pasteable text; Project instructions and reference are unchanged. No skill, reference, manifest or installation change beyond the version.
