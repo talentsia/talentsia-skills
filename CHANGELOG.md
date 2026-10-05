@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+Pocket texts now open with a short instruction to the assistant to treat the text as operating instructions whether pasted or attached, and the human-facing line includes the activation request to send if the assistant hesitates. Motivated by a 2026-10-05 test on the ChatGPT mobile app (free plan): the start prompt worked when pasted, but when attached as a file the assistant initially treated it as reference material. No skill, reference, manifest or installation change beyond the version.
+
 ## 0.4.0
 
 Adds a **pocket edition** for people who cannot install plugins: phone users, ChatGPT plans without a personal marketplace, and any chat client. Three pasteable artifacts are generated from the same canonical source by `scripts/pocket.py`: a start prompt with the shared method and all ten workflows (`talentsia-do-start-<version>.md`), one card per skill (`talentsia-do-card-<skill>-<version>.md`), and Project instructions designed to pair with the existing Project reference file (`talentsia-do-project-instructions-<version>.md`). The release bundles them with the Project reference in `talentsia-do-pocket-<version>.zip` with an `index.json` of sizes and hashes.

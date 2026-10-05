@@ -2,7 +2,7 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.4.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
+Talentsia Do 0.4.1 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
@@ -38,13 +38,13 @@ All routes are generated from the same canonical source and carry the same versi
 
 ## Pocket edition: paste, no installation
 
-The [0.4.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.0) includes `talentsia-do-pocket-0.4.0.zip` with three kinds of pasteable text, each self-contained and sized to be pasted from a phone:
+The [0.4.1 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.1) includes `talentsia-do-pocket-0.4.1.zip` with three kinds of pasteable text, each self-contained and sized to be pasted from a phone:
 
-- `talentsia-do-start-0.4.0.md`: the shared method plus all ten workflows. Paste it as the first message of a new chat, then say what is on your mind.
-- `talentsia-do-card-<skill>-0.4.0.md`: one skill with the shared method, for example `talentsia-do-card-plan-my-day-0.4.0.md`. Paste it when you want only that workflow.
-- `talentsia-do-project-instructions-0.4.0.md` + `talentsia-do-project-reference-0.4.0.md`: paste the instructions into a Project's instruction field and upload the reference file to the same Project. The Review card and the Project reference include the weekly-review guidance; the other cards name it as unavailable.
+- `talentsia-do-start-0.4.1.md`: the shared method plus all ten workflows. Paste it as the first message of a new chat, then say what is on your mind.
+- `talentsia-do-card-<skill>-0.4.1.md`: one skill with the shared method, for example `talentsia-do-card-plan-my-day-0.4.1.md`. Paste it when you want only that workflow.
+- `talentsia-do-project-instructions-0.4.1.md` + `talentsia-do-project-reference-0.4.1.md`: paste the instructions into a Project's instruction field and upload the reference file to the same Project. The Review card and the Project reference include the weekly-review guidance; the other cards name it as unavailable.
 
-A pasted text is instructions for one conversation or Project. It is not an installed plugin, does not persist by itself, and provides no storage; records you want to keep belong in your own notes or files. Real behavior in specific mobile apps has not been tested by Talentsia; try a fictional example first.
+A pasted text is instructions for one conversation or Project. It is not an installed plugin, does not persist by itself, and provides no storage; records you want to keep belong in your own notes or files. Paste as text rather than attaching the file: in a 2026-10-05 test on the ChatGPT mobile app (free plan) an attached file was treated as reference material until the user sent “Use the Talentsia Do instructions I attached for this conversation.” Other apps and plans have not been tested by Talentsia; try a fictional example first.
 
 ## ChatGPT desktop / Codex marketplace
 
@@ -56,7 +56,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.4.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.4.1` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -64,12 +64,12 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.4.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.4.1** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.1
 claude plugin install talentsia-do@talentsia-skills
 ```
 
@@ -77,7 +77,7 @@ Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Ex
 
 ## Individual skill ZIPs and other clients
 
-The [0.4.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.4.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
+The [0.4.1 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.1) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.4.1.zip`. Each individual ZIP is self-contained and includes the shared reference export.
 
 In Claude web/desktop, upload each desired individual skill ZIP through **Customize → Skills → + → Create skill → Upload a skill**, then enable it. Do not upload the whole plugin ZIP as a single skill. [Official skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
@@ -103,4 +103,4 @@ This instructions-only plugin creates no storage backend, connected account, wor
 
 Canonical shared references live under `plugins/talentsia-do/references/`; the hand-kept compressed method for pasteable artifacts lives in `plugins/talentsia-do/pocket/method.md` and must be revised whenever `references/core.md` changes meaning. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build ZIPs outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
 
-Generate the indexed Project adaptation with `python3 scripts/mobile_reference.py --output /tmp/talentsia-do-release/talentsia-do-project-reference-0.4.0.md`, then the pocket texts and ZIP with `python3 scripts/pocket.py --output /tmp/talentsia-do-release`, then check archives, reference closure and pocket budgets with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release`. The Project reference and pocket texts are context, not native installation or automatic storage. The release includes 64 authored behavior cases; model runs, real mobile app behavior and pasted-text behavior remain unexecuted.
+Generate the indexed Project adaptation with `python3 scripts/mobile_reference.py --output /tmp/talentsia-do-release/talentsia-do-project-reference-0.4.1.md`, then the pocket texts and ZIP with `python3 scripts/pocket.py --output /tmp/talentsia-do-release`, then check archives, reference closure and pocket budgets with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release`. The Project reference and pocket texts are context, not native installation or automatic storage. The release includes 64 authored behavior cases; model runs, real mobile app behavior and pasted-text behavior remain unexecuted.
