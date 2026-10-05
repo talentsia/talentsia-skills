@@ -1,4 +1,4 @@
-# Talentsia Do 0.3.0
+# Talentsia Do 0.4.0
 
 Seu multiplicador de produtividade. / Your productivity multiplier.
 
@@ -6,9 +6,11 @@ One free plugin, ten skills, one bilingual method: Clear My Head, Organize My Wo
 
 ## Install and choose a skill
 
-Use the public [Talentsia Skills marketplace](https://github.com/talentsia/talentsia-skills). In ChatGPT desktop, use Add → Marketplace with repo `talentsia/talentsia-skills`, branch `main`, path `.agents/plugins`; update or install Talentsia Do and check version 0.3.0. On a supported Codex CLI, add with `codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins`.
+No installation available on your device? The release ships a **pocket edition**: pasteable texts (a start prompt, one card per skill, and Project instructions with a reference file) generated from this same source. See the [repository README](https://github.com/talentsia/talentsia-skills#pocket-edition-paste-no-installation).
 
-Claude Code: `claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.3.0`, then `claude plugin install talentsia-do@talentsia-skills`.
+Use the public [Talentsia Skills marketplace](https://github.com/talentsia/talentsia-skills). In ChatGPT desktop, use Add → Marketplace with repo `talentsia/talentsia-skills`, branch `main`, path `.agents/plugins`; update or install Talentsia Do and check version 0.4.0. On a supported Codex CLI, add with `codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins`.
+
+Claude Code: `claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.0`, then `claude plugin install talentsia-do@talentsia-skills`.
 
 Choose by current need: capture → Clear My Head; clarify inbox → Organize My Work; choose today → Plan My Day; unblock a project → Move Forward; readiness → Prepare; execute → Do With Me; track promised results → Follow Through; reduce overload → Make Room; checkpoint/return → Resume; reconcile the system → Review. Reset composes skills; Someday/Maybe is a state.
 
@@ -26,4 +28,4 @@ See [methodology sources](references/methodology-sources.md). This is an indepen
 
 ## Verification limits
 
-The release contains 64 synthetic behavior fixtures. Static package/reference/archive checks passed. Fresh local Codex runtime discovery and source-file reads were checked on the reviewed candidate before final version promotion. Model behavior fixtures and real mobile app behavior remain unexecuted. A successful installation or source read does not prove the model applied the instructions.
+The release contains 64 synthetic behavior fixtures. Static package/reference/archive/pocket checks passed. Model behavior fixtures, real mobile app behavior and pasted pocket-text behavior remain unexecuted. A successful installation or source read does not prove the model applied the instructions.

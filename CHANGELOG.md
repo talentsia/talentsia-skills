@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0
+
+Adds a **pocket edition** for people who cannot install plugins: phone users, ChatGPT plans without a personal marketplace, and any chat client. Three pasteable artifacts are generated from the same canonical source by `scripts/pocket.py`: a start prompt with the shared method and all ten workflows (`talentsia-do-start-<version>.md`), one card per skill (`talentsia-do-card-<skill>-<version>.md`), and Project instructions designed to pair with the existing Project reference file (`talentsia-do-project-instructions-<version>.md`). The release bundles them with the Project reference in `talentsia-do-pocket-<version>.zip` with an `index.json` of sizes and hashes.
+
+Adds `plugins/talentsia-do/pocket/method.md`, a hand-kept compressed form of `references/core.md`; it is a summary for pasting, not a second method, and must be revised with the core. Candidate checks now verify pocket texts against source, enforce character budgets so each stays pasteable, and verify the pocket ZIP contents. Documentation now routes by what the user has in hand (any chat, Project, desktop marketplace, Claude Code, skill upload) instead of asking them to identify a product tier.
+
+The ten skills, shared references, plugin manifests, catalog identities, archive names and installation commands are unchanged apart from the version. Existing installations keep working; sources pinned to earlier tags stay on those versions. No backend, permission expansion, new license, premium content or guaranteed result is introduced. Pasted-text behavior in real apps remains unexecuted.
+
 ## 0.3.0
 
 Strengthens the shared method across the same ten skills: novice capture and optional mind sweep; trusted-store bootstrap with verified writes and honest fallbacks; explicit state handoffs; useful contexts, person agendas and bring-forward tied to a real mechanism; context/time/energy filtering before priority; predefined, incoming and defining work; independent executable next actions; guided eleven-function weekly review with coverage gaps; five-step natural planning, six horizons and reference-read failure behavior.

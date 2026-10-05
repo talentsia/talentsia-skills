@@ -2,7 +2,7 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.3.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
+Talentsia Do 0.4.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
@@ -21,6 +21,31 @@ Explore [skills.talentsia.com](https://skills.talentsia.com).
 
 Ask naturally in PT/EN, or invoke a specific skill in supported clients: `$clear-my-head`, `$plan-my-day`, `$review`. A broader **Reset** can combine existing skills; **Someday/Maybe** is a record state. Neither is an additional skill.
 
+## Choose a route by what you have in hand
+
+You do not need to know which product tier or app variant you are using. Pick the first row that fits.
+
+| You have… | Route | What you get |
+| --- | --- | --- |
+| Any chat app, on a phone or computer, and want to try it now | **Pocket start prompt** (below) | One pasted message; works in a single conversation |
+| Any chat app and want just one skill | **Pocket skill card** (below) | One pasted message for that skill alone |
+| A chat app with Projects (or an equivalent space with instructions + files) and want it to persist | **Project instructions + reference file** (below) | Reusable setup you own; not a native plugin |
+| ChatGPT desktop with a Plugins marketplace, or Codex | [ChatGPT desktop / Codex marketplace](#chatgpt-desktop--codex-marketplace) | Native installation and versioned updates |
+| Claude Code | [Claude Code](#claude-code) | Native installation and versioned updates |
+| Claude web/desktop with custom skills | [Individual skill ZIPs](#individual-skill-zips-and-other-clients) | One uploaded skill at a time |
+
+All routes are generated from the same canonical source and carry the same version, so moving from the pocket edition to a native installation later changes nothing in your records.
+
+## Pocket edition: paste, no installation
+
+The [0.4.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.0) includes `talentsia-do-pocket-0.4.0.zip` with three kinds of pasteable text, each self-contained and sized to be pasted from a phone:
+
+- `talentsia-do-start-0.4.0.md`: the shared method plus all ten workflows. Paste it as the first message of a new chat, then say what is on your mind.
+- `talentsia-do-card-<skill>-0.4.0.md`: one skill with the shared method, for example `talentsia-do-card-plan-my-day-0.4.0.md`. Paste it when you want only that workflow.
+- `talentsia-do-project-instructions-0.4.0.md` + `talentsia-do-project-reference-0.4.0.md`: paste the instructions into a Project's instruction field and upload the reference file to the same Project. The Review card and the Project reference include the weekly-review guidance; the other cards name it as unavailable.
+
+A pasted text is instructions for one conversation or Project. It is not an installed plugin, does not persist by itself, and provides no storage; records you want to keep belong in your own notes or files. Real behavior in specific mobile apps has not been tested by Talentsia; try a fictional example first.
+
 ## ChatGPT desktop / Codex marketplace
 
 Use **Add → Marketplace** with repository `talentsia/talentsia-skills`, branch `main`, catalog path `.agents/plugins`.
@@ -31,7 +56,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.3.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.4.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -39,20 +64,20 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.3.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.4.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.3.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.0
 claude plugin install talentsia-do@talentsia-skills
 ```
 
-Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Existing marketplace sources pinned to `v0.1.x` must be changed to the new tag before updating the plugin. [Official Claude Code guide](https://code.claude.com/docs/en/plugin-marketplaces).
+Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Existing marketplace sources pinned to an earlier tag must be changed to the new tag before updating the plugin. [Official Claude Code guide](https://code.claude.com/docs/en/plugin-marketplaces).
 
 ## Individual skill ZIPs and other clients
 
-The [0.3.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.3.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.3.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
+The [0.4.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.4.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.4.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
 
 In Claude web/desktop, upload each desired individual skill ZIP through **Customize → Skills → + → Create skill → Upload a skill**, then enable it. Do not upload the whole plugin ZIP as a single skill. [Official skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
@@ -76,6 +101,6 @@ This instructions-only plugin creates no storage backend, connected account, wor
 
 ## Maintain the package
 
-Canonical shared references live under `plugins/talentsia-do/references/`. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build ZIPs outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
+Canonical shared references live under `plugins/talentsia-do/references/`; the hand-kept compressed method for pasteable artifacts lives in `plugins/talentsia-do/pocket/method.md` and must be revised whenever `references/core.md` changes meaning. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build ZIPs outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
 
-Generate the indexed Project adaptation with `python3 scripts/mobile_reference.py --output /tmp/talentsia-do-release/talentsia-do-project-reference-0.3.0.md`, then check archives and reference closure with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release`. The Project reference is context, not native installation or automatic storage. The release includes 64 authored behavior cases; model runs and real mobile app behavior remain unexecuted.
+Generate the indexed Project adaptation with `python3 scripts/mobile_reference.py --output /tmp/talentsia-do-release/talentsia-do-project-reference-0.4.0.md`, then the pocket texts and ZIP with `python3 scripts/pocket.py --output /tmp/talentsia-do-release`, then check archives, reference closure and pocket budgets with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release`. The Project reference and pocket texts are context, not native installation or automatic storage. The release includes 64 authored behavior cases; model runs, real mobile app behavior and pasted-text behavior remain unexecuted.
