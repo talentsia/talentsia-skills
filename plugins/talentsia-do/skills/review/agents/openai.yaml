@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review"
+  short_description: "Reconcile commitments and expose project risks"
+  default_prompt: "Use $review to reconcile my commitments and identify missing next actions."

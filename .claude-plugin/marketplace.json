@@ -7,8 +7,8 @@
     {
       "name": "talentsia-do",
       "source": "./plugins/talentsia-do",
-      "description": "Clarify commitments, next actions and follow-up in PT or EN.",
-      "version": "0.1.1"
+      "description": "Ten free bilingual productivity skills in one Talentsia Do plugin.",
+      "version": "0.2.0"
     }
   ],
   "metadata": {

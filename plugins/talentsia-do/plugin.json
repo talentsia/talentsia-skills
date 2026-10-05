@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "talentsia-do",
-  "version": "0.1.1",
-  "description": "Talentsia Do clarifies commitments, next actions, and follow-up in English or Portuguese.",
+  "version": "0.2.0",
+  "description": "Ten bilingual skills for capturing, organizing, planning, preparing, doing, following through and reviewing work.",
   "author": {
     "name": "Talentsia"
   },
@@ -17,12 +17,13 @@
       "interface": {
         "displayName": "Talentsia Do",
         "shortDescription": "Clear commitments and actions",
-        "longDescription": "Talentsia Do helps clarify inputs, define accepted outcomes and next actions, track delegated results, and review commitments in English or Portuguese. The commitment owner decides; the system steward maintains the record. Personal context stays in your own storage. Requires tools and permissions supplied by the host; includes no storage service, autonomous worker, or scheduled reviews.",
+        "longDescription": "Talentsia Do includes ten free skills: Clear My Head, Organize My Work, Plan My Day, Move Forward, Prepare, Do With Me, Follow Through, Make Room, Resume, and Review. One shared method in Portuguese and English keeps ideas distinct from commitments and reuses your own trusted records. Tools and permissions come from the host; no storage service, connected accounts or automatic future monitoring are included.",
         "developerName": "Talentsia",
         "category": "Productivity",
         "defaultPrompt": [
-          "Use Talentsia Do to clarify my inbox.",
-          "Use Talentsia Do to review my active projects."
+          "Use Clear My Head to capture what is on my mind.",
+          "Use Plan My Day to choose feasible work for today.",
+          "Use Review to reconcile my commitments."
         ],
         "logo": "./assets/talentsia-do.svg",
         "composerIcon": "./assets/talentsia-do.svg",

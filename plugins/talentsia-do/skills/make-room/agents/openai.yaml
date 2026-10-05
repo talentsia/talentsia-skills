@@ -1,0 +1,4 @@
+interface:
+  display_name: "Make Room"
+  short_description: "Propose practical tradeoffs to reduce overload"
+  default_prompt: "Use $make-room to propose practical changes to an overloaded week for my decision."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Do With Me"
+  short_description: "Produce real work and record the actual result"
+  default_prompt: "Use $do-with-me to produce the selected next action with me and record the actual result."

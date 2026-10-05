@@ -2,62 +2,78 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-A public marketplace for reusable productivity skills in Portuguese and English. Talentsia Do helps clarify commitments, define next actions, track delegated outcomes, and review follow-through. Ideas stay separate from accepted commitments.
+Talentsia Do 0.2.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
 
-Explore the product at [skills.talentsia.com](https://skills.talentsia.com). **Only Talentsia Do is available in this release.** Premium skills are not included.
+Explore [skills.talentsia.com](https://skills.talentsia.com).
 
-## ChatGPT desktop / Codex
+| Skill | Invocation name | Purpose |
+| --- | --- | --- |
+| Clear My Head | `clear-my-head` | Capture thoughts without inventing commitments |
+| Organize My Work | `organize-my-work` | Turn inbox inputs into clear states and actions |
+| Plan My Day | `plan-my-day` | Choose a realistic day from available capacity |
+| Move Forward | `move-forward` | Find one concrete step that advances a project |
+| Prepare | `prepare` | Prepare materials and readiness for an occasion |
+| Do With Me | `do-with-me` | Produce real work and record the actual result |
+| Follow Through | `follow-through` | Track promised results and close evidenced loops |
+| Make Room | `make-room` | Propose practical tradeoffs to reduce overload |
+| Resume | `resume` | Keep a checkpoint and restore the next step |
+| Review | `review` | Reconcile commitments and expose project risks |
 
-On a supported installation with the Codex CLI:
+Ask naturally in PT/EN, or invoke a specific skill in supported clients: `$clear-my-head`, `$plan-my-day`, `$review`. A broader **Reset** can combine existing skills; **Someday/Maybe** is a record state. Neither is an additional skill.
+
+## ChatGPT desktop / Codex marketplace
+
+Use **Add → Marketplace** with repository `talentsia/talentsia-skills`, branch `main`, catalog path `.agents/plugins`.
+
+Alternatively, with a supported Codex CLI:
 
 ```sh
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-For **Add → Marketplace** in the desktop app, select repository `talentsia/talentsia-skills`, branch `main`, and catalog path `.agents/plugins`. The catalog fetches the plugin separately from the repository's `v0.1.1` tag, so catalog-only sparse checkouts contain everything needed to discover it.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.2.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
-If this source was added before the catalog correction, run `codex plugin marketplace upgrade talentsia-skills` and restart the app. Keep the marketplace on `main`; earlier release tags have not been rewritten.
+For an existing installation:
 
-Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia Skills**, and install **Talentsia Do**. Adding a marketplace makes a catalog available; it does not install its plugins. Client and workspace support may vary. This repository is a marketplace source, not a listing in OpenAI's universal public directory.
+```sh
+codex plugin marketplace upgrade talentsia-skills
+```
 
-[Official OpenAI packaging and marketplace guidance](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.2.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.1
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.2.0
 claude plugin install talentsia-do@talentsia-skills
 ```
 
-Then try `/talentsia-do:talentsia-do` with a small synthetic inbox. [Official Claude Code marketplace guidance](https://code.claude.com/docs/en/plugin-marketplaces).
+Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Existing marketplace sources pinned to `v0.1.x` must be changed to the new tag before updating the plugin. [Official Claude Code guide](https://code.claude.com/docs/en/plugin-marketplaces).
 
-## Claude web / desktop and other clients
+## Individual skill ZIPs and other clients
 
-Download `talentsia-do-skill-0.1.1.zip` from [Releases](https://github.com/talentsia/talentsia-skills/releases/tag/v0.1.1). In Claude, upload the skill ZIP using **Customize → Skills → + → Create skill → Upload a skill**, then enable it. [Official Claude skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+The [0.2.0 release](https://github.com/talentsia/talentsia-skills/releases/tag/v0.2.0) includes one plugin ZIP and ten individual skill ZIPs, named such as `clear-my-head-0.2.0.zip`. Each individual ZIP is self-contained and includes the shared reference export.
 
-For another Agent Skills-compatible client, follow its own installation procedure using `plugins/talentsia-do/skills/talentsia-do`. A Git repository or chat attachment is not a universal installer. `talentsia-do-plugin-0.1.1.zip` contains the plugin for clients supporting local plugin installation.
+In Claude web/desktop, upload each desired individual skill ZIP through **Customize → Skills → + → Create skill → Upload a skill**, then enable it. Do not upload the whole plugin ZIP as a single skill. [Official skill guide](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
-## First use
+Other Agent Skills-compatible clients use the appropriate `plugins/talentsia-do/skills/<name>` folder according to their installation procedure. A chat attachment or repository is not a universal installer.
 
-- PT: “Use Talentsia Do para esclarecer estes itens e identificar a próxima ação.”
-- EN: “Use Talentsia Do to clarify these inbox items and identify the next action.”
+## Try the pack
 
-Start with synthetic inputs. Check the [PT/EN acceptance scenarios](plugins/talentsia-do/skills/talentsia-do/references/examples-and-acceptance.md). This release has been packaged and its manifests validated; full behavior in each client requires installation and testing.
+- PT: “Use Clear My Head para capturar o que está na minha cabeça, sem virar tudo obrigação.”
+- EN: “Use Plan My Day to choose work that fits my available time and energy.”
+- PT: “Use Do With Me para revisar este rascunho, sem publicar.”
 
-## Privacy and capabilities
+Start with synthetic inputs. [Behavior evaluation cases](evals/README.md) cover routing, all ten scopes and shared boundaries. Static validation does not prove model behavior; record observed outputs in the target client before declaring behavioral tests passed.
 
-This is a skills-only plugin. It creates no account, storage backend, connected service, autonomous worker, or review schedule. Personal context and task records belong in your own storage, outside this repository. The host's available tools and permissions determine what actions are possible.
+## Migration, privacy and rights
 
-Talentsia Do is an independent implementation. [Methodology sources](plugins/talentsia-do/skills/talentsia-do/references/methodology-sources.md) identify influences without claiming endorsement or certification. No guaranteed productivity result is promised.
+The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the same `talentsia-do` plugin. See [CHANGELOG](CHANGELOG.md) for migration. Existing personal records need no conversion, copying or relocation. Remove a separately uploaded legacy skill only after checking the new installation; this release does not edit user settings, live Pages or personal projects.
 
-## Repository layout
+This instructions-only plugin creates no storage backend, connected account, worker or schedule. Personal records stay in user-owned storage. Without tools/persistence, skills provide portable records marked not saved and disclose unperformed actions. Email, calendar and third-party actions require explicit human authorization. No guaranteed productivity result is promised.
 
-- `.agents/plugins/marketplace.json`: ChatGPT/Codex catalog.
-- `.claude-plugin/marketplace.json`: Claude Code catalog.
-- `plugins/talentsia-do/plugin.json`: portable plugin identity.
-- `plugins/talentsia-do/.claude-plugin/plugin.json`: Claude Code compatibility manifest.
-- `plugins/talentsia-do/skills/talentsia-do`: shared skill and supporting references.
+[Methodology sources](plugins/talentsia-do/references/methodology-sources.md) identify influences without endorsement or certification. Copyright © 2026 Talentsia. No open-source license is designated; copyright and third-party rights remain with their respective owners.
 
-## Rights
+## Maintain the package
 
-Copyright © 2026 Talentsia. No open-source license is designated. Copyright and third-party rights remain with their respective owners.
+Canonical shared references live under `plugins/talentsia-do/references/`. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build ZIPs outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Follow Through"
+  short_description: "Track promised results and close evidenced loops"
+  default_prompt: "Use $follow-through to review promised results and draft any needed follow-up without sending."

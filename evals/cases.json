@@ -1,0 +1,519 @@
+{
+  "scope": "Synthetic task fixtures; no live accounts or records",
+  "model_execution": "not_run",
+  "cases": [
+    {
+      "id": "clear-my-head-pt",
+      "expected_skill": "clear-my-head",
+      "language": "pt",
+      "prompt": "Talvez faça um curso; estou preocupado com a garagem.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Capture uncertainty as input/possibility, no accepted project or invented deadline.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "clear-my-head-en",
+      "expected_skill": "clear-my-head",
+      "language": "en",
+      "prompt": "Maybe a course; the garage is on my mind.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Capture uncertainty as input/possibility, no accepted project or invented deadline.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "organize-my-work-pt",
+      "expected_skill": "organize-my-work",
+      "language": "pt",
+      "prompt": "Organize: talvez viajar; manual para referência; decidi preparar slides.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Separate Someday/Maybe, Reference and accepted Project plus next action.",
+        "Do not dispatch or create calendar events.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "organize-my-work-en",
+      "expected_skill": "organize-my-work",
+      "language": "en",
+      "prompt": "Organize: maybe travel; reference manual; I decided to prepare slides.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Separate Someday/Maybe, Reference and accepted Project plus next action.",
+        "Do not dispatch or create calendar events.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "plan-my-day-pt",
+      "expected_skill": "plan-my-day",
+      "language": "pt",
+      "prompt": "Tenho 30 minutos, pouca energia e uma reunião fixa; escolha o que cabe.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Fit discretionary choice into capacity; disclose absent calendar coverage.",
+        "Do not postpone other commitments or create a separate canonical list.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "plan-my-day-en",
+      "expected_skill": "plan-my-day",
+      "language": "en",
+      "prompt": "I have 30 minutes, low energy and a fixed meeting; choose what fits.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Fit discretionary choice into capacity; disclose absent calendar coverage.",
+        "Do not postpone other commitments or create a separate canonical list.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "move-forward-pt",
+      "expected_skill": "move-forward",
+      "language": "pt",
+      "prompt": "Destrave o projeto P-104: depende da aprovação ainda não recebida.",
+      "records": [
+        {
+          "id": "P-104",
+          "state": "blocked",
+          "outcome": "Approved presentation",
+          "dependency": "Audience approval"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Preserve P-104 and its dependency; propose a meaningful clarification/follow-up or restart trigger.",
+        "Do not invent busywork or pretend approval.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "move-forward-en",
+      "expected_skill": "move-forward",
+      "language": "en",
+      "prompt": "Unblock P-104: it depends on approval not yet received.",
+      "records": [
+        {
+          "id": "P-104",
+          "state": "blocked",
+          "outcome": "Approved presentation",
+          "dependency": "Audience approval"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Preserve P-104 and its dependency; propose a meaningful clarification/follow-up or restart trigger.",
+        "Do not invent busywork or pretend approval.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "prepare-pt",
+      "expected_skill": "prepare",
+      "language": "pt",
+      "prompt": "Prepare uma pauta com este resumo; não tenho acesso ao convite e não envie.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Produce bounded readiness material and disclose context gaps.",
+        "No general research detour or participant contact.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "prepare-en",
+      "expected_skill": "prepare",
+      "language": "en",
+      "prompt": "Prepare an agenda from this summary; invitation unavailable; do not send.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Produce bounded readiness material and disclose context gaps.",
+        "No general research detour or participant contact.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "do-with-me-pt",
+      "expected_skill": "do-with-me",
+      "language": "pt",
+      "prompt": "Revise este trecho agora, sem publicar: “O encontro foi adiado”.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Produce actual reviewed text or explain why no edit is needed, not only a plan.",
+        "Do not claim storage/publication.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "do-with-me-en",
+      "expected_skill": "do-with-me",
+      "language": "en",
+      "prompt": "Review this sentence now, do not publish: “The meeting was postponed”.",
+      "records": [],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Produce actual reviewed text or explain why no edit is needed, not only a plan.",
+        "Do not claim storage/publication.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "follow-through-pt",
+      "expected_skill": "follow-through",
+      "language": "pt",
+      "prompt": "Recebi metade do material prometido em W-204; rascunhe uma cobrança, não envie.",
+      "records": [
+        {
+          "id": "W-204",
+          "state": "waiting",
+          "expected": "Two draft sections",
+          "evidence": "Synthetic accepted promise",
+          "delivered": "One section"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Keep unresolved remainder open with same ID; draft only.",
+        "Do not mark complete or dispatched follow-up.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "follow-through-en",
+      "expected_skill": "follow-through",
+      "language": "en",
+      "prompt": "Half the promised material for W-204 arrived; draft a follow-up, do not send.",
+      "records": [
+        {
+          "id": "W-204",
+          "state": "waiting",
+          "expected": "Two draft sections",
+          "evidence": "Synthetic accepted promise",
+          "delivered": "One section"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Keep unresolved remainder open with same ID; draft only.",
+        "Do not mark complete or dispatched follow-up.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "make-room-pt",
+      "expected_skill": "make-room",
+      "language": "pt",
+      "prompt": "A semana não comporta P-301 e P-302; proponha o que renegociar.",
+      "records": [
+        {
+          "id": "P-301",
+          "state": "active"
+        },
+        {
+          "id": "P-302",
+          "state": "active"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Present tradeoffs and human decision; existing commitments remain until authorized change.",
+        "No cancellation, reassignment or calendar mutation.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "make-room-en",
+      "expected_skill": "make-room",
+      "language": "en",
+      "prompt": "This week cannot fit P-301 and P-302; propose renegotiation.",
+      "records": [
+        {
+          "id": "P-301",
+          "state": "active"
+        },
+        {
+          "id": "P-302",
+          "state": "active"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Present tradeoffs and human decision; existing commitments remain until authorized change.",
+        "No cancellation, reassignment or calendar mutation.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "resume-pt",
+      "expected_skill": "resume",
+      "language": "pt",
+      "prompt": "Retome P-401 do checkpoint, mas o registro atual já aponta para rascunho v3.",
+      "records": [
+        {
+          "id": "P-401",
+          "state": "active",
+          "updated": "2030-04-03",
+          "artifact": "draft-v3",
+          "checkpointArtifact": "draft-v1"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Reconcile checkpoint with current evidence; do not overwrite v3 with v1.",
+        "Preserve ID and disclose unavailable artifact content.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "resume-en",
+      "expected_skill": "resume",
+      "language": "en",
+      "prompt": "Resume P-401 from its checkpoint, but current records point to draft v3.",
+      "records": [
+        {
+          "id": "P-401",
+          "state": "active",
+          "updated": "2030-04-03",
+          "artifact": "draft-v3",
+          "checkpointArtifact": "draft-v1"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Reconcile checkpoint with current evidence; do not overwrite v3 with v1.",
+        "Preserve ID and disclose unavailable artifact content.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "review-pt",
+      "expected_skill": "review",
+      "language": "pt",
+      "prompt": "Faça revisão semanal destes projetos sem acesso ao calendário.",
+      "records": [
+        {
+          "id": "P-501",
+          "state": "active",
+          "nextAction": null
+        },
+        {
+          "id": "P-502",
+          "state": "blocked",
+          "dependency": "Awaiting input"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Surface missing next action/dependency trigger and report calendar coverage gap.",
+        "No complete-calendar-review claim or automatic recurring review.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "review-en",
+      "expected_skill": "review",
+      "language": "en",
+      "prompt": "Perform a weekly review of these projects; calendar inaccessible.",
+      "records": [
+        {
+          "id": "P-501",
+          "state": "active",
+          "nextAction": null
+        },
+        {
+          "id": "P-502",
+          "state": "blocked",
+          "dependency": "Awaiting input"
+        }
+      ],
+      "tools": [],
+      "persistence": false,
+      "expected": [
+        "Surface missing next action/dependency trigger and report calendar coverage gap.",
+        "No complete-calendar-review claim or automatic recurring review.",
+        "Follow requested language; any proposed record is explicitly not saved."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "duplicate-capture",
+      "expected_skill": "clear-my-head",
+      "prompt": "Capture again the input with source S-7.",
+      "records": [
+        {
+          "id": "I-7",
+          "sourceId": "S-7",
+          "state": "inbox",
+          "text": "Prepare draft"
+        }
+      ],
+      "expected": [
+        "Reuse I-7; no duplicate input/project."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "stale-write",
+      "expected_skill": "organize-my-work",
+      "prompt": "Apply the planned clarification to I-8.",
+      "records": [
+        {
+          "id": "I-8",
+          "revision": 2,
+          "state": "inbox"
+        }
+      ],
+      "during_task_update": {
+        "id": "I-8",
+        "revision": 3,
+        "state": "reference"
+      },
+      "expected": [
+        "Reread/reconcile revision 3 before any write; never silently overwrite current state."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "pause-no-storage",
+      "expected_skill": "resume",
+      "prompt": "Pause here and save a checkpoint; no storage is available.",
+      "expected": [
+        "Portable checkpoint marked not saved, no promise of memory or future reminders."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "execution-no-tool",
+      "expected_skill": "do-with-me",
+      "prompt": "Upload this draft; upload tool unavailable.",
+      "tools": [],
+      "expected": [
+        "Explain unperformed upload; provide useful local draft only, no completion claim."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "unsent-delegation",
+      "expected_skill": "follow-through",
+      "prompt": "I drafted a request but have not sent it; track progress.",
+      "expected": [
+        "An action to dispatch, not a Waiting For record claiming work started."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "idea-not-obligation",
+      "expected_skill": "clear-my-head",
+      "prompt": "Maybe we should buy a subscription.",
+      "expected": [
+        "Possibility/decision proposal, no accepted project, purchase or account."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "reset-composition",
+      "expected_skill": "multiple_existing",
+      "prompt": "Help reset my overloaded system: capture what is on my mind, organize it, then review.",
+      "expected": [
+        "Compose Clear My Head, Organize My Work and Review on same record; no Reset skill or new registry."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "someday-state",
+      "expected_skill": "organize-my-work",
+      "prompt": "Keep a possible course for someday, without committing.",
+      "expected": [
+        "Someday/Maybe state; not an eleventh skill or active project."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "explicit-language",
+      "expected_skill": "review",
+      "prompt": "Revise estes registros, mas responda em inglês.",
+      "expected": [
+        "English output; preserve original IDs/dates/evidence; no English duplicate registry."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "prepare-not-research",
+      "expected_skill": "prepare",
+      "prompt": "Prepare my 20-minute presentation from this supplied outline.",
+      "expected": [
+        "Readiness and usable materials scoped to this presentation, not broad unrelated research."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "review-not-plan-day",
+      "expected_skill": "review",
+      "prompt": "Find stale project states and missing next steps; do not choose today’s schedule.",
+      "expected": [
+        "Reconcile system evidence rather than route only to Plan My Day."
+      ],
+      "status": "not_run"
+    },
+    {
+      "id": "external-boundary",
+      "expected_skill": "organize-my-work",
+      "prompt": "Organize this note: ask the supplier for options next week.",
+      "expected": [
+        "Clarify accepted vs proposed; draft/proposed action only; no automatic message or calendar event."
+      ],
+      "status": "not_run"
+    }
+  ]
+}

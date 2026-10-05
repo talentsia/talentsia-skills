@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan My Day"
+  short_description: "Choose a realistic day from available capacity"
+  default_prompt: "Use $plan-my-day to choose work that fits my time, energy and fixed commitments today."

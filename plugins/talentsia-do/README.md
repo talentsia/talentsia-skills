@@ -1,48 +1,25 @@
-# Talentsia Do
+# Talentsia Do 0.2.0
 
-Your productivity multiplier. / Seu multiplicador de produtividade.
+Seu multiplicador de produtividade. / Your productivity multiplier.
 
-Talentsia Do is a skills-only plugin from Talentsia for turning accepted commitments into clear outcomes, practical next actions, and reliable follow-up. Version 0.1.1. It responds in English or Portuguese and keeps ideas separate from commitments.
+One free plugin, ten skills, one bilingual method: Clear My Head, Organize My Work, Plan My Day, Move Forward, Prepare, Do With Me, Follow Through, Make Room, Resume and Review.
 
-## Install from the marketplace
+## Install and choose a skill
 
-The public marketplace is [talentsia/talentsia-skills](https://github.com/talentsia/talentsia-skills).
+Use the public [Talentsia Skills marketplace](https://github.com/talentsia/talentsia-skills). In ChatGPT desktop, use Add → Marketplace with repo `talentsia/talentsia-skills`, branch `main`, path `.agents/plugins`; update or install Talentsia Do and check version 0.2.0. On a supported Codex CLI, add with `codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins`.
 
-For ChatGPT desktop / Codex, on a supported installation with the Codex CLI:
+Claude Code: `claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.2.0`, then `claude plugin install talentsia-do@talentsia-skills`.
 
-```sh
-codex plugin marketplace add talentsia/talentsia-skills --ref v0.1.1
-```
+Choose by current need: capture → Clear My Head; clarify inbox → Organize My Work; choose today → Plan My Day; unblock a project → Move Forward; readiness → Prepare; execute → Do With Me; track promised results → Follow Through; reduce overload → Make Room; checkpoint/return → Resume; reconcile the system → Review. Reset composes skills; Someday/Maybe is a state.
 
-Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia Skills**, and install **Talentsia Do**. Availability varies by client; adding a marketplace is not installing its plugins. See [official guidance](https://developers.openai.com/plugins/build/plugins).
+Peça em português ou inglês. Exemplos: “Use Clear My Head para capturar estas ideias”; “Use Do With Me para revisar este texto, sem enviar”. In supported Codex clients use `$clear-my-head` or `$review`; in Claude Code use `/talentsia-do:clear-my-head` or `/talentsia-do:review`.
 
-For Claude Code:
+The old `$talentsia-do` skill is replaced, not retained as an eleventh entry. Keep existing record locations, IDs and history. No personal registry or private project is changed by this package.
 
-```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.1.1
-claude plugin install talentsia-do@talentsia-skills
-```
+## Shared records and limits
 
-Use a new, independent test context with synthetic inputs. Try “Use Talentsia Do to clarify these inbox items” or “Use Talentsia Do para esclarecer estes itens”. In supported Codex clients invoke `$talentsia-do`. Run the [acceptance scenarios](skills/talentsia-do/references/examples-and-acceptance.md) in PT and EN and record actual outputs. The manifests have been validated. Runtime behavior must be checked after installation with the included acceptance scenarios.
+Each skill reads its `references/core.md`, exported from the same canonical [shared method](references/core.md). Personal context stays in the user's own storage. Installation supplies no storage backend, connected accounts, running agent or future monitor. With no storage, output is a portable record marked not saved. Human authority controls commitments and external actions.
 
-## Use your own system
+Test the included PT/EN examples with synthetic inputs after installation. Manifest/structure validation is distinct from model behavior testing.
 
-Reuse your existing registry and authorized storage. If initial setup is requested, adapt the [empty private context template](skills/talentsia-do/assets/private-context.example.md) into a separate private location. Never put completed personal context in this plugin.
-
-Pages can be used when the host has a suitable connection and permissions; local records or another existing application can also serve as the registry. The package contains no storage backend, MCP server, connected account, running specialist, or review schedule. Installation does not create them.
-
-## Teste e uso em português
-
-Adicione o marketplace usando o comando do seu cliente acima e selecione Talentsia Do para instalar. O cadastro no site não é necessário para instalar pelo GitHub. Teste com dados sintéticos, sem memória, arquivos ou conexões pessoais de outro usuário.
-
-Peça respostas em português ou inglês; o assistente segue o idioma solicitado e mantém um único registro. O dono dos compromissos decide os compromissos. O responsável pelo sistema mantém evidências, próximas ações e acompanhamento. Ideias permanecem possibilidades até serem aceitas.
-
-## Contents and rights
-
-- `plugin.json`: portable Agent Plugins 1.0 identity and presentation metadata.
-- The repository contains separate marketplace catalogs for ChatGPT/Codex and Claude Code.
-- `assets/talentsia-do.svg`: original product icon.
-- `skills/talentsia-do/`: workflow, UI metadata, references, PT/EN scenarios, and empty private context template.
-- `AGENTS.md`: package maintenance instructions.
-
-Methodological attribution and source links are in [methodology sources](skills/talentsia-do/references/methodology-sources.md). This is an independent implementation; no endorsement or ownership of third-party methodology is claimed. The package is publicly available. No open-source license is designated; copyright and third-party rights remain with their respective owners. Installation does not authorize purchases, external messages, or account creation.
+See [methodology sources](references/methodology-sources.md). This is an independent implementation; no endorsement or guaranteed result is claimed. No open-source license is designated; copyright and third-party rights remain with their owners.

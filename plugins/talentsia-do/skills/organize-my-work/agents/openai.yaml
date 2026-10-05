@@ -1,0 +1,4 @@
+interface:
+  display_name: "Organize My Work"
+  short_description: "Turn inbox inputs into clear states and actions"
+  default_prompt: "Use $organize-my-work to clarify these inbox items and route them into my existing records."

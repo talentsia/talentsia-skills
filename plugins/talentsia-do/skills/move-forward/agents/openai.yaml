@@ -1,0 +1,4 @@
+interface:
+  display_name: "Move Forward"
+  short_description: "Find one concrete step that advances a project"
+  default_prompt: "Use $move-forward to identify the blocker and next concrete action for this project."

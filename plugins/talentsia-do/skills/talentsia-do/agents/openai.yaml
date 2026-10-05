@@ -1,4 +1,0 @@
-interface:
-  display_name: "Talentsia Do"
-  short_description: "Clear commitments and actions"
-  default_prompt: "Use Talentsia Do to clarify my inbox and identify the next concrete action."

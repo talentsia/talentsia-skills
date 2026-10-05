@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resume"
+  short_description: "Keep a checkpoint and restore the next step"
+  default_prompt: "Use $resume to create or restore a checkpoint for this unfinished task."

@@ -1,7 +1,7 @@
 # Talentsia Do package instructions
 
-This package contains reusable instructions, never a personal task registry. Read `skills/talentsia-do/SKILL.md` before changing its workflow. Keep the commitment owner in charge of commitments and the system steward in charge of the system. Preserve authority boundaries and source dates.
+This free plugin contains exactly ten skills sharing one canonical method under `references/`. Each skill explicitly reads a self-contained export. Read the relevant SKILL.md and shared core before changing workflow. The human decides commitments; the assistant stewards evidence and records.
 
-Keep personal context, accounts, permissions, identities, and live records outside this package. Use generic roles and synthetic examples only. Keep runtime instructions self-contained inside the skill folder. Retain the methodological attribution in `skills/talentsia-do/references/methodology-sources.md`.
+After editing canonical references, run `python3 scripts/package.py` from repository root to synchronize reference exports and create release packages. Never edit exported reference copies independently. Maintain one bilingual instruction base per skill. Personal records, contexts, identities and secrets stay outside this package.
 
-Before distribution, validate JSON, skill frontmatter, local references, icons, marketplace paths, and ZIP contents. Include only reviewed files. Do not include surrounding workspace state, secrets, dependencies, symlinks, or version-control history. Packaging does not authorize installation, publication, account creation, payments, or external messages.
+Before distribution validate JSON, frontmatter, local references, exact ten-skill discovery, icons and archive contents. Preserve attribution and existing rights. No backend, connected services, running worker or automatic external actions are supplied. Packaging does not authorize accounts, payments, messages or permission expansion.

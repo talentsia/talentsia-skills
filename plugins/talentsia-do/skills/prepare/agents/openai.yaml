@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare"
+  short_description: "Prepare materials and readiness for an occasion"
+  default_prompt: "Use $prepare to get ready for my next meeting using the materials I provide."

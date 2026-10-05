@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clear My Head"
+  short_description: "Capture thoughts without inventing commitments"
+  default_prompt: "Use $clear-my-head to capture these thoughts without turning every idea into a commitment."
