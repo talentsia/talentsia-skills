@@ -1,20 +1,20 @@
-"""Generate pasteable pocket artifacts for clients without plugin installation; no deployment or network."""
+"""Generate attachable/pasteable pocket artifacts for clients without plugin installation; no deployment or network."""
 import argparse,hashlib,json,re,zipfile
 from pathlib import Path
 from mobile_reference import PLUGIN,ROOT,ORDER
 SITE='https://skills.talentsia.com'
-# Character budgets keep each artifact pasteable on a phone; the Review card carries the weekly-review reference.
-BUDGETS={'start':8000,'project-instructions':8000,'card':8500,'card-review':17000}
-DEEP_NOTE=('Deeper references named above (review-and-planning, operating-instructions) are not included in this card. '
- 'Apply the shared method, say that the deeper reference was unavailable, and suggest the full Project reference or installed plugin when it matters.')
+# The pack is meant to be attached, so it may be long; start and Project instructions must stay pasteable from a phone.
+BUDGETS={'pack':45000,'start':8000,'project-instructions':8000}
 
 def version():return json.loads((PLUGIN/'plugin.json').read_text())['version']
 def method():
     text=(PLUGIN/'pocket/method.md').read_text().strip()
     assert text.startswith('# ')
     return '## Shared method / Método comum\n\n'+text.split('\n',1)[1].strip()
-ATTACH_OR_PASTE=('_Attach this file to a new chat and send: “Use the attached Talentsia Do skill in this conversation.” Or paste the whole text as the first message. Then say what is on your mind. Attach one skill file, not a .zip. / '
- 'Anexe este arquivo a uma nova conversa e envie: “Use a skill Talentsia Do anexada nesta conversa.” Ou cole o texto inteiro como primeira mensagem. Depois diga o que está na sua cabeça. Anexe um arquivo de skill, não um .zip._')
+ATTACH_OR_PASTE=('_Attach this file to a new chat and send: “Use the attached Talentsia Do skill in this conversation.” Then say what is on your mind. Attach this one file, not a .zip. / '
+ 'Anexe este arquivo a uma nova conversa e envie: “Use a skill Talentsia Do anexada nesta conversa.” Depois diga o que está na sua cabeça. Anexe este arquivo, não um .zip._')
+PASTE_START=('_Paste this whole text as the first message of a new chat, then say what is on your mind. For the complete pack with full instructions for every workflow, attach the SKILL-talentsia-do file instead. / '
+ 'Cole este texto inteiro como primeira mensagem de uma nova conversa e depois diga o que está na sua cabeça. Para o pacote completo com instruções de cada fluxo, anexe o arquivo SKILL-talentsia-do._')
 PASTE_PROJECT='_Paste this entire text into the Project instructions field and upload the reference file to the same Project. / Cole este texto inteiro no campo de instruções do Projeto e envie o arquivo de referência para o mesmo Projeto._'
 ACT_AS_INSTRUCTIONS=('**To the assistant:** this file is a skill: your operating instructions for this conversation, whether it was attached or pasted. '
  'Apply it now to what the user says next; do not treat it as reference material to summarize or wait for a further request.')
@@ -27,6 +27,7 @@ def ui(name):
     lines=(PLUGIN/'skills'/name/'agents/openai.yaml').read_text().splitlines()[1:]
     return {l.strip().split(': ',1)[0]:json.loads(l.strip().split(': ',1)[1]) for l in lines}
 def plain_links(text):return re.sub(r'\[([^\]]+)\]\((?:references/)?[\w-]+\.md\)',r'\1',text)
+def demote(text):return re.sub(r'^(#+) ',r'#\1 ',text,flags=re.M)
 def body_without_preamble(name):
     _,body=frontmatter(name)
     paragraphs=body.split('\n\n')
@@ -44,23 +45,24 @@ def footer(v):
     return (f'Talentsia Do {v} pocket edition, {SITE}. This skill file is instructions, not an installed plugin, a saved record or a storage service. '
      'Independent implementation; no third-party endorsement or guaranteed result is claimed.')
 
-def start(v):
-    description='Talentsia Do: ten bilingual productivity workflows sharing one method. Use when the user wants to capture, organize, plan, unblock, prepare, do, follow through, make room, resume or review work; choose the fitting workflow.'
-    return '\n\n'.join([skill_frontmatter('talentsia-do',description),f'# Talentsia Do {v} — start here / comece aqui',ATTACH_OR_PASTE,ACT_AS_INSTRUCTIONS,method(),'## The ten workflows / Os dez fluxos',menu(),
-     '## How to begin / Como começar',
-     'Infer the workflow from what the user says next, or ask one short question offering two or three fitting workflows. '
-     'If the user names a workflow, apply it. Do not ask for setup, storage or deadlines before being useful; start from the user\'s own words and existing records when supplied. '
-     'Keep all ten in mind for handoffs, and tell the user which workflow you are applying.',footer(v)])+'\n'
+PACK_DESCRIPTION='Talentsia Do: ten bilingual productivity workflows sharing one method and one trusted record. Use when the user wants to capture, organize, plan, unblock, prepare, do, follow through, make room, resume or review work; choose the fitting workflow and hand off between them.'
+BEGIN=('Infer the workflow from what the user says next, or ask one short question offering two or three fitting workflows. '
+ 'If the user names a workflow, apply it. Do not ask for setup, storage or deadlines before being useful; start from the user\'s own words and existing records when supplied. '
+ 'Keep all ten in mind for handoffs, and tell the user which workflow you are applying.')
 
-def card(name,v):
-    display=ui(name)['display_name'];description,_=frontmatter(name)
-    prompt=ui(name)['default_prompt'].replace('$'+name,display)
-    parts=[skill_frontmatter(name,description),f'# Talentsia Do {v} — {display} / pocket skill',ATTACH_OR_PASTE,ACT_AS_INSTRUCTIONS,method(),f'## {display}',body_without_preamble(name)]
-    if name=='review':
-        parts+=['## Review and planning',plain_links((PLUGIN/'references/review-and-planning.md').read_text().strip())]
-    elif 'review-and-planning' in parts[-1] or 'operating-instructions' in parts[-1]:
-        parts.append(DEEP_NOTE)
-    parts+=[f'## Start / Começar\nExample request: “{prompt}” Apply {display} to what the user sends next.',footer(v)]
+def start(v):
+    return '\n\n'.join([skill_frontmatter('talentsia-do-start',PACK_DESCRIPTION),f'# Talentsia Do {v} — start here / comece aqui',PASTE_START,ACT_AS_INSTRUCTIONS,method(),'## The ten workflows / Os dez fluxos',menu(),
+     '## How to begin / Como começar',BEGIN,footer(v)])+'\n'
+
+def pack(v):
+    parts=[skill_frontmatter('talentsia-do',PACK_DESCRIPTION),f'# Talentsia Do {v} — the complete pack / o pacote completo',ATTACH_OR_PASTE,ACT_AS_INSTRUCTIONS,method(),
+     '## The ten workflows / Os dez fluxos',menu(),'## How to begin / Como começar',BEGIN+' Each workflow below has its full instructions; the two references at the end apply when a workflow names them.']
+    for name in ORDER:
+        display=ui(name)['display_name'];description,_=frontmatter(name)
+        prompt=ui(name)['default_prompt'].replace('$'+name,display)
+        parts+=[f'## {display} (`{name}`)',f'_{description}_',demote(body_without_preamble(name)),f'Example request: “{prompt}”']
+    parts+=['## Review and planning (reference)',demote(plain_links((PLUGIN/'references/review-and-planning.md').read_text().split('\n',1)[1].strip())),
+     '## Authority and delegation (reference)',demote(plain_links((PLUGIN/'references/operating-instructions.md').read_text().split('\n',1)[1].strip())),footer(v)]
     return '\n\n'.join(parts)+'\n'
 
 def project_instructions(v):
@@ -74,8 +76,7 @@ def project_instructions(v):
      '## The ten workflows / Os dez fluxos',menu(),footer(v)])+'\n'
 
 def artifacts():
-    v=version();out={f'SKILL-talentsia-do-start-{v}.md':('start',start(v)),f'talentsia-do-project-instructions-{v}.md':('project-instructions',project_instructions(v))}
-    for name in ORDER:out[f'SKILL-{name}-{v}.md']=('card-review' if name=='review' else 'card',card(name,v))
+    v=version();out={f'SKILL-talentsia-do-{v}.md':('pack',pack(v)),f'SKILL-talentsia-do-start-{v}.md':('start',start(v)),f'talentsia-do-project-instructions-{v}.md':('project-instructions',project_instructions(v))}
     for filename,(kind,text) in out.items():
         assert len(text)<=BUDGETS[kind],f'{filename} exceeds {BUDGETS[kind]} characters ({len(text)})'
         assert not re.findall(r'\]\((?:references/)?[\w-]+\.md\)',text),f'Unresolved file link in {filename}'
@@ -86,7 +87,7 @@ def write(out):
     for filename,text in files.items():(out/filename).write_text(text)
     reference=out/f'talentsia-do-project-reference-{v}.md'
     assert reference.is_file(),'Generate the Project reference first'
-    index={'version':v,'site':SITE,'note':'Attach or paste one SKILL-*.md file per conversation; do not attach this zip to a chat.','files':{}}
+    index={'version':v,'site':SITE,'note':'Attach SKILL-talentsia-do-<version>.md to a chat, or paste the start text; do not attach this zip.','files':{}}
     with zipfile.ZipFile(out/f'talentsia-do-pocket-{v}.zip','w',zipfile.ZIP_DEFLATED) as z:
         for p in [out/f for f in files]+[reference]:
             data=p.read_bytes();z.writestr(f'talentsia-do-pocket-{v}/{p.name}',data)
