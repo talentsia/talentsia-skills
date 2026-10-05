@@ -11,8 +11,12 @@ Explore the product at [skills.talentsia.com](https://skills.talentsia.com). **O
 On a supported installation with the Codex CLI:
 
 ```sh
-codex plugin marketplace add talentsia/talentsia-skills --ref v0.1.0
+codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
+
+For **Add → Marketplace** in the desktop app, select repository `talentsia/talentsia-skills`, branch `main`, and catalog path `.agents/plugins`. The catalog fetches the plugin separately from the repository's `v0.1.0` tag, so catalog-only sparse checkouts contain everything needed to discover it.
+
+If this source was added before the catalog correction, run `codex plugin marketplace upgrade talentsia-skills` and restart the app. Keep the marketplace on `main`; the original `v0.1.0` catalog has not been rewritten.
 
 Restart the ChatGPT desktop app, open the Plugins Directory, select **Talentsia Skills**, and install **Talentsia Do**. Adding a marketplace makes a catalog available; it does not install its plugins. Client and workspace support may vary. This repository is a marketplace source, not a listing in OpenAI's universal public directory.
 

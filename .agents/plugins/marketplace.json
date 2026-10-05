@@ -7,8 +7,10 @@
     {
       "name": "talentsia-do",
       "source": {
-        "source": "local",
-        "path": "./plugins/talentsia-do"
+        "source": "git-subdir",
+        "url": "https://github.com/talentsia/talentsia-skills.git",
+        "path": "./plugins/talentsia-do",
+        "ref": "v0.1.0"
       },
       "policy": {
         "installation": "AVAILABLE",
