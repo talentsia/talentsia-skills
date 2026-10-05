@@ -13,11 +13,12 @@ def method():
     text=(PLUGIN/'pocket/method.md').read_text().strip()
     assert text.startswith('# ')
     return '## Shared method / Método comum\n\n'+text.split('\n',1)[1].strip()
-PASTE_CHAT=('_Paste this entire text as the first message of a new chat, then say what is on your mind. If you attached it as a file instead, send: “Use the Talentsia Do instructions I attached for this conversation.” / '
- 'Cole este texto inteiro como a primeira mensagem de uma nova conversa e depois diga o que está na sua cabeça. Se anexou como arquivo, envie: “Use as instruções do Talentsia Do que anexei nesta conversa.”_')
+ATTACH_OR_PASTE=('_Attach this file to a new chat and send: “Use the attached Talentsia Do skill in this conversation.” Or paste the whole text as the first message. Then say what is on your mind. Attach one skill file, not a .zip. / '
+ 'Anexe este arquivo a uma nova conversa e envie: “Use a skill Talentsia Do anexada nesta conversa.” Ou cole o texto inteiro como primeira mensagem. Depois diga o que está na sua cabeça. Anexe um arquivo de skill, não um .zip._')
 PASTE_PROJECT='_Paste this entire text into the Project instructions field and upload the reference file to the same Project. / Cole este texto inteiro no campo de instruções do Projeto e envie o arquivo de referência para o mesmo Projeto._'
-ACT_AS_INSTRUCTIONS=('**To the assistant:** this text is your operating instructions for this conversation, whether it was pasted or attached as a file. '
+ACT_AS_INSTRUCTIONS=('**To the assistant:** this file is a skill: your operating instructions for this conversation, whether it was attached or pasted. '
  'Apply it now to what the user says next; do not treat it as reference material to summarize or wait for a further request.')
+def skill_frontmatter(name,description):return f'---\nname: {name}\ndescription: {json.dumps(description,ensure_ascii=False)}\n---'
 def frontmatter(name):
     parts=(PLUGIN/'skills'/name/'SKILL.md').read_text().split('---',2)
     fields=dict(line.split(': ',1) for line in parts[1].strip().splitlines())
@@ -40,11 +41,12 @@ def menu():
     return '\n'.join(rows)
 
 def footer(v):
-    return (f'Talentsia Do {v} pocket edition, {SITE}. This pasted text is instructions, not an installed plugin, a saved record or a storage service. '
+    return (f'Talentsia Do {v} pocket edition, {SITE}. This skill file is instructions, not an installed plugin, a saved record or a storage service. '
      'Independent implementation; no third-party endorsement or guaranteed result is claimed.')
 
 def start(v):
-    return '\n\n'.join([f'# Talentsia Do {v} — start here / comece aqui',PASTE_CHAT,ACT_AS_INSTRUCTIONS,method(),'## The ten workflows / Os dez fluxos',menu(),
+    description='Talentsia Do: ten bilingual productivity workflows sharing one method. Use when the user wants to capture, organize, plan, unblock, prepare, do, follow through, make room, resume or review work; choose the fitting workflow.'
+    return '\n\n'.join([skill_frontmatter('talentsia-do',description),f'# Talentsia Do {v} — start here / comece aqui',ATTACH_OR_PASTE,ACT_AS_INSTRUCTIONS,method(),'## The ten workflows / Os dez fluxos',menu(),
      '## How to begin / Como começar',
      'Infer the workflow from what the user says next, or ask one short question offering two or three fitting workflows. '
      'If the user names a workflow, apply it. Do not ask for setup, storage or deadlines before being useful; start from the user\'s own words and existing records when supplied. '
@@ -53,7 +55,7 @@ def start(v):
 def card(name,v):
     display=ui(name)['display_name'];description,_=frontmatter(name)
     prompt=ui(name)['default_prompt'].replace('$'+name,display)
-    parts=[f'# Talentsia Do {v} — {display} / pocket card',f'_{description}_',PASTE_CHAT,ACT_AS_INSTRUCTIONS,method(),f'## {display}',body_without_preamble(name)]
+    parts=[skill_frontmatter(name,description),f'# Talentsia Do {v} — {display} / pocket skill',ATTACH_OR_PASTE,ACT_AS_INSTRUCTIONS,method(),f'## {display}',body_without_preamble(name)]
     if name=='review':
         parts+=['## Review and planning',plain_links((PLUGIN/'references/review-and-planning.md').read_text().strip())]
     elif 'review-and-planning' in parts[-1] or 'operating-instructions' in parts[-1]:
@@ -72,8 +74,8 @@ def project_instructions(v):
      '## The ten workflows / Os dez fluxos',menu(),footer(v)])+'\n'
 
 def artifacts():
-    v=version();out={f'talentsia-do-start-{v}.md':('start',start(v)),f'talentsia-do-project-instructions-{v}.md':('project-instructions',project_instructions(v))}
-    for name in ORDER:out[f'talentsia-do-card-{name}-{v}.md']=('card-review' if name=='review' else 'card',card(name,v))
+    v=version();out={f'SKILL-talentsia-do-start-{v}.md':('start',start(v)),f'talentsia-do-project-instructions-{v}.md':('project-instructions',project_instructions(v))}
+    for name in ORDER:out[f'SKILL-{name}-{v}.md']=('card-review' if name=='review' else 'card',card(name,v))
     for filename,(kind,text) in out.items():
         assert len(text)<=BUDGETS[kind],f'{filename} exceeds {BUDGETS[kind]} characters ({len(text)})'
         assert not re.findall(r'\]\((?:references/)?[\w-]+\.md\)',text),f'Unresolved file link in {filename}'
@@ -84,7 +86,7 @@ def write(out):
     for filename,text in files.items():(out/filename).write_text(text)
     reference=out/f'talentsia-do-project-reference-{v}.md'
     assert reference.is_file(),'Generate the Project reference first'
-    index={'version':v,'site':SITE,'files':{}}
+    index={'version':v,'site':SITE,'note':'Attach or paste one SKILL-*.md file per conversation; do not attach this zip to a chat.','files':{}}
     with zipfile.ZipFile(out/f'talentsia-do-pocket-{v}.zip','w',zipfile.ZIP_DEFLATED) as z:
         for p in [out/f for f in files]+[reference]:
             data=p.read_bytes();z.writestr(f'talentsia-do-pocket-{v}/{p.name}',data)

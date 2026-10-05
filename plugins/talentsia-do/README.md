@@ -1,4 +1,4 @@
-# Talentsia Do 0.4.1
+# Talentsia Do 0.4.2
 
 Seu multiplicador de produtividade. / Your productivity multiplier.
 
@@ -8,9 +8,9 @@ One free plugin, ten skills, one bilingual method: Clear My Head, Organize My Wo
 
 No installation available on your device? The release ships a **pocket edition**: pasteable texts (a start prompt, one card per skill, and Project instructions with a reference file) generated from this same source. See the [repository README](https://github.com/talentsia/talentsia-skills#pocket-edition-paste-no-installation).
 
-Use the public [Talentsia Skills marketplace](https://github.com/talentsia/talentsia-skills). In ChatGPT desktop, use Add → Marketplace with repo `talentsia/talentsia-skills`, branch `main`, path `.agents/plugins`; update or install Talentsia Do and check version 0.4.1. On a supported Codex CLI, add with `codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins`.
+Use the public [Talentsia Skills marketplace](https://github.com/talentsia/talentsia-skills). In ChatGPT desktop, use Add → Marketplace with repo `talentsia/talentsia-skills`, branch `main`, path `.agents/plugins`; update or install Talentsia Do and check version 0.4.2. On a supported Codex CLI, add with `codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins`.
 
-Claude Code: `claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.1`, then `claude plugin install talentsia-do@talentsia-skills`.
+Claude Code: `claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.4.2`, then `claude plugin install talentsia-do@talentsia-skills`.
 
 Choose by current need: capture → Clear My Head; clarify inbox → Organize My Work; choose today → Plan My Day; unblock a project → Move Forward; readiness → Prepare; execute → Do With Me; track promised results → Follow Through; reduce overload → Make Room; checkpoint/return → Resume; reconcile the system → Review. Reset composes skills; Someday/Maybe is a state.
 

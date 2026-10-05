@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2
+
+Pocket texts are now shaped and named as skill files: `SKILL-<skill>-<version>.md` and `SKILL-talentsia-do-start-<version>.md`, each opening with `name`/`description` frontmatter like a `SKILL.md`, so assistants recognize an attached file as a skill to follow. Guidance changes from “paste” to “attach one skill file and send the activation sentence, or paste”; the pocket zip is for the website and bulk download and should not be attached to a chat. Motivated by assistant feedback in a 2026-10-05 ChatGPT mobile test: an attached zip was not followed strictly, and a single skill file would have been. Replaces the `talentsia-do-card-*` and `talentsia-do-start-*` names introduced in 0.4.0; no skill, reference, manifest or installation change beyond the version.
+
 ## 0.4.1
 
 Pocket texts now open with a short instruction to the assistant to treat the text as operating instructions whether pasted or attached, and the human-facing line includes the activation request to send if the assistant hesitates. Motivated by a 2026-10-05 test on the ChatGPT mobile app (free plan): the start prompt worked when pasted, but when attached as a file the assistant initially treated it as reference material. No skill, reference, manifest or installation change beyond the version.
