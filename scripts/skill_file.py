@@ -43,7 +43,8 @@ def menu():
 def footer(v):
     return (f'Talentsia Do {v}, {SITE}. Source and updates: {REPO}. This file is instructions, not an installed plugin, a saved record or a storage service. '
      'Independent implementation informed by Getting Things Done; no third-party endorsement or guaranteed result is claimed. '
-     '© 2026 Talentsia. Licensed CC BY-NC-SA 4.0: share and adapt with attribution, not for sale.')
+    '© 2026 Talentsia. Skill content is CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/. '
+    'Share and adapt with attribution for noncommercial purposes. Business use is not automatically permitted; seek written permission.')
 
 def generate():
     v=version()

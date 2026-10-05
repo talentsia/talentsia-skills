@@ -5,6 +5,9 @@ from skill_file import generate,PLUGIN,ROOT,ORDER
 
 def check(out):
  version=json.loads((PLUGIN/'plugin.json').read_text())['version']
+ assert (ROOT/'LICENSE').is_file() and (ROOT/'SKILLS-LICENSE').is_file() and (ROOT/'CODE-LICENSE').is_file() and (ROOT/'NOTICE.md').is_file()
+ license_index=(ROOT/'LICENSE').read_text()
+ assert 'SKILLS-LICENSE' in license_index and 'CODE-LICENSE' in license_index
  cases=json.loads((ROOT/'evals/cases.json').read_text())
  assert cases['model_execution']=='not_run'
  ids=[c['id'] for c in cases['cases']]

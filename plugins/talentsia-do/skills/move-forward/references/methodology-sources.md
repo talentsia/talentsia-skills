@@ -11,4 +11,4 @@ The package contains operating instructions adapted from the existing reusable s
 - [Horizons of focus](https://gettingthingsdone.com/wp-content/uploads/2014/10/2016-Horizons-of-Focus.pdf)
 - [Natural planning](https://gettingthingsdone.com/2024/11/the-natural-planning-model/)
 
-Copyright and third-party rights remain with their respective owners. Talentsia's own text in this package is licensed CC BY-NC-SA 4.0; that license does not extend to the third-party sources listed above.
+Copyright and third-party rights remain with their respective owners. Talentsia's original skill content is licensed CC BY-NC-SA 4.0 for noncommercial purposes; that license does not extend to the third-party sources listed above. Business use is not automatically permitted; consult Talentsia for written permission.

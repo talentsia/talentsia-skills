@@ -2,7 +2,7 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.5.0 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
+Talentsia Do 0.5.1 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. No premium content or backend is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
@@ -54,7 +54,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.0` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.1` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -62,12 +62,12 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.0** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.1** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.0
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.1
 claude plugin install talentsia-do@talentsia-skills
 ```
 
@@ -95,10 +95,10 @@ The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the 
 
 This instructions-only plugin creates no storage backend, connected account, worker or schedule. Personal records stay in user-owned storage. Without tools/persistence, skills provide portable records marked not saved and disclose unperformed actions. Email, calendar and third-party actions require explicit human authorization. No guaranteed productivity result is promised.
 
-© 2026 Talentsia. Licensed under [CC BY-NC-SA 4.0](LICENSE): use it freely, share and adapt it with attribution under the same terms, do not sell it. Plain-language summary in [NOTICE.md](NOTICE.md). Premium packs and membership services are offered separately under their own terms. [Methodology sources](plugins/talentsia-do/references/methodology-sources.md) identify influences without endorsement or certification; third-party rights remain with their owners.
+© 2026 Talentsia. Original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0. These are noncommercial licenses, not OSI-approved open-source licenses. The skill-content license does not make all workplace or business use automatically permitted. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md). Business use requires separate written permission from Talentsia. Premium packs are proprietary and separately licensed; the public license does not apply to them. Third-party rights remain with their owners.
 
 ## Maintain the package
 
-Canonical shared references live under `plugins/talentsia-do/references/`; the hand-kept compressed method used in the skill file lives in `plugins/talentsia-do/pocket/method.md` and must be revised whenever `references/core.md` changes meaning. Run `python3 scripts/package.py` to synchronize identical self-contained exports, validate package structure and build the plugin ZIP outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
+Canonical shared references live under `plugins/talentsia-do/references/`; the hand-kept compressed method used in the skill file lives in `plugins/talentsia-do/pocket/method.md` and must be revised whenever `references/core.md` changes meaning. Run `python3 scripts/package.py` to synchronize identical self-contained exports and build the plugin ZIP outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
 
-Build the skill file and its upload ZIP with `python3 scripts/skill_file.py --output /tmp/talentsia-do-release`, then verify all artifacts with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release` and `python3 scripts/privacy_scan.py --output /tmp/talentsia-do-release`. A release has exactly three artifacts: the skill file, the skill ZIP and the plugin ZIP, plus checksums and the validation report. The release includes 64 authored behavior cases; model runs and real app behavior remain unexecuted.
+Build the skill file and its upload ZIP with `python3 scripts/skill_file.py --output /tmp/talentsia-do-release`, then verify all artifacts with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release` and `python3 scripts/privacy_scan.py --output /tmp/talentsia-do-release`. A release has exactly three distributable artifacts: the skill file, the skill ZIP and the plugin ZIP, plus checksums and the validation report. The release includes 64 authored behavior cases; model runs and real app behavior remain unexecuted.

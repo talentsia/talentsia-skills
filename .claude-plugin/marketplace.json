@@ -8,7 +8,7 @@
       "name": "talentsia-do",
       "source": "./plugins/talentsia-do",
       "description": "Ten free bilingual productivity skills in one Talentsia Do plugin.",
-      "version": "0.5.0"
+      "version": "0.5.1"
     }
   ],
   "metadata": {

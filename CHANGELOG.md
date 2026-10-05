@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+Clarifies license scope: the original skill content and documentation are CC BY-NC-SA 4.0; repository Python scripts and GitHub Actions code are PolyForm Noncommercial 1.0.0. Adds separate full license texts and a license index. These are source-available noncommercial licenses, not OSI-approved open-source licenses. Business use of the CC-licensed content is not automatically permitted. Prior releases retain the license terms under which they were distributed; this clarification does not revoke previously granted rights.
+
+Corrects stale package-maintenance documentation to reflect the current three-artifact release process and the single `scripts/skill_file.py` generator.
+
 ## 0.5.0
 
 **One skill, three artifacts, a license.** Each release now publishes exactly `SKILL-talentsia-do-<version>.md` (the complete pack as one skill file, for attaching to chats or Projects), `talentsia-do-skill-<version>.zip` (the same file as `talentsia-do/SKILL.md` for clients that upload skill ZIPs, such as Claude web/desktop) and `talentsia-do-plugin-<version>.zip` (the native ten-skill plugin). Removed: the ten individual skill ZIPs, the Project reference and Project instructions files, the start text, the pocket ZIP and `scripts/mobile_reference.py` / `scripts/pocket.py`, replaced by `scripts/skill_file.py`. The Project route now uses the skill file itself with a one-sentence Project instruction. Fewer files means one version to track and one thing to replace when updating.
