@@ -1,0 +1,17 @@
+{
+  "name": "talentsia-skills",
+  "owner": {
+    "name": "Talentsia"
+  },
+  "plugins": [
+    {
+      "name": "talentsia-do",
+      "source": "./plugins/talentsia-do",
+      "description": "Clarify commitments, next actions and follow-up in PT or EN.",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "Reusable Talentsia productivity skills in Portuguese and English."
+  }
+}
