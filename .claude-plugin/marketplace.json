@@ -9,6 +9,12 @@
       "source": "./plugins/talentsia-do",
       "description": "Ten free bilingual productivity skills in one Talentsia Do plugin.",
       "version": "0.5.1"
+    },
+    {
+      "name": "talentsia-work",
+      "source": "./plugins/talentsia-work",
+      "description": "Hold a seat in your Talentsia organisation: six free skills, four role agents and a signed MCP connection.",
+      "version": "0.1.0"
     }
   ],
   "metadata": {

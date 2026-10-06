@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hand Over"
+  short_description: "File work for the seat or another worker"
+  default_prompt: "Use $hand-over to file this as a Talentsia task for the right worker."

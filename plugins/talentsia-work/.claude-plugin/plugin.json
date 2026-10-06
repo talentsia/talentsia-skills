@@ -1,0 +1,17 @@
+{
+  "name": "talentsia-work",
+  "version": "0.1.0",
+  "description": "Hold a seat in a Talentsia organisation: live procedures, tasks, progress, deliverables and promises over a signed MCP connection.",
+  "author": {
+    "name": "Talentsia"
+  },
+  "homepage": "https://skills.talentsia.com",
+  "mcpServers": {
+    "talentsia-work": {
+      "command": "python3",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/server/mcp_server.py"
+      ]
+    }
+  }
+}

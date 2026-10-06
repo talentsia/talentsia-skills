@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deliver Work"
+  short_description: "File the deliverable and close the task"
+  default_prompt: "Use $deliver-work to file this finished work in Talentsia."

@@ -2,7 +2,7 @@ name: Validate release package
 on:
   push:
     branches: [main]
-    tags: ['v*']
+    tags: ['v*', 'talentsia-work-v*']
   pull_request:
 permissions:
   contents: read
@@ -20,4 +20,6 @@ jobs:
           python3 scripts/skill_file.py --output /tmp/talentsia-do-ci
           python3 scripts/check_candidate.py --output /tmp/talentsia-do-ci
           python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
+          python3 scripts/package_work.py --output /tmp/talentsia-work-ci
+          python3 scripts/privacy_scan.py --output /tmp/talentsia-work-ci
           git diff --exit-code

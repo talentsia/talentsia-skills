@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep Promises"
+  short_description: "Review and report on the seat's promises"
+  default_prompt: "Use $keep-promises to review what my Talentsia seat owes and report progress."

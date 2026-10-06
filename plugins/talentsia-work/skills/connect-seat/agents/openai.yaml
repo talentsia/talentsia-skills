@@ -1,0 +1,4 @@
+interface:
+  display_name: "Connect Seat"
+  short_description: "Set up and verify a Talentsia seat"
+  default_prompt: "Use $connect-seat to connect this assistant to my Talentsia seat."

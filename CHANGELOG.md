@@ -1,5 +1,16 @@
 # Changelog
 
+## Talentsia Work 0.1.0
+
+New free pack, released separately from Talentsia Do and tagged `talentsia-work-v0.1.0`. It lets an assistant in Codex or Claude Code hold a seat in a Talentsia organisation. It contains:
+
+- six skills sharing one seat protocol: Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over and What Needs Me;
+- four role agents: Content Designer, Content Writer, Software Engineer and Executive Assistant;
+- a standard-library MCP client (15 tools) that signs each request with the seat's own credential;
+- `setup_seat.py`, which checks a credential without printing it and writes one Codex or Claude Code agent per seat.
+
+The package carries no organisation content, addresses or keys. Procedures are read live from the organisation's device. Codex loads the plugin from `.codex-plugin/plugin.json`, Claude Code from `.claude-plugin/plugin.json`. Model behaviour and live-workspace behaviour are not run in CI. Artifacts carry SHA-256 checksums and are not yet signed.
+
 ## 0.5.1
 
 Clarifies license scope: the original skill content and documentation are CC BY-NC-SA 4.0; repository Python scripts and GitHub Actions code are PolyForm Noncommercial 1.0.0. Adds separate full license texts and a license index. These are source-available noncommercial licenses, not OSI-approved open-source licenses. Business use of the CC-licensed content is not automatically permitted. Prior releases retain the license terms under which they were distributed; this clarification does not revoke previously granted rights.

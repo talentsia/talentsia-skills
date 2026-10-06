@@ -1,0 +1,4 @@
+interface:
+  display_name: "What Needs Me"
+  short_description: "See and handle what waits for the person"
+  default_prompt: "Use $what-needs-me to show what my Talentsia organisation is waiting on me for."

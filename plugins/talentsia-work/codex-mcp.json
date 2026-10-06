@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "talentsia-work": {
+      "title": "Talentsia Work",
+      "description": "Signed connection to a seat in your Talentsia organisation.",
+      "cwd": ".",
+      "command": "python3",
+      "args": [
+        "./server/mcp_server.py"
+      ]
+    }
+  }
+}

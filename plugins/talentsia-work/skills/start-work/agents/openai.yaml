@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start Work"
+  short_description: "Read the seat, its tasks and agree the work"
+  default_prompt: "Use $start-work to see what my Talentsia seat has waiting and pick the next piece of work."

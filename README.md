@@ -89,6 +89,12 @@ Other Agent Skills-compatible clients can use `plugins/talentsia-do/skills/<name
 
 Start with synthetic inputs. [Behavior evaluation cases](evals/README.md) cover routing, all ten scopes and shared boundaries. Static validation does not prove model behavior; record observed outputs in the target client before declaring behavioral tests passed.
 
+## Talentsia Work (free)
+
+**Talentsia Work 0.1.0** lets Codex or Claude Code hold a seat in an organisation that runs on Talentsia: a position on its chart filled by an outside agent. Six skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small signed MCP client that connects to the organisation's own Talentsia workspace. The seat reads its procedures live from the organisation's device. This package carries no organisation content and no credentials, and it never publishes, sends, approves or decides anything.
+
+It needs a Talentsia organisation and a seat that a person has enrolled on its device, so it is installed natively rather than attached as a skill file. Install it from the same marketplaces: `codex plugin add talentsia-work@talentsia-skills`, or `claude plugin install talentsia-work@talentsia-skills`. Setup and the one-seat versus several-seat arrangement are in the [Talentsia Work README](plugins/talentsia-work/README.md). Releases are tagged `talentsia-work-v<version>`, separately from Talentsia Do's `v<version>`.
+
 ## Migration, privacy and rights
 
 The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the same `talentsia-do` plugin; the single skill file is a distribution format of those same ten, not a return to the catch-all. See [CHANGELOG](CHANGELOG.md) for migration. Existing personal records need no conversion, copying or relocation. Remove a separately uploaded legacy skill only after checking the new installation; this release does not edit user settings, live Pages or personal projects.
@@ -102,3 +108,5 @@ This instructions-only plugin creates no storage backend, connected account, wor
 Canonical shared references live under `plugins/talentsia-do/references/`; the hand-kept compressed method used in the skill file lives in `plugins/talentsia-do/pocket/method.md` and must be revised whenever `references/core.md` changes meaning. Run `python3 scripts/package.py` to synchronize identical self-contained exports and build the plugin ZIP outside the repository. It makes no network calls. The plugin has exactly ten `skills/*/SKILL.md` entrypoints; shared references are not skills.
 
 Build the skill file and its upload ZIP with `python3 scripts/skill_file.py --output /tmp/talentsia-do-release`, then verify all artifacts with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release` and `python3 scripts/privacy_scan.py --output /tmp/talentsia-do-release`. A release has exactly three distributable artifacts: the skill file, the skill ZIP and the plugin ZIP, plus checksums and the validation report. The release includes 64 authored behavior cases; model runs and real app behavior remain unexecuted.
+
+Talentsia Work is packaged separately. Run `python3 scripts/package_work.py --output /tmp/talentsia-work-release`, then `python3 scripts/privacy_scan.py --output /tmp/talentsia-work-release`. That build synchronises the seat-protocol exports, validates both harness manifests, smoke-tests the MCP server with no credentials, and writes the plugin ZIP, a `SHA256SUMS` file covering the ZIP and the client scripts, and a checks report. Its [synthetic cases](evals/talentsia-work-cases.json) are authored and not run.
