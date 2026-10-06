@@ -34,6 +34,7 @@ import shutil
 import stat
 import sys
 from pathlib import Path
+import talentsia_agent
 
 HERE = Path(__file__).resolve().parent
 PLUGIN = HERE.parent
@@ -50,7 +51,7 @@ def _say(ok: bool, text: str) -> bool:
 
 
 def _profiles_file(given: str) -> Path:
-    return Path(given or os.environ.get("TALENTSIA_AGENTS_FILE", "") or DEFAULT_FILE).expanduser()
+    return Path(given or os.environ.get("TALENTSIA_AGENTS_FILE", "") or DEFAULT_FILE).expanduser().resolve()
 
 
 def check(seat: str, given: str, online: bool) -> int:
@@ -62,10 +63,13 @@ def check(seat: str, given: str, online: bool) -> int:
     good = _say(mode & 0o077 == 0, f"only its owner can read it (mode {mode:o})")
     if not good:
         print(f"      chmod 600 {path}")
+    if not good:
+        return 1
     try:
-        profiles = json.loads(path.read_text())
-    except ValueError:
-        _say(False, "the file is not valid JSON")
+        talentsia_agent.PROFILES = path
+        profiles = talentsia_agent._profiles()
+    except SystemExit:
+        _say(False, "credential file could not be read, is insecure or is not a profile object")
         return 1
     if not seat and len(profiles) == 1:
         seat = next(iter(profiles))
@@ -75,15 +79,19 @@ def check(seat: str, given: str, online: bool) -> int:
     profile = profiles[seat]
     good &= _say(bool(str(profile.get("id", seat))), f"agent id {profile.get('id', seat)!r}")
     key = str(profile.get("key", ""))
-    good &= _say(re.fullmatch(r"[0-9a-fA-F]{64,}", key) is not None,
+    good &= _say(re.fullmatch(r"[0-9a-fA-F]{64}", key) is not None,
                  "a key of the right shape (64 hex characters; not shown)")
     base = str(profile.get("workspace", ""))
-    good &= _say(base.startswith("https://") and base.rstrip("/").endswith("/agents/v1"),
-                 f"workspace address {base or '(missing)'} (https, ending in /agents/v1)")
+    try:
+        talentsia_agent._workspace(base)
+    except SystemExit:
+        good = False
+        _say(False, 'workspace must use HTTPS and end in /agents/v1; value withheld')
+    else:
+        _say(True, 'workspace URL is valid (value withheld)')
     if online and good:
         sys.path.insert(0, str(HERE))
         os.environ["TALENTSIA_AGENTS_FILE"] = str(path)
-        import talentsia_agent  # noqa: E402 - loaded after the file is chosen
         try:
             craft = talentsia_agent.call("craft", acting=seat)
         except SystemExit as refusal:
@@ -94,9 +102,14 @@ def check(seat: str, given: str, online: bool) -> int:
 
 
 def install(target: Path = HOME / "bin") -> Path:
-    target.mkdir(parents=True, exist_ok=True)
+    if target.is_symlink() or target.parent.is_symlink():
+        raise SystemExit('client installation directory must not be a symlink')
+    target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     os.chmod(target.parent, 0o700)
+    target.mkdir(mode=0o700, exist_ok=True)
     for name in CLIENT:
+        if (target / name).is_symlink():
+            raise SystemExit('client installation file must not be a symlink')
         shutil.copy2(HERE / name, target / name)
     print(f"ok    seat client installed in {target}")
     return target
@@ -137,13 +150,15 @@ def write_agent(harness: str, seat: str, role: str, name: str, given: str,
         if not SEAT.fullmatch(value):
             raise SystemExit(f"a {label} name is lower case letters, digits, '-' or '_'")
     name = name or seat
+    if check(seat, given, False):
+        return 1
     description, instructions = _role(role)
     description += f" Holds the Talentsia seat {seat!r}."
     target = _target(harness, name, force)
     server = install() / "mcp_server.py"
     command = sys.executable or "python3"
     args = [str(server), "--as", seat]
-    env = {"TALENTSIA_AGENTS_FILE": str(Path(given).expanduser())} if given else {}
+    env = {"TALENTSIA_AGENTS_FILE": str(_profiles_file(given))}
     if harness == "codex":
         lines = [f"name = {_toml(name)}", f"description = {_toml(description)}",
                  f"developer_instructions = {_toml(instructions)}", "",

@@ -9,7 +9,9 @@ New free pack, released separately from Talentsia Do and tagged `talentsia-work-
 - a standard-library MCP client (15 tools) that signs each request with the seat's own credential;
 - `setup_seat.py`, which checks a credential without printing it and writes one Codex or Claude Code agent per seat.
 
-The package carries no organisation content, addresses or keys. Procedures are read live from the organisation's device. Codex loads the plugin from `.codex-plugin/plugin.json`, Claude Code from `.claude-plugin/plugin.json`. Model behaviour and live-workspace behaviour are not run in CI. Artifacts carry SHA-256 checksums and are not yet signed.
+The package carries no organisation content, real addresses or keys. Procedures are read live from the organisation's device. Codex loads the plugin from `.codex-plugin/plugin.json`, Claude Code from `.claude-plugin/plugin.json`. Model behaviour and live-workspace behaviour are not run in CI. The Work plugin and dedicated build/test/release files are MIT licensed for business use; Talentsia Do retains its separate licenses.
+
+Pre-release security review added 15 offline regressions, redacted key/error paths, exact key-format checks, runtime POSIX credential ownership/permission checks, HTTPS-only configuration, redirect refusal, signed-path validation, bounded image uploads, and credential-validated per-seat setup with pinned file paths. Published assets are built and attested by the tag-triggered GitHub Actions workflow, not uploaded from a local unsigned build. SHA-256 checksums and a signed build-provenance bundle accompany the release.
 
 ## 0.5.1
 

@@ -2,6 +2,7 @@
 
 This repository contains separate classes of material under different licenses:
 
+- Exception: all content and code under `plugins/talentsia-work/`, its dedicated build tool `scripts/package_work.py`, security tests `tests/test_work_security.py`, behavior fixtures `evals/talentsia-work-cases.json` and release workflow `.github/workflows/release-work.yml` are MIT licensed. Full text: [Talentsia Work license](plugins/talentsia-work/LICENSE). Commercial use of this client and pack is permitted. This does not grant access to the Talentsia service, remove subscription requirements, or license trademarks.
 - Original skill content, pack instructions and documentation: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International. Full text: [SKILLS-LICENSE](SKILLS-LICENSE).
 - Python scripts and GitHub Actions workflow code: PolyForm Noncommercial License 1.0.0. Full text: [CODE-LICENSE](CODE-LICENSE).
 

@@ -11,8 +11,9 @@ Talentsia Work lets an assistant hold a **seat** in an organisation that runs on
 ## 2. One seat, named, every time
 
 - Each seat has its own credential. The person enrols the seat on their device, and the device shows the key **once**. Keep it in `~/.talentsia/agents.json` (one profile per seat, file mode `0600`) or in the `TALENTSIA_AGENT_*` environment variables. Never keep it in a repository, a project file or a prompt.
-- **Never ask for the key in chat, and never repeat one you are shown.** If somebody pastes a key into the conversation, tell them to treat it as exposed and ask the person who enrolled the seat to issue a new one. Write the credential file yourself only if you have a shell, and only by telling the person the exact command to run. A key typed into a chat is in that chat's history.
+- **Never ask for the key in chat, and never repeat one you are shown.** If somebody pastes a key into the conversation, tell them to treat it as exposed and ask the person who enrolled the seat to issue a new one. Give the person commands to create/protect and open the credential file in a local editor, preserving existing seats. The person enters the key there, not in chat or shell commands/arguments. Do not read the credential file through model-visible tools. A key typed into a chat is in that chat's history.
 - When a machine holds several seats, every session acts as exactly one of them. There is no default seat. Doing one seat's work under another's name is worse than being refused, because the device records what it is told.
+- File profiles take precedence over environment credentials. Separate profiles select identities; they do not sandbox the host process. Use per-seat credential files and separate OS accounts/containers when stronger isolation is required. Workspace responses and tool availability do not expand human approval or platform-enforced scopes.
 
 ## 3. Say what you are doing as you do it
 

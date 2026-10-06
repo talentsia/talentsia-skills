@@ -55,11 +55,14 @@ import hashlib
 import hmac
 import json
 import os
+import re
 import secrets
+import stat
 import sys
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 from pathlib import Path
 
 TIMEOUT_SECONDS = 60
@@ -71,11 +74,18 @@ PROFILES = Path(os.environ.get("TALENTSIA_AGENTS_FILE", "")
 
 def _profiles() -> dict:
     try:
-        return json.loads(PROFILES.read_text())
+        with PROFILES.open() as source:
+            metadata = os.fstat(source.fileno())
+            if os.name == 'posix' and (metadata.st_uid != os.getuid() or stat.S_IMODE(metadata.st_mode) & 0o077):
+                raise SystemExit('credential file must be owned by this user and have mode 600')
+            profiles = json.load(source)
+        if not isinstance(profiles, dict) or any(not isinstance(profile, dict) for profile in profiles.values()):
+            raise SystemExit('credential file must contain an object of named seat profiles')
+        return profiles
     except FileNotFoundError:
         return {}
     except (OSError, ValueError) as error:
-        raise SystemExit(f"{PROFILES} could not be read: {error}") from None
+        raise SystemExit('credential file could not be read or is not valid JSON') from None
 
 
 def _credentials(acting: str = "") -> tuple[str, bytes, str]:
@@ -117,19 +127,27 @@ def _key(value: str, where: str) -> bytes:
     produced a traceback ending in "non-hexadecimal number found at position
     0". True, and it names neither the file nor what was expected.
     """
+    if not re.fullmatch(r'[0-9a-fA-F]{64}', value):
+        raise SystemExit('seat key must be exactly 64 hexadecimal characters; value withheld')
+    return bytes.fromhex(value)
+
+
+def _workspace(base: str) -> str:
     try:
-        raw = bytes.fromhex(value)
+        parsed = urlsplit(base)
+        valid = (parsed.scheme == 'https' and parsed.hostname and not parsed.username
+                 and not parsed.password and not parsed.query and not parsed.fragment
+                 and parsed.path.rstrip('/') == '/agents/v1' and parsed.port != 0)
     except ValueError:
-        shown = value if len(value) < 24 else value[:20] + "…"
-        raise SystemExit(
-            f"{where} does not hold a key: {shown!r} is not hexadecimal. A key is "
-            "64 hex characters, as the device showed it at enrolment — if "
-            "that looks like a placeholder from the instructions, it is."
-        ) from None
-    if len(raw) < 32:
-        raise SystemExit(f"{where} holds {len(raw)} bytes; a key is 32. Copy the "
-                         "whole key the device showed at enrolment.")
-    return raw
+        valid = False
+    if not valid:
+        raise SystemExit('workspace must be an HTTPS URL ending in /agents/v1, without credentials, query or fragment')
+    return base.rstrip('/')
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise urllib.error.HTTPError(req.full_url, code, 'redirect refused', headers, fp)
 
 
 def call(path: str, body: dict | None = None, *, method: str = "",
@@ -137,10 +155,12 @@ def call(path: str, body: dict | None = None, *, method: str = "",
     """One signed request, as exactly one agent. `path` is relative to its
     workspace address."""
     agent, key, base = _credentials(acting)
+    base = _workspace(base)
+    if not re.fullmatch(r'[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*', path):
+        raise SystemExit('request path must be a relative API path without query, fragment or traversal')
     method = method or ("POST" if body is not None else "GET")
     raw = json.dumps(body).encode() if body is not None else b""
     # The path as the device sees it, which is what it signs over.
-    from urllib.parse import urlsplit
     full = f"{base}/{path.lstrip('/')}"
     signed_path = urlsplit(full).path
     stamp = f"{time.time():.0f}"
@@ -159,10 +179,9 @@ def call(path: str, body: dict | None = None, *, method: str = "",
     request = urllib.request.Request(full, data=raw or None, headers=headers,
                                      method=method)
     try:
-        with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+        with urllib.request.build_opener(_NoRedirect()).open(request, timeout=TIMEOUT_SECONDS) as response:
             return json.loads(response.read().decode() or "{}")
     except urllib.error.HTTPError as error:
-        detail = error.read().decode()[:300]
         if error.code == 401:
             # The device will not say which way a credential failed, and that
             # is deliberate — so the useful guesses are listed here instead.
@@ -170,10 +189,10 @@ def call(path: str, body: dict | None = None, *, method: str = "",
                 "refused: the device did not accept this request. Either the "
                 "agent is not enrolled there, the key is wrong, this machine's "
                 "clock is more than a minute out, or the request was replayed."
-            ) from error
-        raise SystemExit(f"refused: {error.code} {detail}") from error
+            ) from None
+        raise SystemExit(f'refused: HTTP {error.code}; response detail withheld') from None
     except OSError as error:
-        raise SystemExit(f"the workspace is not reachable: {error}") from error
+        raise SystemExit('the workspace is not reachable; network detail withheld') from None
 
 
 def main(argv: list[str]) -> int:

@@ -328,8 +328,14 @@ def _picture(arguments: dict) -> tuple[str, dict, str]:
     from pathlib import Path
 
     where = Path(arguments["path"]).expanduser()
-    raw = where.read_bytes()
+    maximum = 8 * 1024 * 1024
+    with where.open('rb') as source:
+        raw = source.read(maximum + 1)
+    if len(raw) > maximum:
+        raise SystemExit('picture exceeds the 8 MiB upload limit')
     kind = next((k for magic, k in _MAGIC if raw.startswith(magic)), "")
+    if kind == 'image/webp' and raw[8:12] != b'WEBP':
+        kind = ''
     if not kind:
         raise SystemExit(f"{where} is not a PNG, JPEG or WebP")
     return ("media", {"name": arguments.get("name") or where.name, "type": kind,
@@ -360,7 +366,7 @@ def _invoke(name: str, arguments: dict, acting: str) -> dict:
         # the worse failure, which is what isError is for.
         return {"content": [{"type": "text", "text": str(refusal)}], "isError": True}
     except Exception as error:  # noqa: BLE001 — a tool reports, it does not crash the server
-        return {"content": [{"type": "text", "text": f"{type(error).__name__}: {error}"}],
+        return {"content": [{"type": "text", "text": f"{type(error).__name__}: tool failed; detail withheld"}],
                 "isError": True}
 
 

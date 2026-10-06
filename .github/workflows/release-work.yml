@@ -1,0 +1,51 @@
+name: Publish attested Talentsia Work
+on:
+  push:
+    tags: ['talentsia-work-v*']
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Validate both packs and build Work artifacts
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 scripts/package.py --output /tmp/talentsia-do-ci
+          python3 scripts/skill_file.py --output /tmp/talentsia-do-ci
+          python3 scripts/check_candidate.py --output /tmp/talentsia-do-ci
+          python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
+          python3 scripts/package_work.py --output /tmp/talentsia-work-release
+          python3 scripts/privacy_scan.py --output /tmp/talentsia-work-release
+          python3 -c 'import json, os; from pathlib import Path; version=json.loads(Path("plugins/talentsia-work/.codex-plugin/plugin.json").read_text())["version"]; assert os.environ["RELEASE_TAG"] == "talentsia-work-v"+version'
+          git diff --exit-code
+      - name: Attest built release assets
+        id: attest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
+        with:
+          subject-path: '/tmp/talentsia-work-release/*'
+      - name: Verify attestation and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          gh attestation verify /tmp/talentsia-work-release/talentsia-work-plugin-*.zip --repo "$GITHUB_REPOSITORY" --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/release-work.yml" --source-ref "$GITHUB_REF" --deny-self-hosted-runners
+          cp "$BUNDLE_PATH" /tmp/talentsia-work-release/talentsia-work-attestation.json
+          gh release create "$RELEASE_TAG" /tmp/talentsia-work-release/* --verify-tag --latest=false --title "Talentsia Work ${RELEASE_TAG#talentsia-work-v}" --notes "Free MIT-licensed Talentsia seat client and six skills for Codex/Claude Code. Requires an enrolled seat and a local MCP host. Includes 15 offline security tests, MCP/setup smoke checks, checksums and signed GitHub build provenance. Model behavior and live authorization are not certified by these checks. See plugins/talentsia-work/README.md for secure installation and verification. Talentsia Do releases are unchanged."

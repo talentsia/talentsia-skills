@@ -3,12 +3,14 @@ import argparse,re,subprocess,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 PATTERNS=[
+ re.compile(r'(?i)["\']key["\']\s*:\s*["\'][0-9a-f]{64,}["\']'),
+ re.compile(r'TALENTSIA_AGENT_KEY\s*=\s*["\']?[0-9a-fA-F]{64,}'),
  re.compile(r'(?<![A-Za-z0-9])/(?:Users|home)/[^\s"\']+'),
  re.compile(r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-(?:proj-)?[A-Za-z0-9_-]{25,})'),
  re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
  re.compile(r'(?i)Bearer\s+[A-Za-z0-9._=-]{20,}'),
  re.compile(r'(?i)(?:luiz@luizdasilva\.com|dev@talentsia\.com|appgprj_[a-z0-9]+|page[_-][a-f0-9]{24,})')]
-FORBIDDEN={'installation-receipt.json','fresh-session-source-check.json','source-changes.patch','ROLLBACK.md','READINESS.md','.env','.app.json'}
+FORBIDDEN={'installation-receipt.json','fresh-session-source-check.json','source-changes.patch','ROLLBACK.md','READINESS.md','.env','.app.json','agents.json','.talentsia'}
 
 def inspect(name,data):
  assert not any(part in FORBIDDEN or part in {'local-marketplace','_context'} for part in Path(name).parts),name

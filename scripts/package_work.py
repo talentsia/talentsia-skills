@@ -20,6 +20,7 @@ def frontmatter(path):
     return dict(line.split(': ',1) for line in parts[1].strip().splitlines() if not line.startswith(' ')),parts[2]
 
 def validate():
+    assert 'MIT License' in (PLUGIN/'LICENSE').read_text()
     codex=json.loads((PLUGIN/'.codex-plugin/plugin.json').read_text())
     claude=json.loads((PLUGIN/'.claude-plugin/plugin.json').read_text())
     version=codex['version']
@@ -80,8 +81,11 @@ def smoke():
         assert all(len(t['description'])>=40 and t['inputSchema']['type']=='object' for t in tools)
         assert answers[3]['isError'] and 'no agent configured' in answers[3]['content'][0]['text']
         for harness in ('codex','claude'):
+            profiles=Path(home)/'profiles.json'
+            profiles.write_text(json.dumps({'designer':{'id':'designer','key':'ab'*32,'workspace':'https://example.test/agents/v1'}}))
+            profiles.chmod(0o600)
             subprocess.run([sys.executable,str(PLUGIN/'server/setup_seat.py'),f'{harness}-agent','--seat','designer','--role','content-designer'],
-                           env={**env,'CODEX_HOME':f'{home}/codex','CLAUDE_CONFIG_DIR':f'{home}/claude'},capture_output=True,check=True,timeout=30)
+                           env={**env,'TALENTSIA_AGENTS_FILE':str(profiles),'CODEX_HOME':f'{home}/codex','CLAUDE_CONFIG_DIR':f'{home}/claude'},capture_output=True,check=True,timeout=30)
         agent=tomllib.loads(Path(home,'codex/agents/designer.toml').read_text())
         assert agent['mcp_servers']['talentsia']['args'][1:]==['--as','designer'] and agent['developer_instructions']
         text=Path(home,'claude/agents/designer.md').read_text();assert 'mcpServers:' in text and '"--as", "designer"' in text
@@ -105,6 +109,8 @@ if __name__=='__main__':
         if (skill/'SKILL.md').is_file():
             (skill/'references').mkdir(exist_ok=True);shutil.copy2(PLUGIN/'references/seat-protocol.md',skill/'references/seat-protocol.md')
     version=validate();tools=smoke()
+    subprocess.run([sys.executable,'-m','unittest','discover','-s',str(ROOT/'tests'),'-p','test_work_security.py'],check=True,
+                   env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1'})
     cases=json.loads((ROOT/'evals/talentsia-work-cases.json').read_text())
     assert cases['model_execution']=='not_run' and len({c['id'] for c in cases['cases']})==len(cases['cases'])>=12
     assert {c['expected_skill'] for c in cases['cases']}>=set(NAMES)
@@ -112,12 +118,14 @@ if __name__=='__main__':
     out.mkdir(parents=True,exist_ok=True)
     for stale in out.glob('talentsia-work-*'):stale.unlink()
     zip_path=out/f'talentsia-work-plugin-{version}.zip';archive(PLUGIN,zip_path)
-    files=[zip_path]+sorted((PLUGIN/'server').glob('*.py'))
-    sums=''.join(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.name}\n' for f in files)
-    (out/f'talentsia-work-{version}.SHA256SUMS').write_text(sums)
     report={'candidate_version':version,'tag':TAG.format(version),'status':'prepared_artifacts',
             'checks':{'skills':len(NAMES),'role_agents':len(ROLES),'mcp_tools':tools,'stdlib_only_client':True,'mcp_handshake':True,
-                      'unconfigured_call_refused':True,'agent_writers':['codex','claude'],'synthetic_fixture_count':len(cases['cases'])},
-            'model_behavior':'not_run','native_host_loading':'not_run','live_workspace':'not_run','signature':'not_signed','sha256':sums.splitlines()}
-    (out/f'talentsia-work-{version}.checks.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(f'PASS Talentsia Work {version}: six skills, four role agents, {tools} MCP tools, stdlib-only client, archive and checksums. Behavior evals not executed; artifacts not signed.')
+                  'unconfigured_call_refused':True,'offline_security_tests':15,'agent_writers':['codex','claude'],'synthetic_fixture_count':len(cases['cases'])},
+            'model_behavior':'not_run','native_host_loading':'not_run','live_workspace':'not_run','license':'MIT',
+            'build_provenance':'local build is unsigned; published assets must be attested by release-work.yml',
+            'sha256':{zip_path.name:hashlib.sha256(zip_path.read_bytes()).hexdigest()}}
+    report_path=out/f'talentsia-work-{version}.checks.json'
+    report_path.write_text(json.dumps(report,indent=2)+'\n')
+    sums=''.join(f'{hashlib.sha256(f.read_bytes()).hexdigest()}  {f.name}\n' for f in [zip_path,report_path])
+    (out/f'talentsia-work-{version}.SHA256SUMS').write_text(sums)
+    print(f'PASS Talentsia Work {version}: six skills, four role agents, {tools} MCP tools, security tests, archive and checksums. Model behavior evals not executed.')

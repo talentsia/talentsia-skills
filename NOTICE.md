@@ -2,11 +2,14 @@
 
 This repository contains separately licensed materials. Read [LICENSE](LICENSE) before using or redistributing anything.
 
+- Talentsia Work (all files in `plugins/talentsia-work/`) and the dedicated build/test/release files identified in the license index: [MIT](plugins/talentsia-work/LICENSE). Business use is allowed; preserve the copyright and license notice. Access to `talentsia.work` still requires an authorized account and seat and is governed by separate service terms. No trademark or endorsement rights are granted.
 - Original skill content, pack instructions and documentation: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), with full text in [SKILLS-LICENSE](SKILLS-LICENSE).
 - Python scripts and GitHub Actions workflow code: [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/), with full text in [CODE-LICENSE](CODE-LICENSE).
 - Third-party references, names, logos and linked material remain subject to their respective owners' rights and terms. Neither license grants trademark rights.
 
 In plain words:
+
+The noncommercial rules below apply to the CC-licensed content, including Talentsia Do, not the MIT-licensed Talentsia Work pack.
 
 - **Use the skill content for permitted noncommercial purposes.** CC BY-NC-SA does not define every workplace or business use as noncommercial. Organizations seeking business use should obtain written permission from Talentsia rather than assume it is covered.
 - **Share it, with attribution.** You may copy and redistribute the files, including on other sites or in other catalogs, as long as you credit Talentsia, link to <https://github.com/talentsia/talentsia-skills> or <https://skills.talentsia.com>, keep this notice, and mark any changes.

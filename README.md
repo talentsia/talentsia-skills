@@ -6,6 +6,8 @@ Talentsia Do 0.5.1 is one free plugin containing exactly ten productivity skills
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
+Talentsia Work 0.1.0 is a separate free, MIT-licensed plugin for business customers holding an enrolled seat on `talentsia.work`. It requires a local MCP-capable host, not a mobile chat attachment. See [installation, credential setup and release verification](plugins/talentsia-work/README.md). Its account/seat permissions and service terms are separate from the client license; Talentsia Do's release and licenses are unchanged.
+
 | Skill | Invocation name | Purpose |
 | --- | --- | --- |
 | Clear My Head | `clear-my-head` | Capture thoughts without inventing commitments |
@@ -101,7 +103,7 @@ The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the 
 
 This instructions-only plugin creates no storage backend, connected account, worker or schedule. Personal records stay in user-owned storage. Without tools/persistence, skills provide portable records marked not saved and disclose unperformed actions. Email, calendar and third-party actions require explicit human authorization. No guaranteed productivity result is promised.
 
-© 2026 Talentsia. Original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0. These are noncommercial licenses, not OSI-approved open-source licenses. The skill-content license does not make all workplace or business use automatically permitted. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md). Business use requires separate written permission from Talentsia. Premium packs are proprietary and separately licensed; the public license does not apply to them. Third-party rights remain with their owners.
+© 2026 Talentsia. Talentsia Do's original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0 except where the license index states otherwise. These noncommercial licenses are not OSI-approved open-source licenses and do not automatically permit business use of Do. **Talentsia Work and its dedicated build/test/release files are MIT licensed for business use.** See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for exact scope. Premium packs are proprietary and separately licensed; these public licenses do not apply to them. Third-party rights remain with their owners.
 
 ## Maintain the package
 

@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "Talentsia Work",
     "shortDescription": "Work a seat in your Talentsia organisation",
-    "longDescription": "Talentsia Work connects this assistant to a seat on your organisation's Talentsia chart. Six free skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small standard-library MCP client that signs each request with the seat's own credential. The organisation's procedures, records and keys stay on its own Talentsia device: the seat reads its procedures live, and nothing is published, sent or approved from here. Requires a Talentsia organisation and a seat enrolled by a person on its device.",
+    "longDescription": "Talentsia Work connects this assistant to an enrolled seat on your organisation's Talentsia chart. Six free skills and four role agents use a standard-library MCP client with signed HTTPS requests. Authoritative records and procedures stay on the organisation's device; the assistant receives private task context and the seat key is stored in your local credential file, never in chat. Requires Python 3.10+, a local MCP-capable host and an authorized Talentsia seat. MIT licensed for business use; platform terms and seat permissions still apply.",
     "developerName": "Talentsia",
     "category": "Productivity",
     "capabilities": [
