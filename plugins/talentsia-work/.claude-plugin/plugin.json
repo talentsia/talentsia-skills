@@ -1,6 +1,6 @@
 {
   "name": "talentsia-work",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hold a seat in a Talentsia organisation: live procedures, tasks, progress, deliverables and promises over a signed MCP connection.",
   "author": {
     "name": "Talentsia"

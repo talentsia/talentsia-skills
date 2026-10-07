@@ -1,5 +1,11 @@
 # Changelog
 
+## Talentsia Work 0.1.1
+
+Fixes `my_tasks`, which failed for every seat in 0.1.0. The 0.1.0 client refuses a request path carrying a query string, because the device signs over the path and not the query, and `my_tasks` sent its state and limit filters as a query. It now requests the device's most recent tasks with no query, filters them by state itself, and says how many it searched, so an empty answer cannot be read as "nothing older exists".
+
+The security tests now point both copies of the client at their synthetic credential file and refuse any real network call. In 0.1.0 the MCP server's own copy of the client read the developer's real `~/.talentsia/agents.json`, and one test passed only because the request was refused before it left the machine. A new test sends every tool's request through the client's own path check.
+
 ## Talentsia Work 0.1.0
 
 New free pack, released separately from Talentsia Do and tagged `talentsia-work-v0.1.0`. It lets an assistant in Codex or Claude Code hold a seat in a Talentsia organisation. It contains:

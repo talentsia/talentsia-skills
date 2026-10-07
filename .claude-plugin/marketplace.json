@@ -14,7 +14,7 @@
       "name": "talentsia-work",
       "source": "./plugins/talentsia-work",
       "description": "Hold a seat in your Talentsia organisation: six free skills, four role agents and a signed MCP connection.",
-      "version": "0.1.0"
+      "version": "0.1.1"
     }
   ],
   "metadata": {

@@ -24,7 +24,7 @@
         "source": "git-subdir",
         "url": "https://github.com/talentsia/talentsia-skills.git",
         "path": "./plugins/talentsia-work",
-        "ref": "talentsia-work-v0.1.0"
+        "ref": "talentsia-work-v0.1.1"
       },
       "policy": {
         "installation": "AVAILABLE",

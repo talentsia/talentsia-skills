@@ -27,7 +27,7 @@ agent = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(agent)
 
 PROTOCOL = "2024-11-05"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 #: What this seat can do. Each maps to one signed request. The descriptions say
 #: what the call is *for*, because a tool list is the whole of what a harness
@@ -48,11 +48,13 @@ TOOLS = [
                           "description": "one of: waiting_for_user, working, "
                                          "ready, completed, blocked"},
                 "limit": {"type": "integer",
-                          "description": "how many to return, 1 to 40"}},
+                          "description": "how many to return, 1 to 40; the newest come first"}},
         },
-        "call": lambda a: ("tasks?" + "&".join(
-            [f"state={a['state']}"] if a.get("state") else []
-            + [f"limit={int(a.get('limit', 20))}"]), None, "GET"),
+        # The device signs over the path and not the query, so the client
+        # sends no query at all; the filter is applied here, over the most
+        # recent work the device returns.
+        "call": lambda a: ("tasks", None, "GET"),
+        "after": lambda answer, a: _filter_tasks(answer, a),
     },
     {
         "name": "read_task",
@@ -342,6 +344,35 @@ def _picture(arguments: dict) -> tuple[str, dict, str]:
                       "bytes": base64.b64encode(raw).decode()}, "POST")
 
 
+#: What the device returns for `tasks` with no filter: its most recent work,
+#: newest first, dismissed work left out.
+RECENT_TASKS = 40
+
+
+def _filter_tasks(answer: dict, arguments: dict) -> dict:
+    """Narrow the device's recent tasks to one state, and say what was looked at.
+
+    The filter runs over the most recent tasks only, so an older task in the
+    asked-for state can be missing. Saying so is the difference between "none
+    waiting" and "none among the latest forty".
+    """
+    items = list(answer.get("items") or [])
+    wanted = str(arguments.get("state") or "").strip()
+    try:
+        limit = max(1, min(int(arguments.get("limit") or 20), RECENT_TASKS))
+    except (TypeError, ValueError):
+        limit = 20
+    matched = [i for i in items if not wanted or i.get("taskState") == wanted]
+    out = {**answer, "items": matched[:limit]}
+    out["note"] = (
+        f"{len(matched)} of the {len(items)} most recent task(s)"
+        + (f" are {wanted}" if wanted else "")
+        + (f"; showing {limit}" if len(matched) > limit else "")
+        + (". Only the most recent are searched; an older task can still exist."
+           if len(items) >= RECENT_TASKS else "."))
+    return out
+
+
 def _listing() -> dict:
     return {"tools": [{k: t[k] for k in ("name", "description", "inputSchema")}
                       for t in TOOLS]}
@@ -358,6 +389,8 @@ def _invoke(name: str, arguments: dict, acting: str) -> dict:
         else:
             path, body, method = tool["call"](arguments or {})
         answer = agent.call(path, body, method=method, acting=acting)
+        if tool.get("after"):
+            answer = tool["after"](answer, arguments or {})
         return {"content": [{"type": "text",
                              "text": json.dumps(answer, indent=1, ensure_ascii=False)}]}
     except SystemExit as refusal:

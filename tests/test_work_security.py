@@ -31,9 +31,22 @@ class WorkSecurityTests(unittest.TestCase):
             for name in ('designer', 'engineer')
         }))
         self.profiles.chmod(0o600)
-        self.profile_patch = patch.object(agent, 'PROFILES', self.profiles)
-        self.profile_patch.start()
-        self.addCleanup(self.profile_patch.stop)
+        # mcp_server loads its own copy of the client, so both copies are
+        # pointed at the synthetic file. Patching only one let a test reach
+        # the developer's real ~/.talentsia/agents.json and a real workspace.
+        for module in (agent, mcp_server.agent):
+            redirect = patch.object(module, 'PROFILES', self.profiles)
+            redirect.start()
+            self.addCleanup(redirect.stop)
+        environment = patch.dict(os.environ, {name: '' for name in (
+            'TALENTSIA_AGENT_ID', 'TALENTSIA_AGENT_KEY', 'TALENTSIA_WORKSPACE')})
+        environment.start()
+        self.addCleanup(environment.stop)
+        # No test reaches the network: one that forgets to fake it fails here.
+        offline = patch('urllib.request.OpenerDirector.open',
+                        side_effect=AssertionError('a test tried to reach the network'))
+        self.network = offline.start()
+        self.addCleanup(offline.stop)
 
     def test_keys_exact_length_and_never_echoed(self):
         for value in (self.secret + 'Z', self.secret * 2, 'SYNTHETIC_SECRET', self.secret[:62]):
@@ -98,6 +111,35 @@ class WorkSecurityTests(unittest.TestCase):
             self.assertTrue(answer['isError'])
             self.assertNotIn(self.secret, json.dumps(answer))
 
+    def test_every_tool_sends_its_request(self):
+        """Each tool's request passes the client's own path check and reaches the network.
+
+        my_tasks once built `tasks?state=...`, which the client refuses, so
+        the seat's first call failed for every user while every other test
+        passed: a refusal before the network looks exactly like an error from it.
+        """
+        sample = {'taskId': '7', 'artifactId': '3', 'commitmentId': '2', 'note': 'n', 'state': 'on_track',
+                  'title': 't', 'body': 'b', 'goal': 'g', 'what': 'w', 'because': 'because so'}
+        for tool in mcp_server.TOOLS:
+            if tool['call'] == 'media':
+                continue
+            with self.subTest(tool=tool['name']), patch(
+                    'urllib.request.OpenerDirector.open', return_value=io.BytesIO(b'{"items": []}')) as opened:
+                answer = mcp_server._invoke(tool['name'], dict(sample), 'designer')
+                self.assertFalse(answer.get('isError'), answer)
+                self.assertTrue(opened.called)
+                self.assertNotIn('?', opened.call_args.args[0].full_url)
+
+    def test_my_tasks_filters_locally_and_says_what_it_searched(self):
+        items = [{'id': str(n), 'taskState': 'ready' if n % 3 == 0 else 'completed'} for n in range(40)]
+        with patch('urllib.request.OpenerDirector.open',
+                   return_value=io.BytesIO(json.dumps({'items': items}).encode())):
+            answer = mcp_server._invoke('my_tasks', {'state': 'ready', 'limit': 5}, 'designer')
+        shown = json.loads(answer['content'][0]['text'])
+        self.assertEqual([i['taskState'] for i in shown['items']], ['ready'] * 5)
+        self.assertIn('14 of the 40 most recent', shown['note'])
+        self.assertIn('an older task can still exist', shown['note'])
+
     def test_signature_covers_body_method_path_and_seat(self):
         response = io.BytesIO(b'{}')
         with patch('urllib.request.OpenerDirector.open', return_value=response) as opened:
@@ -126,7 +168,7 @@ class WorkSecurityTests(unittest.TestCase):
             mcp_server._picture({'path': str(self.profiles)})
 
     def test_unexpected_exception_details_are_hidden(self):
-        with patch.object(agent, 'call', side_effect=ValueError(self.secret)):
+        with patch.object(mcp_server.agent, 'call', side_effect=ValueError(self.secret)):
             result = mcp_server._invoke('my_tasks', {}, 'designer')
         self.assertTrue(result['isError'])
         self.assertNotIn(self.secret, json.dumps(result))

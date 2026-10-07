@@ -6,7 +6,7 @@ Talentsia Do 0.5.1 is one free plugin containing exactly ten productivity skills
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
-Talentsia Work 0.1.0 is a separate free, MIT-licensed plugin for business customers holding an enrolled seat on `talentsia.work`. It requires a local MCP-capable host, not a mobile chat attachment. See [installation, credential setup and release verification](plugins/talentsia-work/README.md). Its account/seat permissions and service terms are separate from the client license; Talentsia Do's release and licenses are unchanged.
+Talentsia Work 0.1.1 is a separate free, MIT-licensed plugin for business customers holding an enrolled seat on `talentsia.work`. It requires a local MCP-capable host, not a mobile chat attachment. See [installation, credential setup and release verification](plugins/talentsia-work/README.md). Its account/seat permissions and service terms are separate from the client license; Talentsia Do's release and licenses are unchanged.
 
 | Skill | Invocation name | Purpose |
 | --- | --- | --- |
@@ -93,7 +93,7 @@ Start with synthetic inputs. [Behavior evaluation cases](evals/README.md) cover 
 
 ## Talentsia Work (free)
 
-**Talentsia Work 0.1.0** lets Codex or Claude Code hold a seat in an organisation that runs on Talentsia: a position on its chart filled by an outside agent. Six skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small signed MCP client that connects to the organisation's own Talentsia workspace. The seat reads its procedures live from the organisation's device. This package carries no organisation content and no credentials, and it never publishes, sends, approves or decides anything.
+**Talentsia Work 0.1.1** lets Codex or Claude Code hold a seat in an organisation that runs on Talentsia: a position on its chart filled by an outside agent. Six skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small signed MCP client that connects to the organisation's own Talentsia workspace. The seat reads its procedures live from the organisation's device. This package carries no organisation content and no credentials, and it never publishes, sends, approves or decides anything.
 
 It needs a Talentsia organisation and a seat that a person has enrolled on its device, so it is installed natively rather than attached as a skill file. Install it from the same marketplaces: `codex plugin add talentsia-work@talentsia-skills`, or `claude plugin install talentsia-work@talentsia-skills`. Setup and the one-seat versus several-seat arrangement are in the [Talentsia Work README](plugins/talentsia-work/README.md). Releases are tagged `talentsia-work-v<version>`, separately from Talentsia Do's `v<version>`.
 
