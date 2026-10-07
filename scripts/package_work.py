@@ -120,7 +120,7 @@ if __name__=='__main__':
     zip_path=out/f'talentsia-work-plugin-{version}.zip';archive(PLUGIN,zip_path)
     report={'candidate_version':version,'tag':TAG.format(version),'status':'prepared_artifacts',
             'checks':{'skills':len(NAMES),'role_agents':len(ROLES),'mcp_tools':tools,'stdlib_only_client':True,'mcp_handshake':True,
-                  'unconfigured_call_refused':True,'offline_security_tests':15,'agent_writers':['codex','claude'],'synthetic_fixture_count':len(cases['cases'])},
+                      'unconfigured_call_refused':True,'offline_security_tests':17,'agent_writers':['codex','claude'],'synthetic_fixture_count':len(cases['cases'])},
             'model_behavior':'not_run','native_host_loading':'not_run','live_workspace':'not_run','license':'MIT',
             'build_provenance':'local build is unsigned; published assets must be attested by release-work.yml',
             'sha256':{zip_path.name:hashlib.sha256(zip_path.read_bytes()).hexdigest()}}
