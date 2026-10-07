@@ -1,4 +1,4 @@
-# Talentsia Work 0.1.1
+# Talentsia Work 0.1.2
 
 Hold a seat in your Talentsia organisation from Codex or Claude Code.
 
@@ -71,22 +71,22 @@ The helper copies the client to `~/.talentsia/bin` so agents keep working across
 
 ## Verify the release
 
-The release is tagged `talentsia-work-v0.1.1`, separately from Talentsia Do. The public GitHub Actions release workflow builds, checks and generates signed build-provenance attestations for the ZIP, checksum file and report. With a recent GitHub CLI, verify downloaded assets before extracting or executing them:
+The release is tagged `talentsia-work-v0.1.2`, separately from Talentsia Do. The public GitHub Actions release workflow builds, checks and generates signed build-provenance attestations for the ZIP, checksum file and report. With a recent GitHub CLI, verify downloaded assets before extracting or executing them:
 
 ```bash
-gh release download talentsia-work-v0.1.1 --repo talentsia/talentsia-skills --dir ./talentsia-work-download
+gh release download talentsia-work-v0.1.2 --repo talentsia/talentsia-skills --dir ./talentsia-work-download
 cd talentsia-work-download
-gh attestation verify talentsia-work-plugin-0.1.1.zip --repo talentsia/talentsia-skills --signer-workflow talentsia/talentsia-skills/.github/workflows/release-work.yml --source-ref refs/tags/talentsia-work-v0.1.1 --deny-self-hosted-runners
-gh attestation verify talentsia-work-0.1.1.SHA256SUMS --repo talentsia/talentsia-skills --signer-workflow talentsia/talentsia-skills/.github/workflows/release-work.yml --source-ref refs/tags/talentsia-work-v0.1.1 --deny-self-hosted-runners
-shasum -a 256 -c talentsia-work-0.1.1.SHA256SUMS
-unzip talentsia-work-plugin-0.1.1.zip
+gh attestation verify talentsia-work-plugin-0.1.2.zip --repo talentsia/talentsia-skills --signer-workflow talentsia/talentsia-skills/.github/workflows/release-work.yml --source-ref refs/tags/talentsia-work-v0.1.2 --deny-self-hosted-runners
+gh attestation verify talentsia-work-0.1.2.SHA256SUMS --repo talentsia/talentsia-skills --signer-workflow talentsia/talentsia-skills/.github/workflows/release-work.yml --source-ref refs/tags/talentsia-work-v0.1.2 --deny-self-hosted-runners
+shasum -a 256 -c talentsia-work-0.1.2.SHA256SUMS
+unzip talentsia-work-plugin-0.1.2.zip
 ```
 
 The bundled attestation is available for offline verification. A local packaging run produces checksums but not a signed attestation. Marketplace clients fetch the tagged Git source, not this attested ZIP. Build provenance verifies origin/integrity, not model behavior or platform authorization.
 
 ## License and verification limits
 
-The entire Work plugin (client, setup helper, skills, references and roles) is [MIT licensed](LICENSE): commercial/business use is permitted with its copyright/license notice. This license does not grant service access, override Talentsia account or subscription terms, or license trademarks. Talentsia Do and premium packs retain their separate licenses.
+The entire Work plugin (client, setup helper, skills, references and roles) is [MIT licensed](LICENSE): commercial/business use is permitted with its copyright/license notice. This license does not grant service access, override Talentsia account or subscription terms, or license trademarks. Talentsia Do is MIT licensed too; premium packs are not part of this repository and are available only with an entitlement.
 
 Offline security tests cover credential errors, permissions, request signing, redirect refusal, seat selection, bounded image reads and setup. Model behavior fixtures are authored, not executed. Runtime discovery and signed reads were reported by the implementation team before review; this release adds offline regressions and does not certify all versions of Codex, Claude Code or all seat permissions.
 

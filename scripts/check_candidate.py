@@ -5,9 +5,9 @@ from skill_file import generate,PLUGIN,ROOT,ORDER
 
 def check(out):
  version=json.loads((PLUGIN/'plugin.json').read_text())['version']
- assert (ROOT/'LICENSE').is_file() and (ROOT/'SKILLS-LICENSE').is_file() and (ROOT/'CODE-LICENSE').is_file() and (ROOT/'NOTICE.md').is_file()
- license_index=(ROOT/'LICENSE').read_text()
- assert 'SKILLS-LICENSE' in license_index and 'CODE-LICENSE' in license_index
+ assert (ROOT/'NOTICE.md').is_file() and not (ROOT/'SKILLS-LICENSE').exists() and not (ROOT/'CODE-LICENSE').exists()
+ for license in (ROOT/'LICENSE',PLUGIN/'LICENSE',ROOT/'plugins/talentsia-work/LICENSE'):
+  assert license.read_text().startswith('MIT License\n\nCopyright (c) 2026 Talentsia\n'),license
  cases=json.loads((ROOT/'evals/cases.json').read_text())
  assert cases['model_execution']=='not_run'
  ids=[c['id'] for c in cases['cases']]

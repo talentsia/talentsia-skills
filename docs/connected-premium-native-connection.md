@@ -1,6 +1,6 @@
 # Native connected Do pilot
 
-Do 0.5.4 bundles the verified endpoint to root `mcp.json` in the existing portable
+Do 0.5.5 bundles the verified endpoint to root `mcp.json` in the existing portable
 plugin. The ten Free workflows retain their instructions. No private method,
 account identity, secret, grant, entitlement or second Premium plugin is bundled.
 Marketplace authentication is `ON_USE`, not an installation prerequisite.
@@ -39,7 +39,7 @@ resource supplies the two Do scopes; the package has no unsupported scope field.
 ## User validation
 
 1. Update the Talentsia Skills marketplace and the existing Talentsia Do plugin;
-   verify version 0.5.4 and ten skills. Start a fresh local Codex task. No source
+   verify version 0.5.5 and ten skills. Start a fresh local Codex task. No source
    edits, second plugin or mandatory ZIP are part of this native route.
 2. Use the host's authentication/account control for the bundled Do connection.
    The exact desktop control has not been observed. Sign in personally to
@@ -101,4 +101,4 @@ hashes and immutable Free lock. All fourteen source files must be accounted for:
 five role TOMLs, roles.json, CONTRACT.md, METHOD.md, the Plan My Day extension and
 five locked Free references. This is an explicit v2 transport contract change;
 it does not add tools, scopes, storage or execution authority. Hosts should refresh
-tool discovery; update the public Do plugin to 0.5.4 for the matching routing.
+tool discovery; update the public Do plugin to 0.5.4 or later for the matching routing.
