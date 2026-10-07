@@ -138,9 +138,47 @@ should be the failure the skill exists to prevent, marked `"regression": true`.
 - `says` and `notSays` are statements a grader checks the answer against. They
   describe meaning, not exact wording.
 
+- An observation keyed by something other than an operation (`document`,
+  `brief`, `today`) is what arrived with the job. The harness hands it over as
+  the job's opening observation, before the first turn.
+- An observation keyed `agent:<name>` is what that subagent returns. Without
+  one a subagent returns `{"status": "ok"}`, and an operation the case
+  recorded nothing for returns an empty, neutral result.
+
 The harness runs every case on each tier the skill claims. A skill becomes
 `released` with its pass rates published in `model.evals`, and the store shows
 them. "Can a 9B run this?" is a number an author sees before submitting.
+
+### Running them
+
+```
+python3 scripts/eval_edge_skills.py --model qwen3.5:9b --base-url http://<ollama>:11434
+python3 scripts/eval_edge_skills.py --package bookkeeping --skill work-a-statement \
+    --model llama3.1:8b --tier small-local --json results.json
+python3 scripts/eval_edge_skills.py --model qwen3.5:9b --write-results
+python3 scripts/eval_edge_skills.py --fake
+```
+
+- The skill is rendered as a device renders it: a short runtime preamble, then
+  the compact form (When to use, Steps, Done when) for `small-local`, or the
+  full form with Notes for `large-local` and `frontier`. `{{tool:a.b/op}}`
+  becomes the tool `a_b_op`, and `{{agent:name}}` the tool `agent_name`.
+- The worker is offered every operation of every interface the skill
+  requires, and one tool per subagent. Arguments are not graded.
+- Ollama `/api/chat` at temperature 0, seed 1, `num_ctx` 16384, thinking off,
+  at most 8 turns. `--base-url` defaults to `$OLLAMA_BASE_URL`.
+- `calls`, `notCalls` and `agents` are graded in code from the calls made.
+  `says` and `notSays` are put to a judge model (`--judge-model`, default the
+  same model) as one YES/NO question each. A case passes only if every
+  expectation holds.
+- `--write-results` records each skill's pass rate in skill.json
+  `model.evals[<model>]`, rounded to two places. Nothing is written for a
+  skill whose run hit a model-server error.
+- `--fake` uses a built-in model that calls exactly what each case expects. It
+  needs no server and proves the harness and the cases, never a skill: a case
+  that fails under it expects something the skill does not offer. CI runs it.
+- A skill the validator refuses is not evaluated. Exit status is 0 when every
+  case passed, 1 when one failed, 2 when the run could not be trusted.
 
 ## 6. Capabilities
 
