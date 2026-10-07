@@ -12,8 +12,7 @@ not a comprehensive secret audit. Private cross-repo suite: 93 passed, including
 Free workflow preservation and absence of full private extension in public
 plugin files. No model behavior evaluation was executed.
 
-The candidate keeps manifest 0.5.1 for source review. Assign and validate a new
-version/tag before public publication; do not overwrite original release tags.
+The public routing release is versioned 0.5.2 with a new immutable tag; original release tags must not be overwritten.
 Private method remains pinned to the original immutable Free 0.5.1 snapshot.
 No install/cache change, push, merge, publication or deployment occurred.
 

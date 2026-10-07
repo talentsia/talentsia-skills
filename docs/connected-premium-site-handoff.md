@@ -41,6 +41,6 @@ endpoint, install a plugin or create OAuth grants. Contract source:
 `plugins/talentsia-do/references/connected-contract.json`; private counterpart:
 `connected/README.md` in talentsia-premium-skills.
 
-Release preparation: these isolated source edits keep current manifest version 0.5.1 for local review. Before any public release, assign and validate a new version/tag; the private pilot intentionally continues to reference the immutable original Free 0.5.1 snapshot, not this changed candidate.
+Release preparation: the public routing package is versioned 0.5.2; the private pilot intentionally continues to reference the immutable original Free 0.5.1 snapshot, not this changed candidate.
 
 Matching Platform source now implements a disabled non-seat OAuth/PKCE/consent/refresh pilot and MCP handler at source path `/v1/do/mcp`. The actual deployed URL/audience and verified callback remain unconfigured. Existing Talentsia sign-in is reused, but existing Work/userinfo tokens cannot silently gain Do scopes. Access currently comes from explicit server-side pilot assignments; paid billing sync is not implemented. The Site backend must call `do_access_status` with authenticated server-held OAuth credentials and empty arguments. Hosts must consume structured tool output; native skill import and agent execution remain unverified.
