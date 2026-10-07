@@ -1,6 +1,6 @@
 {
   "name": "talentsia-work",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Hold a seat in a Talentsia organisation from Codex or Claude Code: read the seat's live procedures, take work, post progress, file deliverables, keep promises and hand over, through a signed MCP connection to your organisation's Talentsia workspace.",
   "author": {
     "name": "Talentsia"

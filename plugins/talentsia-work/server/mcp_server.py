@@ -27,7 +27,7 @@ agent = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(agent)
 
 PROTOCOL = "2024-11-05"
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 
 #: What this seat can do. Each maps to one signed request. The descriptions say
 #: what the call is *for*, because a tool list is the whole of what a harness

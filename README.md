@@ -2,11 +2,11 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.5.4 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. The native package bundles an optional read-only connection; no private Premium content or backend implementation is included.
+Talentsia Do 0.5.5 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. The native package bundles an optional read-only connection; no private Premium content or backend implementation is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
-Talentsia Work 0.1.1 is a separate free, MIT-licensed plugin for business customers holding an enrolled seat on `talentsia.work`. It requires a local MCP-capable host, not a mobile chat attachment. See [installation, credential setup and release verification](plugins/talentsia-work/README.md). Its account/seat permissions and service terms are separate from the client license; Talentsia Do's release and licenses are unchanged.
+Talentsia Work 0.1.2 is a separate free plugin for business customers holding an enrolled seat on `talentsia.work`. It requires a local MCP-capable host, not a mobile chat attachment. See [installation, credential setup and release verification](plugins/talentsia-work/README.md). Its account/seat permissions and service terms are separate from the license on its files.
 
 | Skill | Invocation name | Purpose |
 | --- | --- | --- |
@@ -56,7 +56,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.4` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.5` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -64,11 +64,11 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.4** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.5** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Optional connected Plan My Day pilot
 
-The native Do 0.5.4 package includes the read-only MCP endpoint in root `mcp.json`. Use the same plugin; no second Premium ZIP or manual MCP configuration is required on hosts supporting portable bundled MCP and Codex CIMD. Free workflows remain complete without login. The catalog uses `ON_USE` authentication, so installation does not require consent.
+The native Do 0.5.5 package includes the read-only MCP endpoint in root `mcp.json`. Use the same plugin; no second Premium ZIP or manual MCP configuration is required on hosts supporting portable bundled MCP and Codex CIMD. Free workflows remain complete without login. The catalog uses `ON_USE` authentication, so installation does not require consent.
 
 After updating the marketplace and installed plugin, open a fresh Codex task. Start the plugin's account/authentication flow when using the connected capability, sign in with your own Talentsia account, choose an existing accessible workspace and approve only the two Do read scopes. Exact account controls depend on the host; their presence and live execution still need a native host test. Talentsia Work connections and permissions are separate.
 
@@ -79,7 +79,7 @@ See the [verified connection and validation steps](docs/connected-premium-native
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.4
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.5
 claude plugin install talentsia-do@talentsia-skills
 ```
 
@@ -103,7 +103,7 @@ Start with synthetic inputs. [Behavior evaluation cases](evals/README.md) cover 
 
 ## Talentsia Work (free)
 
-**Talentsia Work 0.1.1** lets Codex or Claude Code hold a seat in an organisation that runs on Talentsia: a position on its chart filled by an outside agent. Six skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small signed MCP client that connects to the organisation's own Talentsia workspace. The seat reads its procedures live from the organisation's device. This package carries no organisation content and no credentials, and it never publishes, sends, approves or decides anything.
+**Talentsia Work 0.1.2** lets Codex or Claude Code hold a seat in an organisation that runs on Talentsia: a position on its chart filled by an outside agent. Six skills (Connect Seat, Start Work, Deliver Work, Keep Promises, Hand Over, What Needs Me) and four role agents work through a small signed MCP client that connects to the organisation's own Talentsia workspace. The seat reads its procedures live from the organisation's device. This package carries no organisation content and no credentials, and it never publishes, sends, approves or decides anything.
 
 It needs a Talentsia organisation and a seat that a person has enrolled on its device, so it is installed natively rather than attached as a skill file. Install it from the same marketplaces: `codex plugin add talentsia-work@talentsia-skills`, or `claude plugin install talentsia-work@talentsia-skills`. Setup and the one-seat versus several-seat arrangement are in the [Talentsia Work README](plugins/talentsia-work/README.md). Releases are tagged `talentsia-work-v<version>`, separately from Talentsia Do's `v<version>`.
 
@@ -130,7 +130,7 @@ The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the 
 
 This instructions-only plugin creates no storage backend, connected account, worker or schedule. Personal records stay in user-owned storage. Without tools/persistence, skills provide portable records marked not saved and disclose unperformed actions. Email, calendar and third-party actions require explicit human authorization. No guaranteed productivity result is promised.
 
-© 2026 Talentsia. Talentsia Do's original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0 except where the license index states otherwise. These noncommercial licenses are not OSI-approved open-source licenses and do not automatically permit business use of Do. **Talentsia Work, the Talentsia Edge worker packages and their dedicated build/test/release files are MIT licensed for business use.** See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for exact scope. Premium packs are proprietary and separately licensed; these public licenses do not apply to them. Third-party rights remain with their owners.
+© 2026 Talentsia. Everything in this repository, including Talentsia Do and Talentsia Work, is licensed under the [MIT License](LICENSE); business use is allowed. See [NOTICE.md](NOTICE.md) for what the license does not cover: premium packs, which are protected by entitlement in a separate private repository; Talentsia services and accounts; names and logos; and third-party rights, which remain with their owners.
 
 ## Maintain the package
 

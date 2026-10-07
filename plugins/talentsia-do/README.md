@@ -24,7 +24,7 @@ Each skill reads its `references/core.md`, exported from the same canonical [sha
 
 Test the included PT/EN examples with synthetic inputs after installation. Manifest/structure validation is distinct from model behavior testing.
 
-See [methodology sources](references/methodology-sources.md). This is an independent implementation; no endorsement or guaranteed result is claimed. © 2026 Talentsia. Skill content is licensed CC BY-NC-SA 4.0 for noncommercial purposes (see the repository `LICENSE`, `SKILLS-LICENSE` and `NOTICE.md`). Business use is not automatically permitted; seek written permission from Talentsia. Third-party rights remain with their owners.
+See [methodology sources](references/methodology-sources.md). This is an independent implementation; no endorsement or guaranteed result is claimed. © 2026 Talentsia. Talentsia Do is licensed under the [MIT License](LICENSE); business use is allowed. Names and logos are not licensed. Third-party rights remain with their owners.
 
 ## Verification limits
 
