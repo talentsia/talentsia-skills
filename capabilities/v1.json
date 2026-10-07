@@ -5,13 +5,13 @@
     "documents.inspect": {"version": 1, "description": "Read a document that arrived: its text, whether it can be identified, its hash.",
       "operations": {"inspect": "document_inspect", "extract_text": "document_extract_text", "metadata": "document_metadata"}},
     "documents.register": {"version": 1, "description": "Record what a document is in the device's document register.",
-      "operations": {"register": "document_register"}},
+      "operations": {"register": "mcp_document_register"}},
     "files.workspace": {"version": 1, "description": "The worker's own filing area: list, read, write, move, make folders.",
       "operations": {"list": "workspace_list", "read": "workspace_read", "write": "workspace_write", "move": "workspace_move", "mkdir": "workspace_mkdir"}},
     "host.observe": {"version": 1, "description": "Read-only facts about the device and its services.",
-      "operations": {"system": "host system information", "services": "host service status", "logs": "host service logs"}},
+      "operations": {"system": "system_info", "services": "services_list", "logs": "logs_read"}},
     "host.services.restart": {"version": 1, "description": "Restart a service the device's policy permits this worker to restart.",
-      "operations": {"restart": "host service restart (policy-gated)"}},
+      "operations": {"restart": "services_restart"}},
     "operator.notify": {"version": 1, "description": "Put something in front of a person, with a severity.",
       "operations": {"notify": "notify_operator"}},
     "memory.learn": {"version": 1, "description": "Keep and recall what this worker was taught.",
@@ -32,8 +32,8 @@
       "operations": {"request": "request_headcount"}},
     "commitments.mine": {"version": 1, "description": "The promises written in this worker's name: read and update.",
       "operations": {"list": "my_commitments", "update": "update_my_commitment"}},
-    "intent.read": {"version": 1, "description": "What the organisation is driving towards: objectives, measures, this worker's area.",
-      "operations": {"priorities": "mcp_cos_priorities", "measures": "mcp_cos_objective_measures", "area": "your_area"}},
+    "intent.read": {"version": 1, "description": "What the organisation is driving towards: objectives and their measures.",
+      "operations": {"priorities": "mcp_cos_priorities", "measures": "mcp_cos_objective_measures"}},
     "intent.propose": {"version": 1, "description": "Propose a priority with its evidence; a person decides.",
       "operations": {"propose": "mcp_cos_propose_priority"}},
     "commitments.read": {"version": 1, "description": "Every promise the organisation is tracking.",
@@ -81,6 +81,6 @@
     "code.preview": {"version": 1, "description": "Build a preview a person can look at.",
       "operations": {"preview": "mcp_eng_preview"}},
     "tasks.write": {"version": 1, "description": "Create or update a task on a local task list.",
-      "operations": {"create": "mcp_tasks_task_create", "update": "mcp_tasks_task_update"}}
+      "operations": {"create": "mcp_task_create", "update": "mcp_task_update"}}
   }
 }
