@@ -1,0 +1,141 @@
+{
+  "contract": "talentsia-do-connected/v1",
+  "status": "pilot_not_connected",
+  "max_response_bytes": 65536,
+  "tools": [
+    {
+      "name": "do_access_status",
+      "description": "Read current Do Premium access for the validated connection. No purchases or grants.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contract",
+          "access",
+          "capabilities"
+        ],
+        "properties": {
+          "contract": {
+            "const": "talentsia-do-connected/v1"
+          },
+          "access": {
+            "enum": [
+              "active",
+              "unavailable"
+            ]
+          },
+          "capabilities": {
+            "type": "array",
+            "maxItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "const": "plan-my-day"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "do_plan_my_day_method",
+      "description": "Read versioned Plan My Day method extension for current Do Premium access. Returns instructions and role descriptors; performs no actions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contract",
+          "capability",
+          "version",
+          "upstream",
+          "resources",
+          "free_references",
+          "resources_sha256",
+          "execution",
+          "storage",
+          "roles"
+        ],
+        "properties": {
+          "contract": {
+            "const": "talentsia-do-connected/v1"
+          },
+          "capability": {
+            "const": "plan-my-day"
+          },
+          "version": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "upstream": {
+            "type": "object",
+            "maxProperties": 8
+          },
+          "resources": {
+            "type": "object",
+            "maxProperties": 7,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 65536
+            }
+          },
+          "free_references": {
+            "type": "object",
+            "maxProperties": 7,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 65536
+            }
+          },
+          "resources_sha256": {
+            "type": "object",
+            "maxProperties": 7,
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "execution": {
+            "const": "instructions_only"
+          },
+          "storage": {
+            "const": "not_supplied"
+          },
+          "roles": {
+            "const": "descriptors_only"
+          }
+        }
+      }
+    }
+  ],
+  "errors": [
+    "authentication_required",
+    "invalid_credentials",
+    "insufficient_scope",
+    "premium_required",
+    "service_unavailable",
+    "integrity_error",
+    "response_too_large",
+    "invalid_arguments",
+    "unknown_tool"
+  ]
+}

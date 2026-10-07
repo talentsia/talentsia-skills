@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.2
+
+- Add optional connected Plan My Day routing through current server access checks in the same Do plugin, with complete Free fallback.
+- Publish bounded read-only MCP schemas and source-only pilot/host limitations. No private Premium method, entitlement, storage or native agent execution is bundled.
+
+
 ## Talentsia Work 0.1.1
 
 Fixes `my_tasks`, which failed for every seat in 0.1.0. The 0.1.0 client refuses a request path carrying a query string, because the device signs over the path and not the query, and `my_tasks` sent its state and limit filters as a query. It now requests the device's most recent tasks with no query, filters them by state itself, and says how many it searched, so an empty answer cannot be read as "nothing older exists".

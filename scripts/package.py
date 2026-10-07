@@ -29,7 +29,7 @@ def validate():
         ui={line.strip().split(': ',1)[0]:json.loads(line.strip().split(': ',1)[1]) for line in metadata[1:]}
         assert 25<=len(ui['short_description'])<=64 and '$'+p.parent.name in ui['default_prompt']
         assert '[the shared method](references/core.md)' in parts[2]
-        for source in (PLUGIN/'references').glob('*.md'):
+        for source in (p for p in (PLUGIN/'references').iterdir() if p.suffix in {'.md','.json'}):
             assert (p.parent/'references'/source.name).read_bytes()==source.read_bytes(),'Reference export stale'
     for p in ROOT.rglob('*'):
         if '.git' in p.parts or not p.is_file():continue
@@ -57,7 +57,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--output',default='/tmp/talentsia-do-release');args=parser.parse_args()
     for skill in (PLUGIN/'skills').iterdir():
         if (skill/'SKILL.md').is_file():
-            for p in (PLUGIN/'references').glob('*.md'):shutil.copy2(p,skill/'references'/p.name)
+            for p in (p for p in (PLUGIN/'references').iterdir() if p.suffix in {'.md','.json'}):shutil.copy2(p,skill/'references'/p.name)
     version,skills=validate();out=Path(args.output).resolve();out.mkdir(parents=True,exist_ok=True)
     assert not out.is_relative_to(ROOT),'Archives must be outside repository'
     archive(PLUGIN,out/f'talentsia-do-plugin-{version}.zip')

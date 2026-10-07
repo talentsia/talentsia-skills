@@ -29,3 +29,5 @@ See [methodology sources](references/methodology-sources.md). This is an indepen
 ## Verification limits
 
 The release contains 64 synthetic behavior fixtures. Static package/reference/archive/skill-file checks passed. Model behavior fixtures and real app behavior remain unexecuted. A successful installation or source read does not prove the model applied the instructions.
+
+Connected Premium source pilot: the same plugin can route Plan My Day through current entitlement checks when the existing host exposes the confirmed tools. [Routing](references/connected-premium.md). Free remains usable without a connection. This source candidate does not configure a live Premium service.
