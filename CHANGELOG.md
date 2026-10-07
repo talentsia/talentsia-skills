@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3
+
+- Bundle the verified read-only Do MCP endpoint in the same portable plugin; use native Codex CIMD with the already registered Do-only public client.
+- Authenticate on first use, preserving complete Free workflows without login and existing Work permissions. Native login and authorized Premium execution remain to be verified by the user.
+
 ## 0.5.2
 
 - Add optional connected Plan My Day routing through current server access checks in the same Do plugin, with complete Free fallback.

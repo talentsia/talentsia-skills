@@ -17,6 +17,13 @@ def validate():
     assert compat['version']==claude['plugins'][0]['version']==version
     assert catalog['plugins'][0]['name']=='talentsia-do'
     assert catalog['plugins'][0]['source']=={'source':'git-subdir','url':'https://github.com/talentsia/talentsia-skills.git','path':'./plugins/talentsia-do','ref':'v'+version}
+    assert catalog['plugins'][0]['policy']['authentication']=='ON_USE','Free installation must not require OAuth'
+    mcp=json.loads((PLUGIN/'mcp.json').read_text())
+    assert set(mcp)=={'$schema','mcpServers'} and mcp['$schema']=='https://agent-plugins.org/schemas/1.0.0/mcp.schema.json'
+    assert set(mcp['mcpServers'])=={'talentsia-do'},'Exactly one Do connection; no Work permission expansion'
+    server=mcp['mcpServers']['talentsia-do']
+    assert set(server)=={'type','url'},'Portable MCP schema excludes OAuth overrides and credential headers'
+    assert server['type']=='streamable-http' and server['url']=='https://api.talentsia.com/v1/do/mcp'
     assert manifest['extensions']['com.openai']['interface']['websiteURL']=='https://skills.talentsia.com'
     assert manifest['homepage']==compat['homepage']=='https://skills.talentsia.com'
     for p in skills:
