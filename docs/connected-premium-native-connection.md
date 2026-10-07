@@ -1,6 +1,6 @@
 # Native connected Do pilot
 
-Do 0.5.3 adds the verified endpoint to root `mcp.json` in the existing portable
+Do 0.5.4 bundles the verified endpoint to root `mcp.json` in the existing portable
 plugin. The ten Free workflows retain their instructions. No private method,
 account identity, secret, grant, entitlement or second Premium plugin is bundled.
 Marketplace authentication is `ON_USE`, not an installation prerequisite.
@@ -39,7 +39,7 @@ resource supplies the two Do scopes; the package has no unsupported scope field.
 ## User validation
 
 1. Update the Talentsia Skills marketplace and the existing Talentsia Do plugin;
-   verify version 0.5.3 and ten skills. Start a fresh local Codex task. No source
+   verify version 0.5.4 and ten skills. Start a fresh local Codex task. No source
    edits, second plugin or mandatory ZIP are part of this native route.
 2. Use the host's authentication/account control for the bundled Do connection.
    The exact desktop control has not been observed. Sign in personally to
@@ -52,7 +52,7 @@ resource supplies the two Do scopes; the package has no unsupported scope field.
    only to the confirmed user/workspace pair, independently of billing.
 4. Repeat status: expected `active` and `plan-my-day`. Request Plan My Day with
    fictional inputs. The assistant must fetch `do_plan_my_day_method({})`, use
-   the returned method 0.3.0 and Free 0.5.1 references, and disclose actual access.
+   the returned method 0.3.1 and Free 0.5.1 references, and disclose actual access.
    Five role descriptors are not proof that agents ran.
 5. Revoke that pilot entitlement while the OAuth login remains valid; a fresh
    protected retrieval must fail and Free must remain usable. Previously
@@ -72,3 +72,33 @@ No WAF rules were changed. Actual native OAuth/resource reachability remains to
 be tested. A network or protocol failure is not a subscription result. The
 website credential resolver and real paid-subscription synchronization are
 separate work; this pilot uses explicit expiring assignments only.
+
+## Observed native run and role handoff correction
+
+The authorized October 7 native Codex pilot established OAuth, discovered both
+Do tools and completed protected Plan My Day retrieval. Supported thread API
+receipts confirm five user-authorized specialist agents started and completed.
+Those agents explicitly used local Free references as fallback: the 0.3.0
+protected payload omitted CONTRACT.md and METHOD.md required by its role TOMLs.
+Agent execution therefore succeeded; exact Premium role-method coverage did not.
+
+The isolated 0.3.1 private candidate adds hash-verified shared prerequisites and
+model-readable MCP text for all five exact roles. Public routing instructs the
+host to supply returned equivalents in assignments. No private instructions are
+bundled here. Matching Platform changes enforce the existing 64 KiB envelope
+limit without truncation. Local tests passed: 98 private, 82 Platform and 17 Work;
+these are fixture checks, not a native run of the correction. Deployment and
+a fresh native role handoff test remain pending. Keep the approved pilot active
+until that test finishes, then perform the separately authorized revocation test.
+
+## Connected v2 delivery
+
+The unchanged 64 KiB limit applies to the entire JSON-RPC envelope. Each source
+file is delivered exactly once in a `content` text block, prefixed by
+`path:<name>` and a newline. The structured resource maps contain `content_index`
+and SHA-256 of the source bytes following that newline, plus the private manifest
+hashes and immutable Free lock. All fourteen source files must be accounted for:
+five role TOMLs, roles.json, CONTRACT.md, METHOD.md, the Plan My Day extension and
+five locked Free references. This is an explicit v2 transport contract change;
+it does not add tools, scopes, storage or execution authority. Hosts should refresh
+tool discovery; update the public Do plugin to 0.5.4 for the matching routing.

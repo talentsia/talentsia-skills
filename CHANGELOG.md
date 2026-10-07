@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.4
+
+- Route authorized role assignments to the exact protected role prerequisites.
+- Adopt connected v2 indexed content: each source is delivered once with block indices and SHA-256, within the unchanged 64 KiB envelope limit.
+- Preserve all Free workflows and Work behavior. No private instructions are bundled.
+
 ## 0.5.3
 
 - Bundle the verified read-only Do MCP endpoint in the same portable plugin; use native Codex CIMD with the already registered Do-only public client.
