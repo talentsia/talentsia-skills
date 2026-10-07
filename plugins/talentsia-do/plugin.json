@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "talentsia-do",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Ten bilingual skills for capturing, organizing, planning, preparing, doing, following through and reviewing work.",
   "author": {
     "name": "Talentsia"
@@ -17,7 +17,7 @@
       "interface": {
         "displayName": "Talentsia Do",
         "shortDescription": "Clear commitments and actions",
-        "longDescription": "Talentsia Do includes ten free skills: Clear My Head, Organize My Work, Plan My Day, Move Forward, Prepare, Do With Me, Follow Through, Make Room, Resume, and Review. One shared method in Portuguese and English keeps ideas distinct from commitments and reuses your own trusted records. Tools and permissions come from the host; no storage service, connected accounts or automatic future monitoring are included.",
+        "longDescription": "Talentsia Do includes ten free bilingual productivity skills sharing one trusted method. The same plugin bundles an optional read-only Talentsia connection for current Premium access and the Plan My Day pilot. Free workflows remain available without signing in. Connected access requires personal Talentsia OAuth consent; no private Premium source, storage, Work seat permissions or automatic monitoring are included.",
         "developerName": "Talentsia",
         "category": "Productivity",
         "defaultPrompt": [
