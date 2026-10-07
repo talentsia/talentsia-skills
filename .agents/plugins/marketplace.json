@@ -10,7 +10,7 @@
         "source": "git-subdir",
         "url": "https://github.com/talentsia/talentsia-skills.git",
         "path": "./plugins/talentsia-do",
-        "ref": "v0.5.3"
+        "ref": "v0.5.4"
       },
       "policy": {
         "installation": "AVAILABLE",

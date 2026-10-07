@@ -2,7 +2,7 @@
 
 **Talentsia Do — Your productivity multiplier. / Seu multiplicador de produtividade.**
 
-Talentsia Do 0.5.3 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. The native package bundles an optional read-only connection; no private Premium content or backend implementation is included.
+Talentsia Do 0.5.4 is one free plugin containing exactly ten productivity skills, in Portuguese and English. Each skill handles a distinct moment of work; all use one shared method and the user's existing trusted records. Ideas remain separate from accepted commitments. The native package bundles an optional read-only connection; no private Premium content or backend implementation is included.
 
 Explore [skills.talentsia.com](https://skills.talentsia.com).
 
@@ -56,7 +56,7 @@ Alternatively, with a supported Codex CLI:
 codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .agents/plugins
 ```
 
-Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.3` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
+Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.4` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
 For an existing installation:
 
@@ -64,11 +64,11 @@ For an existing installation:
 codex plugin marketplace upgrade talentsia-skills
 ```
 
-Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.3** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
+Restart the app and update/reinstall Talentsia Do from its marketplace entry. Verify version **0.5.4** and the ten skills. Sources pinned to earlier tags stay on those versions. [Official OpenAI guide](https://developers.openai.com/plugins/build/plugins).
 
 ## Optional connected Plan My Day pilot
 
-The native Do 0.5.3 package includes the read-only MCP endpoint in root `mcp.json`. Use the same plugin; no second Premium ZIP or manual MCP configuration is required on hosts supporting portable bundled MCP and Codex CIMD. Free workflows remain complete without login. The catalog uses `ON_USE` authentication, so installation does not require consent.
+The native Do 0.5.4 package includes the read-only MCP endpoint in root `mcp.json`. Use the same plugin; no second Premium ZIP or manual MCP configuration is required on hosts supporting portable bundled MCP and Codex CIMD. Free workflows remain complete without login. The catalog uses `ON_USE` authentication, so installation does not require consent.
 
 After updating the marketplace and installed plugin, open a fresh Codex task. Start the plugin's account/authentication flow when using the connected capability, sign in with your own Talentsia account, choose an existing accessible workspace and approve only the two Do read scopes. Exact account controls depend on the host; their presence and live execution still need a native host test. Talentsia Work connections and permissions are separate.
 
@@ -79,7 +79,7 @@ See the [verified connection and validation steps](docs/connected-premium-native
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.3
+claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.4
 claude plugin install talentsia-do@talentsia-skills
 ```
 

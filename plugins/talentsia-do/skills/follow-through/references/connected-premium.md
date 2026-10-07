@@ -23,6 +23,10 @@ work. Perform sequential role analysis unless the host actually exposes an
 explicitly authorized delegation tool and execution is verified. Respect the
 human's authority over commitments and external actions.
 
+The connected v2 response delivers each exact source once as a text block.
+`structuredContent.resources` and `free_references` map paths to `content_index`
+and SHA-256 of the source after the `path:<name>` header and first newline.
+Check indices, paths, hashes and the declared contract before using the method.
 For authorized host delegation, pass each role its exact returned TOML,
 `agents/CONTRACT.md`, `agents/METHOD.md`, the Plan My Day extension and pinned
 `free_references` as supplied equivalents in its assignment. These private
