@@ -92,7 +92,7 @@
           },
           "resources": {
             "type": "object",
-            "maxProperties": 7,
+            "maxProperties": 9,
             "additionalProperties": {
               "type": "string",
               "maxLength": 65536
@@ -108,7 +108,7 @@
           },
           "resources_sha256": {
             "type": "object",
-            "maxProperties": 7,
+            "maxProperties": 9,
             "additionalProperties": {
               "type": "string",
               "pattern": "^[a-f0-9]{64}$"

@@ -72,3 +72,21 @@ No WAF rules were changed. Actual native OAuth/resource reachability remains to
 be tested. A network or protocol failure is not a subscription result. The
 website credential resolver and real paid-subscription synchronization are
 separate work; this pilot uses explicit expiring assignments only.
+
+## Observed native run and role handoff correction
+
+The authorized October 7 native Codex pilot established OAuth, discovered both
+Do tools and completed protected Plan My Day retrieval. Supported thread API
+receipts confirm five user-authorized specialist agents started and completed.
+Those agents explicitly used local Free references as fallback: the 0.3.0
+protected payload omitted CONTRACT.md and METHOD.md required by its role TOMLs.
+Agent execution therefore succeeded; exact Premium role-method coverage did not.
+
+The isolated 0.3.1 private candidate adds hash-verified shared prerequisites and
+model-readable MCP text for all five exact roles. Public routing instructs the
+host to supply returned equivalents in assignments. No private instructions are
+bundled here. Matching Platform changes enforce the existing 64 KiB envelope
+limit without truncation. Local tests passed: 98 private, 82 Platform and 17 Work;
+these are fixture checks, not a native run of the correction. Deployment and
+a fresh native role handoff test remain pending. Keep the approved pilot active
+until that test finishes, then perform the separately authorized revocation test.
