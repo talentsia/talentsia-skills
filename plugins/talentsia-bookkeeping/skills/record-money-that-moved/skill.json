@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.record-money-that-moved",
+  "version": "3.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Record actual movement of funds, on evidence that it moved.",
+  "appliesTo": [
+    "bookkeeper_document"
+  ],
+  "requires": {
+    "capabilities": [
+      "ledger.payments.write@1",
+      "ledger.chart.read@1",
+      "ledger.reports.read@1",
+      "ledger.review.flag@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 215,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every recorded movement is one the document shows as having happened.",
+    "The entry was read back from the books before it was reported."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "transaction_extraction",
+      "version": 2
+    }
+  ]
+}

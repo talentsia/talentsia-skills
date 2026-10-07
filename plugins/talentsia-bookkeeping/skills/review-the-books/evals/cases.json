@@ -1,0 +1,59 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.review-the-books",
+  "cases": [
+    {
+      "id": "entity-from-a-tool",
+      "title": "The report names the entity the tool returned",
+      "given": {
+        "goal": "Review the books.",
+        "observations": {
+          "ledger.entity.read/entity": "Hartwell Holdings LLC",
+          "ledger.reports.read/open_payables": "2 bills, 1,429.44"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.entity.read/entity"
+        ],
+        "says": [
+          "Hartwell Holdings"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "totals-from-the-application",
+      "title": "Totals come from the application",
+      "given": {
+        "goal": "Review the books.",
+        "observations": {
+          "ledger.entity.read/entity": "Hartwell",
+          "ledger.reports.read/open_payables": "total 1,429.44 across 2 bills"
+        }
+      },
+      "expect": {
+        "says": [
+          "1,429.44"
+        ]
+      }
+    },
+    {
+      "id": "silence-is-valid",
+      "title": "Nothing wrong raises nothing",
+      "given": {
+        "goal": "Review the books.",
+        "observations": {
+          "ledger.entity.read/entity": "Hartwell",
+          "ledger.reports.read/open_payables": "none",
+          "ledger.reports.read/entries": "all with evidence"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "operator.notify/notify"
+        ]
+      }
+    }
+  ]
+}

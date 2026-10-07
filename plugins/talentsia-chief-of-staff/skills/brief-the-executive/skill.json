@@ -1,0 +1,55 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.chief-of-staff.brief-the-executive",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Turn a night of organisational activity into the three things that matter today and, at most, one warning.",
+  "appliesTo": [
+    "cos_morning_brief",
+    "cos_weekly_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "intent.read@1",
+      "commitments.read@1",
+      "attention.read@1",
+      "calendar.read@1",
+      "briefs.write@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 274,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every priority names what changed or what falls due, taken from a tool result rather than from the shape of the day.",
+    "At most three priorities and at most one alert.",
+    "The brief was written with the briefs tool, not only described."
+  ],
+  "reads": [],
+  "subagents": [
+    "rank-candidates"
+  ],
+  "replaces": [
+    {
+      "id": "executive_briefing",
+      "version": 1
+    }
+  ]
+}

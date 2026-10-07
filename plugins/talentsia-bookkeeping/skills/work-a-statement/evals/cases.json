@@ -1,0 +1,58 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.work-a-statement",
+  "cases": [
+    {
+      "id": "imported-whole",
+      "title": "A statement is imported, not retyped",
+      "given": {
+        "goal": "Work the September statement.",
+        "observations": {
+          "ledger.statements.import/import": "53 rows staged",
+          "ledger.statements.import/review_queue": "53 waiting"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.statements.import/import"
+        ],
+        "agents": [
+          "place-rows"
+        ]
+      }
+    },
+    {
+      "id": "balances-are-not-movements",
+      "title": "A printed balance is not recorded",
+      "given": {
+        "goal": "Work the statement.",
+        "observations": {
+          "ledger.statements.import/review_queue": "row: 'Closing balance 4,210.00'"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "recorded the closing balance"
+        ]
+      }
+    },
+    {
+      "id": "reconciles-or-says-why",
+      "title": "No closing balance is reported to a person",
+      "given": {
+        "goal": "Work the statement.",
+        "observations": {
+          "ledger.statements.import/import": "12 rows; the statement prints no closing balance"
+        }
+      },
+      "expect": {
+        "calls": [
+          "operator.notify/notify"
+        ],
+        "notCalls": [
+          "ledger.reconcile/reconcile"
+        ]
+      }
+    }
+  ]
+}

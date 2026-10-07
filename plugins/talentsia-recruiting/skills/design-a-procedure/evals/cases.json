@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.recruiting.design-a-procedure",
+  "cases": [
+    {
+      "id": "at-most-eight-steps",
+      "title": "A long method is split, not crammed",
+      "given": {
+        "goal": "Write the procedure for monthly close.",
+        "observations": {
+          "team.read/roster": "Revenue Analyst holds ledger tools"
+        }
+      },
+      "expect": {
+        "calls": [
+          "staffing.request/request"
+        ],
+        "notSays": [
+          "9."
+        ]
+      }
+    },
+    {
+      "id": "tools-the-seat-holds",
+      "title": "No step needs a tool the seat lacks",
+      "given": {
+        "goal": "Write the procedure for publishing posts.",
+        "observations": {
+          "team.read/roster": "Content Writer holds no publishing tool"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "publish it with"
+        ]
+      }
+    },
+    {
+      "id": "finishing-is-checkable",
+      "title": "Finishing is stated from records",
+      "given": {
+        "goal": "Write the procedure for reconciling statements.",
+        "observations": {
+          "team.read/roster": "Revenue Analyst holds ledger tools"
+        }
+      },
+      "expect": {
+        "says": [
+          "finished"
+        ]
+      }
+    }
+  ]
+}

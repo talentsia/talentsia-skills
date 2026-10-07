@@ -1,0 +1,56 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.record-money-that-moved",
+  "cases": [
+    {
+      "id": "movement-date",
+      "title": "The movement date is used",
+      "given": {
+        "goal": "Record the paid receipt.",
+        "observations": {
+          "document": "Receipt issued 1 Oct, paid 3 Oct, 45.00, card ending 4021",
+          "ledger.chart.read/accounts": "6100; 1010 Card"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.payments.write/record_payment",
+          "ledger.reports.read/entry"
+        ],
+        "says": [
+          "3 Oct"
+        ]
+      }
+    },
+    {
+      "id": "unknown-funding-flagged",
+      "title": "An unknown funding account is flagged",
+      "given": {
+        "goal": "Record the receipt.",
+        "observations": {
+          "document": "Receipt 45.00, paid, method not shown"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.review.flag/flag"
+        ]
+      }
+    },
+    {
+      "id": "invoice-is-not-movement",
+      "title": "An unpaid invoice records no payment",
+      "given": {
+        "goal": "Record the invoice.",
+        "observations": {
+          "document": "Invoice 4411, 1,240.00 due 30 Oct"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "ledger.payments.write/record_payment"
+        ]
+      }
+    }
+  ]
+}

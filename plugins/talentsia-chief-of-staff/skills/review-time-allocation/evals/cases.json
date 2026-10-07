@@ -1,0 +1,63 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.review-time-allocation",
+  "cases": [
+    {
+      "id": "their-categories",
+      "title": "The gap is reported in the executive's own categories",
+      "given": {
+        "goal": "Review my week.",
+        "observations": {
+          "calendar.read/week": "clients 9h, admin 14h, teaching 2h",
+          "intent.read/priorities": "target split: clients 40%, teaching 30%, admin 30%"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "says": [
+          "teaching"
+        ]
+      }
+    },
+    {
+      "id": "specific-block",
+      "title": "A suggestion names a day and a time",
+      "given": {
+        "goal": "Review my week.",
+        "observations": {
+          "calendar.read/week": "teaching 1h",
+          "intent.read/priorities": "teaching 30%"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "says": [
+          "a specific day and time"
+        ]
+      }
+    },
+    {
+      "id": "matched-week-said",
+      "title": "A week that matched is said plainly",
+      "given": {
+        "goal": "Review my week.",
+        "observations": {
+          "calendar.read/week": "clients 16h, teaching 12h, admin 12h",
+          "intent.read/priorities": "clients 40%, teaching 30%, admin 30%"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "notSays": [
+          "should"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.choose-the-account",
+  "version": "3.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Put a recording in the right place in the entity's own chart of accounts.",
+  "appliesTo": [
+    "bookkeeper_document",
+    "bookkeeper_queue_work"
+  ],
+  "requires": {
+    "capabilities": [
+      "ledger.chart.read@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 119,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every account used came from the chart the application returned."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "expense_classification",
+      "version": 2
+    }
+  ]
+}

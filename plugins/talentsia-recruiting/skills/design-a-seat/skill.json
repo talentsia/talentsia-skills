@@ -1,0 +1,49 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.recruiting.design-a-seat",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "What a position must be able to do, what must exist before anybody could fill it, and how its first piece of work will be judged.",
+  "appliesTo": [
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "team.read@1",
+      "staffing.request@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 254,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The seat names a checkable first piece of work that is already blocked.",
+    "Everything it may hold is justified by the work named.",
+    "What must exist before it can be filled is stated, or explicitly nothing."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "design_a_seat",
+      "version": 1
+    }
+  ]
+}

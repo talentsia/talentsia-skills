@@ -1,0 +1,62 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.review-a-financial-document",
+  "cases": [
+    {
+      "id": "ungrouped-total",
+      "title": "An ungrouped total is read whole",
+      "given": {
+        "goal": "Book the document inbox/bill.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "Invoice 684310 — Total 1240.00 USD — due 30 Oct 2026",
+          "ledger.documents.lookup/find_by_document": "not found"
+        }
+      },
+      "expect": {
+        "agents": [
+          "extract-figures"
+        ],
+        "says": [
+          "1240.00"
+        ],
+        "notSays": [
+          "240.00 USD due"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "year-less-date-refused",
+      "title": "A date with no year is not guessed",
+      "given": {
+        "goal": "Book the document inbox/renewal.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "Renewal due Oct 1 — 89.00",
+          "ledger.documents.lookup/find_by_document": "not found"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.review.flag/flag"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "already-recorded-stops",
+      "title": "A document already in the books stops the work",
+      "given": {
+        "goal": "Book the document inbox/acme.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "ACME invoice 4411, 1,240.00",
+          "ledger.documents.lookup/find_by_document": "entry 88 rests on this document"
+        }
+      },
+      "expect": {
+        "says": [
+          "already"
+        ]
+      }
+    }
+  ]
+}

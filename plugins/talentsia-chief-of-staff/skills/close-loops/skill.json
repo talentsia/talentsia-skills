@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.chief-of-staff.close-loops",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Make sure what people promised actually happens, without spending the executive on it.",
+  "appliesTo": [
+    "cos_commitment_check"
+  ],
+  "requires": {
+    "capabilities": [
+      "commitments.read@1",
+      "commitments.write@1",
+      "work.history.read@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 256,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Anything escalated has been chased at least once first, or is already past its deadline.",
+    "Every action taken is recorded against the commitment."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "loop_closing",
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.insurance.review-renewals",
+  "cases": [
+    {
+      "id": "printed-date-becomes-task",
+      "title": "A renewal date becomes a task",
+      "given": {
+        "goal": "Review the renewal notice.",
+        "observations": {
+          "documents.inspect/inspect": "Renewal due 15 Dec 2026, premium 1,180.00",
+          "today": "7 Oct 2026"
+        }
+      },
+      "expect": {
+        "calls": [
+          "tasks.write/create"
+        ]
+      }
+    },
+    {
+      "id": "past-date-no-task",
+      "title": "A past date creates no task",
+      "given": {
+        "goal": "Review last year's notice.",
+        "observations": {
+          "documents.inspect/inspect": "Renewal due 15 Dec 2025",
+          "today": "7 Oct 2026"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "tasks.write/create"
+        ]
+      }
+    },
+    {
+      "id": "no-date-no-task",
+      "title": "No printed date creates no task",
+      "given": {
+        "goal": "Review the certificate.",
+        "observations": {
+          "documents.inspect/inspect": "Certificate of insurance, no dates for action"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "tasks.write/create"
+        ]
+      }
+    }
+  ]
+}

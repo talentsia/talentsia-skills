@@ -1,0 +1,60 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.chief-of-staff.keep-records-current",
+  "version": "5.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Turn finished work into the promises and priorities it implies, without inventing anything it did not say.",
+  "appliesTo": [
+    "cos_follow_through",
+    "cos_operating_loop",
+    "cos_standup",
+    "cos_vertical_pass"
+  ],
+  "requires": {
+    "capabilities": [
+      "commitments.read@1",
+      "commitments.write@1",
+      "intent.read@1",
+      "intent.propose@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 12288,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 432,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every commitment recorded names one owner and traces to something the work actually said.",
+    "No priority was created, only proposed with its evidence.",
+    "Nothing was recorded that is already in the existing commitments or priorities.",
+    "Every promise the work names was recorded, including the ones with no date.",
+    "Work that sets out actions with no owner was reported as unowned rather than passed over.",
+    "Work needing somebody nobody employs was recorded and reported as such, not reassigned."
+  ],
+  "reads": [],
+  "subagents": [
+    "extract-promises",
+    "match-existing"
+  ],
+  "replaces": [
+    {
+      "id": "keeping_records",
+      "version": 4
+    }
+  ]
+}

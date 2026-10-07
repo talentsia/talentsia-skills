@@ -3,6 +3,7 @@
 This repository contains separately licensed materials. Read [LICENSE](LICENSE) before using or redistributing anything.
 
 - Talentsia Work (all files in `plugins/talentsia-work/`) and the dedicated build/test/release files identified in the license index: [MIT](plugins/talentsia-work/LICENSE). Business use is allowed; preserve the copyright and license notice. Access to `talentsia.work` still requires an authorized account and seat and is governed by separate service terms. No trademark or endorsement rights are granted.
+- The Talentsia Edge worker packages (every plugin with a `talentsia-package.json`) and their contract files identified in the license index: MIT, with the full text in each package's `LICENSE`. Business use is allowed; preserve the copyright and license notice.
 - Original skill content, pack instructions and documentation: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/), with full text in [SKILLS-LICENSE](SKILLS-LICENSE).
 - Python scripts and GitHub Actions workflow code: [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/), with full text in [CODE-LICENSE](CODE-LICENSE).
 - Third-party references, names, logos and linked material remain subject to their respective owners' rights and terms. Neither license grants trademark rights.

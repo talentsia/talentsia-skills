@@ -1,0 +1,49 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.chief-of-staff.review-time-allocation",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Compare where a week went against where it was meant to go, in the executive's own categories.",
+  "appliesTo": [
+    "cos_calendar_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "calendar.read@1",
+      "intent.read@1",
+      "briefs.write@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 177,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The comparison uses the executive's own stated categories.",
+    "Any suggestion names a specific time and day."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "time_allocation",
+      "version": 1
+    }
+  ]
+}

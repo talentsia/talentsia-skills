@@ -1,0 +1,56 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.executive.name-the-gap",
+  "cases": [
+    {
+      "id": "information-is-not-a-seat",
+      "title": "Missing information is a question, not a hire",
+      "given": {
+        "goal": "Nobody can finish the pricing page: the price has not been decided.",
+        "observations": {
+          "team.read/gaps": "none"
+        }
+      },
+      "expect": {
+        "calls": [
+          "decisions.prepare/raise"
+        ],
+        "notCalls": [
+          "staffing.request/request"
+        ]
+      }
+    },
+    {
+      "id": "missing-trade-is-a-seat",
+      "title": "A trade nobody practises is a seat request",
+      "given": {
+        "goal": "Nobody can run the advertising account.",
+        "observations": {
+          "team.read/gaps": "paid advertising: nobody holds the tool or the trade"
+        }
+      },
+      "expect": {
+        "calls": [
+          "staffing.request/request",
+          "commitments.mine/update"
+        ]
+      }
+    },
+    {
+      "id": "queue-is-not-capacity",
+      "title": "A queue behind one worker is not a missing seat",
+      "given": {
+        "goal": "The engineer has four tasks waiting.",
+        "observations": {
+          "team.read/roster": "Platform Engineer: idle between jobs, one goal at a time"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "staffing.request/request"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

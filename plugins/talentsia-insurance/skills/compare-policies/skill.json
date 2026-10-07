@@ -1,0 +1,49 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.insurance.compare-policies",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Compare insurance options and surface the material differences, with a recommendation and what must be resolved first.",
+  "appliesTo": [
+    "insurance_document_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "documents.inspect@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 161,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every comparison is traceable to evidence that was actually provided.",
+    "The recommendation states what must be resolved before relying on it."
+  ],
+  "reads": [],
+  "subagents": [
+    "compare-clauses"
+  ],
+  "replaces": [
+    {
+      "id": "policy_comparison",
+      "version": 1
+    }
+  ]
+}

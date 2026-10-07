@@ -1,0 +1,48 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.engineering.run-a-scan",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Run a named scan over an authorised repository and report exactly what it found, with the log it wrote.",
+  "appliesTo": [
+    "engineering_scan"
+  ],
+  "requires": {
+    "capabilities": [
+      "code.repo.read@1",
+      "code.checks.run@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 191,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The scan was run by name in this job.",
+    "The findings reported match the tool's output, including the count."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "run_a_scan",
+      "version": 1
+    }
+  ]
+}

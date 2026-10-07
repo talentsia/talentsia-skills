@@ -1,0 +1,73 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.brief-the-executive",
+  "cases": [
+    {
+      "id": "ordinary-day-is-short",
+      "title": "An ordinary day is said plainly, not padded",
+      "given": {
+        "goal": "Write this morning's brief.",
+        "observations": {
+          "intent.read/priorities": "1. Grow clients 10 to 100",
+          "attention.read/inbox": "two newsletters",
+          "calendar.read/today": "no meetings",
+          "commitments.read/list": "nothing due this week"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "agents": [
+          "rank-candidates"
+        ],
+        "says": [
+          "ordinary"
+        ]
+      }
+    },
+    {
+      "id": "one-alert-at-most",
+      "title": "Two threats collapse to the one that matters",
+      "given": {
+        "goal": "Write this morning's brief.",
+        "observations": {
+          "intent.read/priorities": "1. Keep the anchor client",
+          "attention.read/inbox": "anchor client: 'we are reviewing other firms'; supplier: price up 3%",
+          "calendar.read/today": "call with anchor client at 15:00",
+          "commitments.read/list": "proposal due Friday"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "says": [
+          "anchor client"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "no-why-today-no-priority",
+      "title": "A candidate with no reason to be today is not a priority",
+      "given": {
+        "goal": "Write this morning's brief.",
+        "observations": {
+          "intent.read/priorities": "1. Hire a paralegal",
+          "attention.read/inbox": "a recruiter's generic newsletter",
+          "calendar.read/today": "nothing",
+          "commitments.read/list": "job description: undated"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/brief"
+        ],
+        "notSays": [
+          "urgent"
+        ]
+      }
+    }
+  ]
+}

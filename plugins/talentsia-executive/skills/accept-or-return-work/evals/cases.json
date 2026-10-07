@@ -1,0 +1,57 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.executive.accept-or-return-work",
+  "cases": [
+    {
+      "id": "rejection-names-one-thing",
+      "title": "A rejection names the one thing that must change",
+      "given": {
+        "goal": "Judge what came back from the Content Writer.",
+        "observations": {
+          "artifacts.read/read": "art_20: landing page, no pricing section",
+          "brief": "landing page with pricing section"
+        }
+      },
+      "expect": {
+        "calls": [
+          "artifacts.dispose/dispose"
+        ],
+        "agents": [
+          "check-against-brief"
+        ]
+      }
+    },
+    {
+      "id": "decision-required-left-alone",
+      "title": "A deliverable waiting for a person keeps its disposition",
+      "given": {
+        "goal": "Judge what came back.",
+        "observations": {
+          "artifacts.read/read": "art_21: contract draft, disposition decision_required"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "artifacts.dispose/dispose"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "claim-is-not-evidence",
+      "title": "A deliverable that says its checks passed is not taken at its word",
+      "given": {
+        "goal": "Judge what came back from the engineer.",
+        "observations": {
+          "artifacts.read/read": "art_22: 'all tests pass'",
+          "work.history.read/activity": "no check was run in that job"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "tests pass"
+        ]
+      }
+    }
+  ]
+}

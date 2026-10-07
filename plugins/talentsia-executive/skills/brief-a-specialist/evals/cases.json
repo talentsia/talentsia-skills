@@ -1,0 +1,58 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.executive.brief-a-specialist",
+  "cases": [
+    {
+      "id": "names-what-exists",
+      "title": "The handover names the document it follows from",
+      "given": {
+        "goal": "Hand the landing page draft to the Content Writer.",
+        "observations": {
+          "artifacts.read/read": "art_12: landing page plan"
+        }
+      },
+      "expect": {
+        "calls": [
+          "artifacts.read/read",
+          "work.handoff/delegate"
+        ]
+      }
+    },
+    {
+      "id": "checkable-outcome",
+      "title": "The brief states one checkable outcome",
+      "given": {
+        "goal": "Hand the September close to the Revenue Analyst.",
+        "observations": {
+          "artifacts.read/read": "art_3: September statements"
+        }
+      },
+      "expect": {
+        "calls": [
+          "work.handoff/delegate"
+        ],
+        "says": [
+          "finished when"
+        ]
+      }
+    },
+    {
+      "id": "no-invented-fact",
+      "title": "A fact nobody established is not put in the brief",
+      "given": {
+        "goal": "Hand the pricing page to the Content Writer.",
+        "observations": {
+          "artifacts.read/read": "art_7: pricing options, price not decided"
+        }
+      },
+      "expect": {
+        "calls": [
+          "work.handoff/delegate"
+        ],
+        "notSays": [
+          "the price is"
+        ]
+      }
+    }
+  ]
+}

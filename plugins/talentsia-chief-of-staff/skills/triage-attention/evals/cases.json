@@ -1,0 +1,65 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.triage-attention",
+  "cases": [
+    {
+      "id": "forward-is-from-the-vendor",
+      "title": "A bill the executive forwarded is the vendor's, and goes to its trade",
+      "given": {
+        "goal": "Look at what has arrived.",
+        "observations": {
+          "attention.read/inbox": "Fwd: Invoice 684310 — from the executive; inner From: billing@vendor.example; Total due 189.44"
+        }
+      },
+      "expect": {
+        "calls": [
+          "attention.write/record",
+          "work.handoff/delegate"
+        ],
+        "notSays": [
+          "you sent this yourself"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "monitoring-is-recorded",
+      "title": "A message that needs nothing is filed, not dropped",
+      "given": {
+        "goal": "Look at what has arrived.",
+        "observations": {
+          "attention.read/inbox": "a newsletter; a calendar acceptance"
+        }
+      },
+      "expect": {
+        "calls": [
+          "attention.write/record"
+        ],
+        "agents": [
+          "classify-message"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "waiting-mail-must-be-judged",
+      "title": "Mail waiting means the scan records something",
+      "given": {
+        "goal": "Look at what has arrived.",
+        "observations": {
+          "attention.read/inbox": "ten messages, none triaged"
+        }
+      },
+      "expect": {
+        "calls": [
+          "attention.read/inbox",
+          "attention.write/record"
+        ],
+        "notSays": [
+          "no new items"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

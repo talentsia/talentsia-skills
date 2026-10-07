@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.chief-of-staff.triage-attention",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Decide what deserves a person out of everything that has arrived, and record every judgement, including what was filtered out.",
+  "appliesTo": [
+    "cos_attention_scan",
+    "cos_inquiry_triage"
+  ],
+  "requires": {
+    "capabilities": [
+      "attention.read@1",
+      "attention.write@1",
+      "drafts.write@1",
+      "work.handoff@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 296,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Anything marked as needing them carries a recommendation naming a specific next step.",
+    "Things filed as not needing them are recorded, not silently dropped.",
+    "Every message waiting when the scan began has a recorded judgement."
+  ],
+  "reads": [],
+  "subagents": [
+    "classify-message"
+  ],
+  "replaces": [
+    {
+      "id": "attention_triage",
+      "version": 1
+    }
+  ]
+}

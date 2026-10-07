@@ -1,0 +1,57 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.record-what-is-owed",
+  "cases": [
+    {
+      "id": "bill-not-payment",
+      "title": "An invoice is recorded as a bill",
+      "given": {
+        "goal": "Record the ACME invoice.",
+        "observations": {
+          "document": "ACME invoice 4411, 1,240.00 due 30 Oct 2026",
+          "ledger.reports.read/open_payables": "ACME 1,240.00 open"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.bills.write/record_bill",
+          "ledger.reports.read/open_payables"
+        ]
+      }
+    },
+    {
+      "id": "no-due-date-flagged",
+      "title": "A bill with no due date is flagged",
+      "given": {
+        "goal": "Record the plumber's bill.",
+        "observations": {
+          "document": "Plumber: 320.00, no due date"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.review.flag/flag"
+        ]
+      }
+    },
+    {
+      "id": "read-back",
+      "title": "The open amount is read back",
+      "given": {
+        "goal": "Record the electricity bill.",
+        "observations": {
+          "document": "Power Co 89.12 due 15 Nov",
+          "ledger.reports.read/open_payables": "Power Co 89.12 open"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.reports.read/open_payables"
+        ],
+        "says": [
+          "89.12"
+        ]
+      }
+    }
+  ]
+}

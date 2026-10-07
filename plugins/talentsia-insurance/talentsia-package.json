@@ -1,0 +1,18 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-insurance",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "Reading insurance documents for what they actually say, comparing options, and turning real deadlines into tasks.",
+  "skills": [
+    "review-an-insurance-document",
+    "compare-policies",
+    "review-renewals"
+  ]
+}

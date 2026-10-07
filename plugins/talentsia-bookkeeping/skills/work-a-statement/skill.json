@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.work-a-statement",
+  "version": "4.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Bring every posted line of an account statement into the books, then prove the books against it.",
+  "appliesTo": [
+    "bookkeeper_queue_work",
+    "bookkeeper_document"
+  ],
+  "requires": {
+    "capabilities": [
+      "ledger.statements.import@1",
+      "ledger.chart.read@1",
+      "ledger.reconcile@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 264,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The statement was imported, not retyped.",
+    "Every row is placed on an account or named to a person as needing one.",
+    "The books were reconciled through the statement's last date, or a person was told why they could not be."
+  ],
+  "reads": [],
+  "subagents": [
+    "place-rows"
+  ],
+  "replaces": [
+    {
+      "id": "process_bank_statement",
+      "version": 3
+    }
+  ]
+}

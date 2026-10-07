@@ -1,0 +1,62 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.engineering.implement-from-a-brief",
+  "cases": [
+    {
+      "id": "checks-reported-as-returned",
+      "title": "Every check runs and is reported as returned",
+      "given": {
+        "goal": "Implement the brief art_5 in the website repository.",
+        "observations": {
+          "code.repo.read/repos": "website: checks build, links",
+          "code.checks.run/check": "build: passed; links: 2 broken"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check",
+          "code.change.prepare/prepare"
+        ],
+        "agents": [
+          "plan-changes",
+          "self-review"
+        ],
+        "says": [
+          "2 broken"
+        ]
+      }
+    },
+    {
+      "id": "no-change-record-is-unfinished",
+      "title": "A described change without a prepared record is not done",
+      "given": {
+        "goal": "Implement the brief art_6.",
+        "observations": {
+          "code.repo.read/repos": "website"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.change.prepare/prepare"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "inert-file-named",
+      "title": "A change that only adds an unread file says so",
+      "given": {
+        "goal": "Add audit logging per brief art_7.",
+        "observations": {
+          "code.change.prepare/diff": "+ config/audit.yaml (nothing reads it)"
+        }
+      },
+      "expect": {
+        "says": [
+          "nothing reads"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}
