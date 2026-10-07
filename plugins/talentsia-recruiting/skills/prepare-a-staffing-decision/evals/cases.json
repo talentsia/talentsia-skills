@@ -1,0 +1,56 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.recruiting.prepare-a-staffing-decision",
+  "cases": [
+    {
+      "id": "one-request-per-seat",
+      "title": "Two gaps for one seat make one request",
+      "given": {
+        "goal": "Prepare the advertising seat for approval.",
+        "observations": {
+          "team.read/gaps": "advertising: no seat requested yet"
+        }
+      },
+      "expect": {
+        "calls": [
+          "staffing.request/request",
+          "commitments.mine/update"
+        ]
+      }
+    },
+    {
+      "id": "already-waiting",
+      "title": "A request already waiting is not made again",
+      "given": {
+        "goal": "Prepare the advertising seat for approval.",
+        "observations": {
+          "team.read/gaps": "advertising: request waiting on a person"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "staffing.request/request"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "not-a-seat-goes-to-decision",
+      "title": "Missing information becomes a decision, not a hire",
+      "given": {
+        "goal": "Prepare a decision about the course price.",
+        "observations": {
+          "team.read/gaps": "price undecided"
+        }
+      },
+      "expect": {
+        "calls": [
+          "decisions.prepare/raise"
+        ],
+        "notCalls": [
+          "staffing.request/request"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-bookkeeping",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "The basic bookkeeping a worker needs to keep books safely: read the document before recording, record what is owed as owed, import statements whole, and choose only accounts that exist.",
+  "skills": [
+    "review-a-financial-document",
+    "review-the-books",
+    "choose-the-account",
+    "record-what-is-owed",
+    "work-a-statement",
+    "record-money-that-moved"
+  ]
+}

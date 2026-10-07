@@ -1,0 +1,57 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.recruiting.design-a-seat",
+  "cases": [
+    {
+      "id": "first-work-is-blocked-work",
+      "title": "The seat's first task is the work that was stuck",
+      "given": {
+        "goal": "Design the seat for paid advertising.",
+        "observations": {
+          "team.read/roster": "nobody takes advertising"
+        }
+      },
+      "expect": {
+        "calls": [
+          "staffing.request/request"
+        ],
+        "says": [
+          "first piece of work"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites-stated",
+      "title": "What must exist first is stated",
+      "given": {
+        "goal": "Design the seat for paid advertising.",
+        "observations": {
+          "team.read/roster": "no advertising account connected"
+        }
+      },
+      "expect": {
+        "calls": [
+          "staffing.request/request"
+        ],
+        "says": [
+          "account"
+        ]
+      }
+    },
+    {
+      "id": "no-excess-reach",
+      "title": "The seat holds only what its work needs",
+      "given": {
+        "goal": "Design a seat to write captions.",
+        "observations": {
+          "team.read/roster": "Content Writer exists"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "host"
+        ]
+      }
+    }
+  ]
+}

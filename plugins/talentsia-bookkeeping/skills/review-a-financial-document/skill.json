@@ -1,0 +1,51 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.review-a-financial-document",
+  "version": "3.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Establish what a financial document actually proves, before recording anything.",
+  "appliesTo": [
+    "bookkeeper_document"
+  ],
+  "requires": {
+    "capabilities": [
+      "documents.inspect@1",
+      "ledger.documents.lookup@1",
+      "ledger.review.flag@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 193,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every recorded figure appears in the document it came from.",
+    "The same document was not recorded twice."
+  ],
+  "reads": [],
+  "subagents": [
+    "extract-figures"
+  ],
+  "replaces": [
+    {
+      "id": "bookkeeping_document_review",
+      "version": 2
+    }
+  ]
+}

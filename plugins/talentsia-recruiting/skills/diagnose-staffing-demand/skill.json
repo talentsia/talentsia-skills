@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.recruiting.diagnose-staffing-demand",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Turn promises nobody can keep into a named gap per area, and say which of them is actually a seat.",
+  "appliesTo": [
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "commitments.mine@1",
+      "team.read@1",
+      "artifacts.read@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 264,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every stuck promise in the diagnosis names one of the five gaps in words.",
+    "No seat is proposed for a gap that is not capacity or a missing trade.",
+    "Nothing is claimed about who works here that the roster did not return."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "diagnose_staffing_demand",
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.insurance.review-renewals",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Find the real future obligations in an insurance document and make each one a dated task.",
+  "appliesTo": [
+    "policy_renewal_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "documents.inspect@1",
+      "tasks.write@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 138,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every task created corresponds to a date printed in the document.",
+    "No task was created for a date already past."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "renewal_review",
+      "version": 1
+    }
+  ]
+}

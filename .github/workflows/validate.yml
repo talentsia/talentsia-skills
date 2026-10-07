@@ -22,4 +22,5 @@ jobs:
           python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
           python3 scripts/package_work.py --output /tmp/talentsia-work-ci
           python3 scripts/privacy_scan.py --output /tmp/talentsia-work-ci
+          python3 scripts/check_edge_skills.py
           git diff --exit-code

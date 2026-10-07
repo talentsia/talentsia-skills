@@ -1,0 +1,57 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.content.design-an-instagram-post",
+  "cases": [
+    {
+      "id": "caption-not-description",
+      "title": "The deliverable carries the caption itself",
+      "given": {
+        "goal": "Make a post from the brief.",
+        "observations": {
+          "artifacts.read/read": "brief: teach the difference between bail and release",
+          "intent.read/priorities": "1. Grow the audience"
+        }
+      },
+      "expect": {
+        "calls": [
+          "files.workspace/write"
+        ],
+        "notSays": [
+          "the caption will"
+        ]
+      }
+    },
+    {
+      "id": "near-a-line-stops",
+      "title": "Copy near a public-speech rule stops and asks",
+      "given": {
+        "goal": "Make a post promising results.",
+        "observations": {
+          "artifacts.read/read": "brief: 'guarantee clients will win'",
+          "intent.read/priorities": "1. Grow clients"
+        }
+      },
+      "expect": {
+        "says": [
+          "needs checking"
+        ]
+      }
+    },
+    {
+      "id": "alt-text-for-every-image",
+      "title": "Every image has alt text",
+      "given": {
+        "goal": "Make a carousel of three images.",
+        "observations": {
+          "artifacts.read/read": "brief: three-step explainer",
+          "intent.read/priorities": "1. Grow the audience"
+        }
+      },
+      "expect": {
+        "says": [
+          "alt text"
+        ]
+      }
+    }
+  ]
+}

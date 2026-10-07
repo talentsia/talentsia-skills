@@ -1,0 +1,51 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.record-what-is-owed",
+  "version": "3.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Record an amount due without representing it as money already paid.",
+  "appliesTo": [
+    "bookkeeper_document",
+    "bookkeeper_review",
+    "bookkeeper_bill"
+  ],
+  "requires": {
+    "capabilities": [
+      "ledger.bills.write@1",
+      "ledger.reports.read@1",
+      "ledger.review.flag@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 192,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The bill appears as an open payable the application itself computes.",
+    "No payment was recorded for a document that only shows an amount due."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "obligation_tracking",
+      "version": 2
+    }
+  ]
+}

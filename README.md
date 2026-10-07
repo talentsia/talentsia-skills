@@ -107,13 +107,30 @@ Start with synthetic inputs. [Behavior evaluation cases](evals/README.md) cover 
 
 It needs a Talentsia organisation and a seat that a person has enrolled on its device, so it is installed natively rather than attached as a skill file. Install it from the same marketplaces: `codex plugin add talentsia-work@talentsia-skills`, or `claude plugin install talentsia-work@talentsia-skills`. Setup and the one-seat versus several-seat arrangement are in the [Talentsia Work README](plugins/talentsia-work/README.md). Releases are tagged `talentsia-work-v<version>`, separately from Talentsia Do's `v<version>`.
 
+## Skills for Talentsia Edge workers (free)
+
+Eight packages give the resident workers on a Talentsia Edge device their craft, the way a phone gains abilities from apps:
+
+| Package | For |
+|---|---|
+| [`talentsia-operations`](plugins/talentsia-operations/README.md) | looking after the device, routing what arrives |
+| [`talentsia-chief-of-staff`](plugins/talentsia-chief-of-staff/README.md) | briefing, triage, keeping and closing promises, meetings, time |
+| [`talentsia-executive`](plugins/talentsia-executive/README.md) | running an area: moving its work, briefing specialists, judging what comes back |
+| [`talentsia-recruiting`](plugins/talentsia-recruiting/README.md) | diagnosing what is missing, designing seats and procedures |
+| [`talentsia-engineering`](plugins/talentsia-engineering/README.md) | changes, reviews and scans in authorised repositories |
+| [`talentsia-bookkeeping`](plugins/talentsia-bookkeeping/README.md) | basic bookkeeping a worker can do safely |
+| [`talentsia-insurance`](plugins/talentsia-insurance/README.md) | reading policies, comparing options, renewals |
+| [`talentsia-content`](plugins/talentsia-content/README.md) | social posts an organisation can approve |
+
+These are the free, basic editions, MIT licensed. Enhanced and practice-specific editions are premium. A skill here is prose only: it requires capabilities, never names tools, and grants nothing. The device decides what its worker may do. The contract, including subagents and per-model evals, is in [docs/edge-worker-skills.md](docs/edge-worker-skills.md). Validate with `python3 scripts/check_edge_skills.py`.
+
 ## Migration, privacy and rights
 
 The legacy `$talentsia-do` catch-all skill is replaced by ten skills inside the same `talentsia-do` plugin; the single skill file is a distribution format of those same ten, not a return to the catch-all. See [CHANGELOG](CHANGELOG.md) for migration. Existing personal records need no conversion, copying or relocation. Remove a separately uploaded legacy skill only after checking the new installation; this release does not edit user settings, live Pages or personal projects.
 
 This instructions-only plugin creates no storage backend, connected account, worker or schedule. Personal records stay in user-owned storage. Without tools/persistence, skills provide portable records marked not saved and disclose unperformed actions. Email, calendar and third-party actions require explicit human authorization. No guaranteed productivity result is promised.
 
-© 2026 Talentsia. Talentsia Do's original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0 except where the license index states otherwise. These noncommercial licenses are not OSI-approved open-source licenses and do not automatically permit business use of Do. **Talentsia Work and its dedicated build/test/release files are MIT licensed for business use.** See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for exact scope. Premium packs are proprietary and separately licensed; these public licenses do not apply to them. Third-party rights remain with their owners.
+© 2026 Talentsia. Talentsia Do's original skill content and documentation are licensed CC BY-NC-SA 4.0; repository scripts are separately licensed under PolyForm Noncommercial 1.0.0 except where the license index states otherwise. These noncommercial licenses are not OSI-approved open-source licenses and do not automatically permit business use of Do. **Talentsia Work, the Talentsia Edge worker packages and their dedicated build/test/release files are MIT licensed for business use.** See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for exact scope. Premium packs are proprietary and separately licensed; these public licenses do not apply to them. Third-party rights remain with their owners.
 
 ## Maintain the package
 

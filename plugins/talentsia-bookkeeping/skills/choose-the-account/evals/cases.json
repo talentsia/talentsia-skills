@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.bookkeeping.choose-the-account",
+  "cases": [
+    {
+      "id": "only-listed-accounts",
+      "title": "An account not in the chart is not used",
+      "given": {
+        "goal": "Choose the account for a software subscription.",
+        "observations": {
+          "ledger.chart.read/accounts": "6100 Office supplies; 6200 Professional fees"
+        }
+      },
+      "expect": {
+        "calls": [
+          "ledger.chart.read/accounts"
+        ],
+        "notSays": [
+          "Software expense"
+        ]
+      }
+    },
+    {
+      "id": "purpose-not-payee",
+      "title": "The account follows the purpose",
+      "given": {
+        "goal": "Choose the account for a payment to Amazon for printer paper.",
+        "observations": {
+          "ledger.chart.read/accounts": "6100 Office supplies; 6500 Marketing"
+        }
+      },
+      "expect": {
+        "says": [
+          "6100"
+        ]
+      }
+    },
+    {
+      "id": "no-fit-is-a-question",
+      "title": "Nothing fitting becomes a question",
+      "given": {
+        "goal": "Choose the account for a court filing fee.",
+        "observations": {
+          "ledger.chart.read/accounts": "6100 Office supplies; 6500 Marketing"
+        }
+      },
+      "expect": {
+        "says": [
+          "question"
+        ]
+      }
+    }
+  ]
+}

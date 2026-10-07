@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.insurance.review-an-insurance-document",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Review one insurance document and establish what it actually says.",
+  "appliesTo": [
+    "insurance_document_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "documents.inspect@1",
+      "documents.register@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 159,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every value reported can be pointed at in the document.",
+    "Anything absent is reported as absent rather than estimated."
+  ],
+  "reads": [],
+  "subagents": [
+    "extract-policy-fields"
+  ],
+  "replaces": [
+    {
+      "id": "insurance_document_review",
+      "version": 1
+    }
+  ]
+}

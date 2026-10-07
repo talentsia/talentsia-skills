@@ -1,0 +1,19 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-recruiting",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "Staffing an organisation: diagnosing what is really missing, designing a seat and its procedures, and preparing one decision a person can answer.",
+  "skills": [
+    "diagnose-staffing-demand",
+    "design-a-seat",
+    "design-a-procedure",
+    "prepare-a-staffing-decision"
+  ]
+}

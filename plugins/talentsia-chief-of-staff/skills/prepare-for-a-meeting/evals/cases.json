@@ -1,0 +1,69 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.prepare-for-a-meeting",
+  "cases": [
+    {
+      "id": "owed-to-an-attendee",
+      "title": "Something owed to an attendee is in the brief",
+      "given": {
+        "goal": "Prepare me for the 15:00 call.",
+        "observations": {
+          "calendar.read/meeting": "Pricing review with the Finance Executive",
+          "commitments.read/list": "#4 owed to Finance Executive: course price proposal (overdue)",
+          "decisions.read/list": "none about pricing"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/meeting_brief"
+        ],
+        "says": [
+          "#4"
+        ],
+        "agents": [
+          "find-landmines"
+        ]
+      }
+    },
+    {
+      "id": "no-invented-landmine",
+      "title": "A quiet record gives no landmines",
+      "given": {
+        "goal": "Prepare me for tomorrow's intro call.",
+        "observations": {
+          "calendar.read/meeting": "Intro call with a new contact",
+          "commitments.read/list": "nothing with this person",
+          "decisions.read/list": "nothing"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/meeting_brief"
+        ],
+        "notSays": [
+          "risk"
+        ]
+      }
+    },
+    {
+      "id": "purpose-unclear-is-said",
+      "title": "A meeting with no stated purpose says so first",
+      "given": {
+        "goal": "Prepare me for 'Catch-up'.",
+        "observations": {
+          "calendar.read/meeting": "Catch-up, no description, three attendees",
+          "commitments.read/list": "nothing",
+          "decisions.read/list": "nothing"
+        }
+      },
+      "expect": {
+        "calls": [
+          "briefs.write/meeting_brief"
+        ],
+        "says": [
+          "purpose"
+        ]
+      }
+    }
+  ]
+}

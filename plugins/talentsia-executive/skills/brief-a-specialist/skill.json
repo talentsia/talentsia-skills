@@ -1,0 +1,49 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.executive.brief-a-specialist",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Write the brief that goes with a handover, so the worker receiving it can finish without coming back to ask what was meant.",
+  "appliesTo": [
+    "cos_vertical_pass",
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "artifacts.read@1",
+      "work.handoff@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 247,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The brief names a checkable outcome and at least one existing record, repository or document.",
+    "No instruction in the brief asks for a tool the receiving worker does not hold."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "brief_a_specialist",
+      "version": 1
+    }
+  ]
+}

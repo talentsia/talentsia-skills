@@ -1,0 +1,55 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.executive.run-a-vertical",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "A pass over your own area: read what is owed and in flight, put each piece of work with whoever can do it, put judgements in front of a person, and name what the area cannot do.",
+  "appliesTo": [
+    "cos_vertical_pass"
+  ],
+  "requires": {
+    "capabilities": [
+      "commitments.mine@1",
+      "artifacts.read@1",
+      "work.history.read@1",
+      "team.read@1",
+      "work.handoff@1",
+      "decisions.prepare@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 12288,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 350,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every piece of work you say you handed over has a job id returned by the handoff tool.",
+    "Every promise you say you moved was written to and came back changed.",
+    "Nothing is reported as done that no tool result in this job shows was done."
+  ],
+  "reads": [],
+  "subagents": [
+    "survey-area"
+  ],
+  "replaces": [
+    {
+      "id": "run_a_vertical",
+      "version": 1
+    }
+  ]
+}

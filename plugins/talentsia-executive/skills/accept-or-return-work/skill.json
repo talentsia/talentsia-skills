@@ -1,0 +1,53 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.executive.accept-or-return-work",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Read what came back against what was asked, and record which it is: accepted, accepted with what is still missing, or returned with the one thing that has to change.",
+  "appliesTo": [
+    "cos_vertical_pass"
+  ],
+  "requires": {
+    "capabilities": [
+      "artifacts.read@1",
+      "artifacts.dispose@1",
+      "work.history.read@1",
+      "work.handoff@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 274,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every deliverable you judged carries a recorded disposition.",
+    "Any rejection names the single thing that must change.",
+    "Nothing is accepted on the strength of what the answer said about itself."
+  ],
+  "reads": [],
+  "subagents": [
+    "check-against-brief"
+  ],
+  "replaces": [
+    {
+      "id": "accept_or_return_work",
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.recruiting.diagnose-staffing-demand",
+  "cases": [
+    {
+      "id": "existing-seat-not-proposed",
+      "title": "A seat the organisation already has is not proposed",
+      "given": {
+        "goal": "Do we need to hire for the runtime security work?",
+        "observations": {
+          "team.read/roster": "Platform and Runtime Engineer: takes engineering_change",
+          "team.read/gaps": "none for engineering"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "create a Platform"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "five-gaps-named",
+      "title": "Each stuck promise is named as one of the five",
+      "given": {
+        "goal": "Why is marketing stuck?",
+        "observations": {
+          "commitments.mine/list": "#3 run ads (no tool), #4 price (undecided)"
+        }
+      },
+      "expect": {
+        "says": [
+          "missing tool",
+          "missing information"
+        ]
+      }
+    },
+    {
+      "id": "duplicate-request-avoided",
+      "title": "A gap already requested is not requested again",
+      "given": {
+        "goal": "Do we need a designer?",
+        "observations": {
+          "team.read/gaps": "design: seat already requested, waiting on a person"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "request a designer"
+        ]
+      }
+    }
+  ]
+}

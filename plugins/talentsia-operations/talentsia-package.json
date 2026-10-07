@@ -1,0 +1,17 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-operations",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "Looking after the device a team runs on, and getting what arrives to the right person.",
+  "skills": [
+    "check-the-device",
+    "route-an-arriving-document"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.keep-records-current",
+  "cases": [
+    {
+      "id": "dated-plan-gives-dated-promises",
+      "title": "A plan's dates reach the promises",
+      "given": {
+        "goal": "You have just finished a launch plan. Record what follows from it.",
+        "observations": {
+          "commitments.read/list": "none",
+          "intent.read/priorities": "1. Grow clients",
+          "document": "Marketing Executive drafts the landing page before 16 Oct; Finance Executive sets the price before 25 Oct."
+        }
+      },
+      "expect": {
+        "calls": [
+          "commitments.write/record",
+          "commitments.write/date"
+        ],
+        "agents": [
+          "extract-promises",
+          "match-existing"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "two-owners-two-promises",
+      "title": "A promise naming two people is recorded twice, once each",
+      "given": {
+        "goal": "Record what follows from the standup notes.",
+        "observations": {
+          "commitments.read/list": "none",
+          "document": "The Platform Executive and the Content Writer will prepare the course page."
+        }
+      },
+      "expect": {
+        "calls": [
+          "commitments.write/record"
+        ],
+        "notSays": [
+          "shared"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "restatement-dates-not-duplicates",
+      "title": "A restated promise gains its date instead of a copy",
+      "given": {
+        "goal": "Record what follows from the revised plan.",
+        "observations": {
+          "commitments.read/list": "#7 Finance Executive: set the course price (undated)",
+          "document": "Finance Executive sets the course price before 25 Oct."
+        }
+      },
+      "expect": {
+        "calls": [
+          "commitments.write/date"
+        ],
+        "notCalls": [
+          "commitments.write/record"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

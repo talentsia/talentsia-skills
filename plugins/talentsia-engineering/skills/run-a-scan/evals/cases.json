@@ -1,0 +1,64 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.engineering.run-a-scan",
+  "cases": [
+    {
+      "id": "findings-as-returned",
+      "title": "Findings are reported with their count",
+      "given": {
+        "goal": "Scan the website repository for vulnerable dependencies.",
+        "observations": {
+          "code.repo.read/repos": "website: checks deps",
+          "code.checks.run/check": "deps: 2 findings (lodash 4.17.20 GHSA-x, minimist 1.2.5 GHSA-y), log /logs/deps.txt"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check"
+        ],
+        "says": [
+          "2"
+        ]
+      }
+    },
+    {
+      "id": "nothing-found-said-plainly",
+      "title": "A clean scan says so",
+      "given": {
+        "goal": "Scan the runtime repository.",
+        "observations": {
+          "code.repo.read/repos": "runtime: checks deps",
+          "code.checks.run/check": "deps: 0 findings"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check"
+        ],
+        "says": [
+          "no findings"
+        ]
+      }
+    },
+    {
+      "id": "could-not-run",
+      "title": "A scan that could not run says why and stops",
+      "given": {
+        "goal": "Scan the runtime repository.",
+        "observations": {
+          "code.repo.read/repos": "runtime: checks deps",
+          "code.checks.run/check": "error: No module named 'app'"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check"
+        ],
+        "says": [
+          "could not run"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

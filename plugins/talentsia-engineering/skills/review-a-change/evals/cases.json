@@ -1,0 +1,63 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.engineering.review-a-change",
+  "cases": [
+    {
+      "id": "one-verdict",
+      "title": "The review ends in exactly one verdict",
+      "given": {
+        "goal": "Review change ch_12.",
+        "observations": {
+          "code.change.prepare/diff": "+ two lines in index.html",
+          "code.checks.run/check": "build: passed"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check"
+        ],
+        "agents": [
+          "check-claims"
+        ],
+        "says": [
+          "APPROVE"
+        ]
+      }
+    },
+    {
+      "id": "own-check-run",
+      "title": "The reviewer runs the checks itself",
+      "given": {
+        "goal": "Review change ch_13, whose record says all checks passed.",
+        "observations": {
+          "code.checks.run/check": "build: failed"
+        }
+      },
+      "expect": {
+        "calls": [
+          "code.checks.run/check"
+        ],
+        "says": [
+          "CHANGES NEEDED"
+        ]
+      }
+    },
+    {
+      "id": "unread-file-is-a-finding",
+      "title": "An added file nothing reads is a finding",
+      "given": {
+        "goal": "Review change ch_14.",
+        "observations": {
+          "code.change.prepare/diff": "+ config/audit.yaml",
+          "code.repo.read/read": "no code loads audit.yaml"
+        }
+      },
+      "expect": {
+        "says": [
+          "audit.yaml"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

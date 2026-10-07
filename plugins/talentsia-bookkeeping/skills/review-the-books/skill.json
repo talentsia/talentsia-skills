@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.bookkeeping.review-the-books",
+  "version": "3.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Look over the assigned entity's books for work that is unfinished or wrong, using the application's own figures.",
+  "appliesTo": [
+    "bookkeeper_review",
+    "bookkeeper_change_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "ledger.entity.read@1",
+      "ledger.reports.read@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 202,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every figure reported came from the application, not from arithmetic.",
+    "The entity was named from a tool result."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "bookkeeping_review",
+      "version": 2
+    }
+  ]
+}

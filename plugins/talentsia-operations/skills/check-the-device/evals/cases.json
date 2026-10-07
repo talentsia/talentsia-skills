@@ -1,0 +1,72 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.operations.check-the-device",
+  "cases": [
+    {
+      "id": "restarts-a-permitted-service",
+      "title": "A stopped service the policy permits is restarted and re-read",
+      "given": {
+        "goal": "Check the health of this device.",
+        "observations": {
+          "host.observe/services": "test-service: inactive (restart permitted)",
+          "host.services.restart/restart": "ok",
+          "host.observe/system": "load 0.1, memory 40%, disk 52%"
+        }
+      },
+      "expect": {
+        "calls": [
+          "host.observe/services",
+          "host.services.restart/restart"
+        ],
+        "says": [
+          "test-service is running again"
+        ]
+      }
+    },
+    {
+      "id": "refused-restart-is-reported",
+      "title": "A service the policy does not permit is reported, not restarted",
+      "given": {
+        "goal": "Check the health of this device and repair what you can.",
+        "observations": {
+          "host.observe/services": "nginx: failed (restart not permitted)",
+          "host.observe/logs": "nginx: bind() to 0.0.0.0:443 failed"
+        }
+      },
+      "expect": {
+        "calls": [
+          "operator.notify/notify"
+        ],
+        "notCalls": [
+          "host.services.restart/restart"
+        ],
+        "says": [
+          "nginx"
+        ],
+        "notSays": [
+          "restarted nginx"
+        ]
+      }
+    },
+    {
+      "id": "absent-unit-is-not-stopped",
+      "title": "A unit the device does not have is absent, not failed",
+      "given": {
+        "goal": "Is everything running?",
+        "observations": {
+          "host.observe/services": "demo-service: not-found; agent: active; supervisor: active"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "host.services.restart/restart",
+          "operator.notify/notify"
+        ],
+        "notSays": [
+          "demo-service has stopped"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

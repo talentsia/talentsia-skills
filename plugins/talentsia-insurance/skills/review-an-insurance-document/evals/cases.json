@@ -1,0 +1,58 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.insurance.review-an-insurance-document",
+  "cases": [
+    {
+      "id": "absent-is-absent",
+      "title": "A missing premium is reported as absent",
+      "given": {
+        "goal": "Review inbox/policy.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "Insurer: Acme Mutual; Policy AM-1192; cover 1 Jan 2026 to 31 Dec 2026; premium not stated"
+        }
+      },
+      "expect": {
+        "calls": [
+          "documents.register/register"
+        ],
+        "agents": [
+          "extract-policy-fields"
+        ],
+        "says": [
+          "absent"
+        ]
+      }
+    },
+    {
+      "id": "contradiction-flagged",
+      "title": "Contradicting terms are flagged",
+      "given": {
+        "goal": "Review inbox/schedule.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "Excess 500 on page 1; excess 1,000 on page 3"
+        }
+      },
+      "expect": {
+        "says": [
+          "contradict"
+        ]
+      }
+    },
+    {
+      "id": "values-as-printed",
+      "title": "Values come from the document",
+      "given": {
+        "goal": "Review inbox/cert.pdf.",
+        "observations": {
+          "documents.inspect/inspect": "Policy AM-2201, premium 1,180.00"
+        }
+      },
+      "expect": {
+        "says": [
+          "AM-2201",
+          "1,180.00"
+        ]
+      }
+    }
+  ]
+}

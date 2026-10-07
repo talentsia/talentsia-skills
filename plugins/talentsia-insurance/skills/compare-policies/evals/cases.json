@@ -1,0 +1,55 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.insurance.compare-policies",
+  "cases": [
+    {
+      "id": "difference-quoted",
+      "title": "A changed excess is reported with both values",
+      "given": {
+        "goal": "Compare the renewal with the current policy.",
+        "observations": {
+          "documents.inspect/inspect": "current: excess 500; renewal: excess 1,000"
+        }
+      },
+      "expect": {
+        "agents": [
+          "compare-clauses"
+        ],
+        "says": [
+          "500",
+          "1,000"
+        ]
+      }
+    },
+    {
+      "id": "no-invented-term",
+      "title": "A term in neither document is not compared",
+      "given": {
+        "goal": "Compare options A and B.",
+        "observations": {
+          "documents.inspect/inspect": "A and B: liability 1M, no mention of cyber cover"
+        }
+      },
+      "expect": {
+        "notSays": [
+          "cyber cover differs"
+        ]
+      }
+    },
+    {
+      "id": "recommendation-with-conditions",
+      "title": "A recommendation names what to resolve first",
+      "given": {
+        "goal": "Which option should we take?",
+        "observations": {
+          "documents.inspect/inspect": "A cheaper but excludes flood; B covers flood"
+        }
+      },
+      "expect": {
+        "says": [
+          "resolve"
+        ]
+      }
+    }
+  ]
+}

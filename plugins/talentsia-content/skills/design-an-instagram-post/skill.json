@@ -1,0 +1,51 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.content.design-an-instagram-post",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker",
+    "seat"
+  ],
+  "summary": "Take a brief to a finished post: the one thing it teaches, the words on the image, the image specification, the caption as posted, the hashtags and the alt text, filed as one deliverable.",
+  "appliesTo": [
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "artifacts.read@1",
+      "intent.read@1",
+      "files.workspace@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 338,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The caption is the caption, not a description of one.",
+    "Alt text exists for every image and describes the image rather than repeating the caption.",
+    "Anything that could not be established is written down with who could answer it."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "design_an_instagram_post",
+      "version": 1
+    }
+  ]
+}

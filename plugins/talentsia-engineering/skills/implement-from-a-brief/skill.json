@@ -1,0 +1,55 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.engineering.implement-from-a-brief",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Turn a written brief into a reviewed, previewed change in an authorised repository, without claiming anything a tool did not return.",
+  "appliesTo": [
+    "engineering_change"
+  ],
+  "requires": {
+    "capabilities": [
+      "code.repo.read@1",
+      "code.repo.write@1",
+      "code.checks.run@1",
+      "code.change.prepare@1",
+      "code.preview@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 16384,
+    "tiers": [
+      "large-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 370,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "A change was prepared in this job and its id reported.",
+    "Every check the repository offers was run in this job and its result reported as returned.",
+    "No claim about building, testing or previewing appears without the tool result behind it."
+  ],
+  "reads": [],
+  "subagents": [
+    "plan-changes",
+    "self-review"
+  ],
+  "replaces": [
+    {
+      "id": "implement_from_brief",
+      "version": 1
+    }
+  ]
+}

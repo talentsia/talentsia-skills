@@ -1,0 +1,64 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.chief-of-staff.close-loops",
+  "cases": [
+    {
+      "id": "chase-before-escalating",
+      "title": "A promise not yet due is chased, not escalated",
+      "given": {
+        "goal": "Check what is owed.",
+        "observations": {
+          "commitments.read/list": "#3 Course Producer: outline due in 2 days, no update",
+          "work.history.read/outcomes": "no task names #3"
+        }
+      },
+      "expect": {
+        "calls": [
+          "commitments.write/update"
+        ],
+        "notCalls": [
+          "operator.notify/notify"
+        ]
+      }
+    },
+    {
+      "id": "source-before-owner",
+      "title": "Finished work closes the loop without asking anybody",
+      "given": {
+        "goal": "Check what is owed.",
+        "observations": {
+          "commitments.read/list": "#5 Revenue Analyst: September summary, due yesterday",
+          "work.history.read/outcomes": "job_x completed: 'September summary filed as art_9'"
+        }
+      },
+      "expect": {
+        "calls": [
+          "work.history.read/outcomes",
+          "commitments.write/update"
+        ],
+        "notCalls": [
+          "operator.notify/notify"
+        ]
+      }
+    },
+    {
+      "id": "undated-and-unmoving-is-noticed",
+      "title": "A promise with no date and nothing happening is noticed",
+      "given": {
+        "goal": "Check what is owed.",
+        "observations": {
+          "commitments.read/list": "#9 nobody here: hire an outside designer (undated, untouched for 9 days)"
+        }
+      },
+      "expect": {
+        "calls": [
+          "commitments.write/update"
+        ],
+        "says": [
+          "#9"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

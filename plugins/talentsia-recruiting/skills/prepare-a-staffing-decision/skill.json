@@ -1,0 +1,51 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.recruiting.prepare-a-staffing-decision",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Do everything up to the point where only a yes or a no is left, one seat at a time.",
+  "appliesTo": [
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "staffing.request@1",
+      "decisions.prepare@1",
+      "commitments.mine@1",
+      "team.read@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 263,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "One request per seat, each carrying its gap, its needs and its procedures.",
+    "Every blocked promise the request came from carries a note saying so.",
+    "No claim of a filled seat without a tool result behind it."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "prepare_one_staffing_decision",
+      "version": 1
+    }
+  ]
+}

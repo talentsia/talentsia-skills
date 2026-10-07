@@ -1,0 +1,60 @@
+{
+  "schema": "talentsia-skill-evals/v1",
+  "skill": "talentsia.executive.run-a-vertical",
+  "cases": [
+    {
+      "id": "empty-objective-gets-promises",
+      "title": "An objective with nothing promised gets work recorded or handed on",
+      "given": {
+        "goal": "Move your area forward.",
+        "observations": {
+          "commitments.mine/list": "none",
+          "team.read/roster": "Content Writer takes operator_goal",
+          "area": "objective #1 has nothing promised against it"
+        }
+      },
+      "expect": {
+        "calls": [
+          "work.handoff/delegate"
+        ],
+        "agents": [
+          "survey-area"
+        ]
+      },
+      "regression": true
+    },
+    {
+      "id": "judgement-goes-to-a-person",
+      "title": "Setting a price is prepared for a person, not decided",
+      "given": {
+        "goal": "Move your area forward.",
+        "observations": {
+          "commitments.mine/list": "#4 set the course price (waiting on nobody)"
+        }
+      },
+      "expect": {
+        "calls": [
+          "decisions.prepare/raise",
+          "commitments.mine/update"
+        ]
+      }
+    },
+    {
+      "id": "in-flight-not-handed-twice",
+      "title": "Work already running is not handed over again",
+      "given": {
+        "goal": "Move your area forward.",
+        "observations": {
+          "commitments.mine/list": "#2 draft the landing page",
+          "work.history.read/activity": "Content Writer is running a job about #2"
+        }
+      },
+      "expect": {
+        "notCalls": [
+          "work.handoff/delegate"
+        ]
+      },
+      "regression": true
+    }
+  ]
+}

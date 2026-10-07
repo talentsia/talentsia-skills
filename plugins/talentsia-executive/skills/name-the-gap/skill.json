@@ -1,0 +1,52 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.executive.name-the-gap",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "When nobody in your area can do the work: decide which of five gaps it is, and ask for a seat only when it is capacity or a missing trade.",
+  "appliesTo": [
+    "cos_vertical_pass"
+  ],
+  "requires": {
+    "capabilities": [
+      "team.read@1",
+      "staffing.request@1",
+      "commitments.mine@1",
+      "decisions.prepare@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 310,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The gap is named as one of the five, in words, before anything is requested.",
+    "A seat was requested only for capacity or a missing trade.",
+    "The promise carries what is missing."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "name_the_gap",
+      "version": 1
+    }
+  ]
+}

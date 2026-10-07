@@ -1,0 +1,18 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-engineering",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "Implementing a brief as a reviewed change, reviewing a change against its brief, and running a named scan, in repositories a worker is authorised on.",
+  "skills": [
+    "implement-from-a-brief",
+    "review-a-change",
+    "run-a-scan"
+  ]
+}

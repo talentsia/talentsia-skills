@@ -1,0 +1,21 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-chief-of-staff",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "The coordinator's craft: briefing an executive, triaging what arrives, keeping promises recorded and closed, preparing meetings and reviewing where time went.",
+  "skills": [
+    "brief-the-executive",
+    "triage-attention",
+    "keep-records-current",
+    "close-loops",
+    "prepare-for-a-meeting",
+    "review-time-allocation"
+  ]
+}

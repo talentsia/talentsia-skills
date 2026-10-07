@@ -1,0 +1,54 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.operations.route-an-arriving-document",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Identify what an arriving document is, record it, file it, and pass it to whoever owns that kind of work.",
+  "appliesTo": [
+    "document_intake"
+  ],
+  "requires": {
+    "capabilities": [
+      "documents.inspect@1",
+      "documents.register@1",
+      "files.workspace@1",
+      "work.handoff@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 265,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "The document is no longer in the inbox.",
+    "Either a colleague has been given the work, or a person has been notified.",
+    "Every registered value appears in the document."
+  ],
+  "reads": [],
+  "subagents": [
+    "classify-document"
+  ],
+  "replaces": [
+    {
+      "id": "document_intake_routing",
+      "version": 1
+    }
+  ]
+}

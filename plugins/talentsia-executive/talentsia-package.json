@@ -1,0 +1,19 @@
+{
+  "schema": "talentsia-package/v1",
+  "name": "talentsia-executive",
+  "version": "1.0.0",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "description": "Running an area of the organisation: moving its promises, briefing specialists, judging what comes back and naming what the area cannot do.",
+  "skills": [
+    "run-a-vertical",
+    "brief-a-specialist",
+    "accept-or-return-work",
+    "name-the-gap"
+  ]
+}

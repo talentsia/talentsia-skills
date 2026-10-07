@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.operations.check-the-device",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Inspect the device a worker runs on and repair only what its policy permits, reporting what was observed rather than what was expected.",
+  "appliesTo": [
+    "service_health"
+  ],
+  "requires": {
+    "capabilities": [
+      "host.observe@1",
+      "host.services.restart@1",
+      "operator.notify@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 307,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Any claim that a service is running is backed by a reading taken after the restart.",
+    "Nothing was restarted that the device's policy did not permit.",
+    "A problem you could not repair was put in front of a person."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "edge_health_check",
+      "version": 1
+    }
+  ]
+}

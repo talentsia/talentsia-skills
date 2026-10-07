@@ -1,0 +1,50 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.recruiting.design-a-procedure",
+  "version": "1.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Write the steps that turn a seat into a worker that does the work the same way twice.",
+  "appliesTo": [
+    "operator_goal"
+  ],
+  "requires": {
+    "capabilities": [
+      "team.read@1",
+      "staffing.request@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 8192,
+    "tiers": [
+      "small-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 281,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every step is an act, and every fact a later step relies on is established by a named tool earlier.",
+    "No step requires a tool the seat does not hold.",
+    "Finishing is stated in terms that can be checked from records.",
+    "The procedure has at most eight steps."
+  ],
+  "reads": [],
+  "subagents": [],
+  "replaces": [
+    {
+      "id": "design_a_procedure",
+      "version": 1
+    }
+  ]
+}

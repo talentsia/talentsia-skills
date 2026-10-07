@@ -1,0 +1,52 @@
+{
+  "schema": "talentsia-skill/v1",
+  "id": "talentsia.engineering.review-a-change",
+  "version": "2.0.0",
+  "status": "draft",
+  "publisher": "talentsia",
+  "tier": "free",
+  "edition": "basic",
+  "license": "MIT",
+  "targets": [
+    "edge-worker"
+  ],
+  "summary": "Judge a prepared change against its brief, its checks and its claims, and return one verdict a person can act on.",
+  "appliesTo": [
+    "engineering_review"
+  ],
+  "requires": {
+    "capabilities": [
+      "code.repo.read@1",
+      "code.checks.run@1",
+      "code.change.prepare@1"
+    ],
+    "runtime": ">=0.10.0"
+  },
+  "model": {
+    "minContextTokens": 16384,
+    "tiers": [
+      "large-local",
+      "frontier"
+    ],
+    "evals": {}
+  },
+  "budget": {
+    "entrypointTokens": 246,
+    "referencesTokens": 0
+  },
+  "verification": [
+    "Every check was run in this job by the reviewer.",
+    "The answer ends with exactly one of APPROVE, CHANGES NEEDED, REJECT.",
+    "Every problem raised names a file and a line."
+  ],
+  "reads": [],
+  "subagents": [
+    "check-claims"
+  ],
+  "replaces": [
+    {
+      "id": "review_a_change",
+      "version": 1
+    }
+  ]
+}
