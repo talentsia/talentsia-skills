@@ -16,3 +16,7 @@ Choose a feasible small set using context, time, energy and importance grounded 
 ## Select in sequence
 
 Apply the shared method's context → available time → available energy filters before comparing priority and consequences. Review due bring-forward material through its existing mechanism and distinguish calendar events, day-specific actions and day-specific information. Consider predefined work, work arriving and time needed to define work; a fresh input does not automatically outrank existing promises. Show a feasible start and optional choices, not a competing registry. Read review-and-planning for horizon alignment when priority conflicts cannot be resolved from stated goals.
+
+## Connected Premium pilot
+
+Read [connected routing](references/connected-premium.md) when the existing host exposes Talentsia Do connected tools. Use the protected Plan My Day method only after current successful retrieval; otherwise perform this complete Free workflow.
