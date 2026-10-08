@@ -1,0 +1,11 @@
+# Talentsia Skill Builder package instructions
+
+This free plugin contains exactly five skills sharing one canonical method under `references/`, six builder roles under `agents/`, and a compressed method under `pocket/`. The skills make other skills; they perform none of the work those skills describe. Each skill explicitly reads a self-contained export. Read the relevant SKILL.md and shared core before changing workflow.
+
+The references are the material fed to the builder's subagents: `skill-contract.md` (the rules a validator applies), `skill-template.md` (the skeletons to fill), `subagent-contract.md`, `eval-design.md`, `capabilities.md` (a copy of the vocabulary in `capabilities/v1.json`; the repository file is authoritative), `review-checklist.md` and `export-layout.md`. When `docs/edge-worker-skills.md`, `capabilities/v1.json` or `scripts/check_edge_skills.py` change, revise the matching reference in the same change.
+
+After editing canonical references, run `python3 scripts/package_builder.py` from the repository root to synchronize reference exports, validate manifests, frontmatter, roles and links, and build the plugin archive outside the repository. Never edit exported reference copies independently. `pocket/method.md` is the hand-kept compressed form of `references/core.md`; revise it whenever the core changes meaning.
+
+Rules the script enforces: five skills; frontmatter exactly `name` and `description`; body sections When to use, Steps (numbered, at most eight, at most 300 characters), Done when, Notes, A welcoming first turn, Handoffs; `agents/openai.yaml` with `short_description` of 25 to 64 characters and `$<name>` in `default_prompt`; six role files with frontmatter `name` and `description` and sections Before anything, Craft, Must not, Return; every `{{agent:…}}`-style role mention in a skill names an existing role file; no `<` placeholder; exports byte-identical.
+
+This plugin carries no `talentsia-package.json` and no `skill.json`: it targets harnesses, not Edge devices, and must not be swept into the Edge validators. Packs the builder produces may carry both. No personal records, organisational facts, credentials or invented example data belong anywhere in this package. Packaging does not list the plugin in a marketplace, create a tag or publish; those are maintainer steps.

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "talentsia-skill-template",
+  "version": "0.1.0",
+  "description": "Template plugin showing how Talentsia structures reusable skills: one shared method, self-contained exports, explicit authority and bounded subagents.",
+  "author": {
+    "name": "Talentsia"
+  },
+  "keywords": [
+    "template",
+    "skills",
+    "method",
+    "subagents"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Talentsia Skill Template",
+        "shortDescription": "Scaffold for new Talentsia skill packs",
+        "longDescription": "A starting point for new Talentsia skill packs. It contains one placeholder skill, a canonical shared method under references/, a compressed pocket method, a subagent role template and package instructions. Copy the plugin, rename it, replace every <placeholder> and remove this sentence before publishing. It performs no work of its own, stores nothing, connects to nothing and grants no permission.",
+        "developerName": "Talentsia",
+        "category": "Productivity",
+        "defaultPrompt": [
+          "Use Template Skill to show how a Talentsia skill reads its method, bounds its work and reports its result."
+        ],
+        "logo": "./assets/talentsia-skill-template.svg",
+        "composerIcon": "./assets/talentsia-skill-template.svg",
+        "websiteURL": "https://skills.talentsia.com"
+      }
+    }
+  },
+  "homepage": "https://skills.talentsia.com"
+}

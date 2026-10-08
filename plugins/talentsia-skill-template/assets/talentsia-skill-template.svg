@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Talentsia Skill Template">
+  <rect width="128" height="128" rx="28" fill="#14283F"/>
+  <rect x="24" y="24" width="80" height="80" rx="14" fill="none" stroke="#F4F8FC" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+  <path d="M44 48h40M64 48v40" fill="none" stroke="#39D9C3" stroke-width="10" stroke-linecap="round"/>
+</svg>

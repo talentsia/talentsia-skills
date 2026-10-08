@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scope a Skill"
+  short_description: "Agree when a skill applies and what done means"
+  default_prompt: "Use $scope-a-skill to define a new skill from the work I describe."

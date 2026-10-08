@@ -1,0 +1,9 @@
+{
+  "name": "talentsia-skill-builder",
+  "version": "0.1.0",
+  "description": "Five skills that scope, draft, review, test and export Talentsia skill packs with bounded subagents.",
+  "author": {
+    "name": "Talentsia"
+  },
+  "homepage": "https://skills.talentsia.com"
+}
