@@ -22,6 +22,8 @@ jobs:
           python3 scripts/privacy_scan.py --output /tmp/talentsia-do-ci
           python3 scripts/package_work.py --output /tmp/talentsia-work-ci
           python3 scripts/privacy_scan.py --output /tmp/talentsia-work-ci
+          python3 scripts/package_builder.py --output /tmp/talentsia-skill-builder-ci
+          python3 scripts/privacy_scan.py --output /tmp/talentsia-skill-builder-ci
           python3 scripts/check_edge_skills.py
           python3 -m unittest discover -s tests -p 'test_eval_edge_skills.py'
           python3 scripts/eval_edge_skills.py --fake

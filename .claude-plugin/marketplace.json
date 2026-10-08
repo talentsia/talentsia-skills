@@ -1,5 +1,6 @@
 {
   "name": "talentsia-skills",
+  "description": "Reusable Talentsia skill plugins for ChatGPT, Codex, Claude Code and compatible harnesses.",
   "owner": {
     "name": "Talentsia"
   },
@@ -15,6 +16,13 @@
       "source": "./plugins/talentsia-work",
       "description": "Hold a seat in your Talentsia organisation: six free skills, four role agents and a signed MCP connection.",
       "version": "0.1.2"
+    },
+    {
+      "name": "talentsia-skill-builder",
+      "source": "./plugins/talentsia-skill-builder",
+      "description": "Scope, draft, review, rehearse and export reusable skill packs with bounded subagents.",
+      "version": "0.1.0",
+      "category": "Productivity"
     }
   ],
   "metadata": {

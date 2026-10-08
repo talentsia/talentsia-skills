@@ -1,0 +1,9 @@
+{
+  "name": "talentsia-skill-template",
+  "version": "0.1.0",
+  "description": "Template plugin for new Talentsia skill packs: one shared method, self-contained exports, explicit authority and bounded subagents.",
+  "author": {
+    "name": "Talentsia"
+  },
+  "homepage": "https://skills.talentsia.com"
+}

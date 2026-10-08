@@ -58,6 +58,8 @@ codex plugin marketplace add talentsia/talentsia-skills --ref main --sparse .age
 
 Restart the desktop app, choose Talentsia Skills in the Plugins Directory and install Talentsia Do. Adding a catalog does not install its plugin. The sparse catalog fetches the plugin independently from the immutable `v0.5.5` tag. Client and workspace availability can vary. This is a Git marketplace, not an OpenAI universal public-directory listing.
 
+The same catalog now includes Talentsia Skill Builder. Install it with `codex plugin add talentsia-skill-builder@talentsia-skills`, or choose it in the desktop Plugins Directory after adding the marketplace. The entry tracks `main` until a versioned builder tag is published.
+
 For an existing installation:
 
 ```sh
@@ -79,11 +81,13 @@ See the [verified connection and validation steps](docs/connected-premium-native
 ## Claude Code
 
 ```sh
-claude plugin marketplace add https://github.com/talentsia/talentsia-skills.git#v0.5.5
-claude plugin install talentsia-do@talentsia-skills
+claude plugin marketplace add talentsia/talentsia-skills
+claude plugin install talentsia-skill-builder@talentsia-skills
 ```
 
-Invoke, for example, `/talentsia-do:clear-my-head` or `/talentsia-do:review`. Existing marketplace sources pinned to an earlier tag must be changed to the new tag before updating the plugin. [Official Claude Code guide](https://code.claude.com/docs/en/plugin-marketplaces).
+The marketplace follows `main`; the builder entry is `0.1.0`. Invoke `/talentsia-skill-builder:scope-a-skill`, `/talentsia-skill-builder:draft-a-skill`, `/talentsia-skill-builder:review-a-skill`, `/talentsia-skill-builder:test-a-skill` or `/talentsia-skill-builder:export-a-pack`. The same catalog contains Do and Work. [Official Claude Code guide](https://code.claude.com/docs/en/plugin-marketplaces).
+
+These are repository marketplaces for ChatGPT desktop/Codex and Claude Code. They do not publish a plugin to ChatGPT's universal Plugins Directory; that requires a separate OpenAI submission and review. Other Agent Skills-compatible hosts can install the `plugins/talentsia-skill-builder/skills/<name>` folders directly according to their own skill procedure. Skill instructions are portable; subagent execution depends on the host, and the pack specifies sequential fallback where delegation is unavailable.
 
 ## Skill ZIP upload and other clients
 
@@ -139,3 +143,7 @@ Canonical shared references live under `plugins/talentsia-do/references/`; the h
 Build the skill file and its upload ZIP with `python3 scripts/skill_file.py --output /tmp/talentsia-do-release`, then verify all artifacts with `python3 scripts/check_candidate.py --output /tmp/talentsia-do-release` and `python3 scripts/privacy_scan.py --output /tmp/talentsia-do-release`. A release has exactly three distributable artifacts: the skill file, the skill ZIP and the plugin ZIP, plus checksums and the validation report. The release includes 64 authored behavior cases; model runs and real app behavior remain unexecuted.
 
 Talentsia Work is packaged separately. Run `python3 scripts/package_work.py --output /tmp/talentsia-work-release`, then `python3 scripts/privacy_scan.py --output /tmp/talentsia-work-release`. That build synchronises the seat-protocol exports, validates both harness manifests, smoke-tests the MCP server with no credentials, and writes the plugin ZIP, a `SHA256SUMS` file covering the ZIP and the client scripts, and a checks report. Its [synthetic cases](evals/talentsia-work-cases.json) are authored and not run.
+
+To start a new pack, copy [`plugins/talentsia-skill-template`](plugins/talentsia-skill-template/README.md). It carries the Do layout — one canonical method under `references/`, byte-identical exports per skill, a pocket method, a subagent role template and package instructions — with placeholders instead of workflows. It is not installable, not listed in the marketplace manifests and not built by any release script.
+
+[`plugins/talentsia-skill-builder`](plugins/talentsia-skill-builder/README.md) is the installable counterpart: five skills (Scope, Draft, Review, Test, Export) and six subagent roles that make packs in this layout from inside Codex, ChatGPT desktop or Claude Code, fed by references that carry the skill contract, template, subagent and eval contracts, capability vocabulary, review checklist and export layout. Build and validate it with `python3 scripts/package_builder.py --output /tmp/talentsia-skill-builder-release`. It is listed in both repository marketplace manifests on `main`; its conversational test is a rehearsal, and the measured pass rate still comes from `scripts/eval_edge_skills.py`.

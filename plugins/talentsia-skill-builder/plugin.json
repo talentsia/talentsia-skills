@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "talentsia-skill-builder",
+  "version": "0.1.0",
+  "description": "Five skills that scope, draft, review, test and export Talentsia skill packs with bounded subagents, from a shared contract and template.",
+  "author": {
+    "name": "Talentsia"
+  },
+  "keywords": [
+    "skills",
+    "builder",
+    "subagents",
+    "evals",
+    "packaging"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Talentsia Skill Builder",
+        "shortDescription": "Scope, draft, review, test and export skills",
+        "longDescription": "Talentsia Skill Builder turns a described piece of work into a portable skill pack. Scope a Skill fixes when it applies and what done looks like; Draft a Skill writes the entrypoint, machine contract, subagents and graded cases from the bundled template; Review a Skill checks the draft against the contract with independent reviewers; Test a Skill runs the graded cases as a simulated harness in this conversation; Export a Pack assembles the distributable layout for harnesses and Talentsia Edge devices. The references carry the full skill contract, the template, the subagent and eval contracts, the capability vocabulary and the review checklist. The pack writes only where the user designates, grants no permission, and never substitutes a conversational test for a measured pass rate.",
+        "developerName": "Talentsia",
+        "category": "Productivity",
+        "defaultPrompt": [
+          "Use Scope a Skill to define a new skill from the work I describe.",
+          "Use Draft a Skill to write the skill files from the agreed scope.",
+          "Use Export a Pack to assemble the distributable pack."
+        ],
+        "logo": "./assets/talentsia-skill-builder.svg",
+        "composerIcon": "./assets/talentsia-skill-builder.svg",
+        "websiteURL": "https://skills.talentsia.com"
+      }
+    }
+  },
+  "homepage": "https://skills.talentsia.com"
+}
