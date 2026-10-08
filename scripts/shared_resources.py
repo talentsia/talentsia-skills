@@ -381,11 +381,9 @@ def _references(value, name, files, schema_root=None):
             _references(child, name, files, schema_root)
 
 
-def validate_resources(files: dict[str, bytes], metadata: dict) -> None:
-    """Validate a skill-relative resource set and declared subagent contracts."""
+def validate_links(files: dict[str, bytes]) -> None:
+    """Validate arbitrary folder dependencies without imposing a skill role contract."""
     _files(files)
-    if 'SKILL.md' not in files or not isinstance(metadata, dict):
-        raise ResourceError('SKILL.md and canonical metadata are required')
     for name, data in files.items():
         if name.endswith('.json'):
             value = _json(data, name)
@@ -399,6 +397,13 @@ def validate_resources(files: dict[str, bytes], metadata: dict) -> None:
             targets += re.findall(r'^ {0,3}\[[^\]]+\]:\s*(\S+)', text, re.M)
             for target in targets:
                 _target(name, target, files)
+
+
+def validate_resources(files: dict[str, bytes], metadata: dict) -> None:
+    """Validate a skill-relative resource set and declared subagent contracts."""
+    validate_links(files)
+    if 'SKILL.md' not in files or not isinstance(metadata, dict):
+        raise ResourceError('SKILL.md and canonical metadata are required')
     declarations = metadata.get('subagents', [])
     if not isinstance(declarations, list) or any(not isinstance(n, str) or not re.fullmatch(r'[a-z0-9-]{1,64}', n) for n in declarations) or len(set(declarations)) != len(declarations):
         raise ResourceError('invalid subagent declarations')

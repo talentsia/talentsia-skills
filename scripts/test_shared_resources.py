@@ -9,7 +9,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from shared_resources import ResourceError, archive, safe_path, validate_resources, verify_archive, validate_builder_skill, validate_builder_cases
+from shared_resources import ResourceError, archive, safe_path, validate_resources, verify_archive, validate_builder_skill, validate_builder_cases, validate_links
 
 
 def fixture():
@@ -191,6 +191,17 @@ class BuilderContractTests(unittest.TestCase):
             cases=json.loads(files['evals/cases.json']);cases['cases'][0]['expect'][key]=values
             with self.assertRaises(ResourceError):
                 validate_builder_cases(cases,metadata['id'],metadata)
+
+
+class FolderLinkTests(unittest.TestCase):
+    def test_non_skill_folder_links_and_anchors_without_role_registration(self):
+        files = {'AGENTS.md': b'Read [method](references/core.md#checks).',
+                 'agents/coordinator.md': b'# Coordinator\nRead-only legacy role brief.\n',
+                 'references/core.md': b'# Method\n## Checks\n'}
+        validate_links(files)
+        files['references/core.md'] = b'# Method\n'
+        with self.assertRaisesRegex(ResourceError, 'anchor'):
+            validate_links(files)
 
 
 if __name__ == '__main__':
