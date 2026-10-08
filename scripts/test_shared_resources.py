@@ -112,7 +112,7 @@ class ResourceTests(unittest.TestCase):
             self.assert_invalid(files,metadata)
 
     def test_unsafe_paths(self):
-        for path in ('../a','/a','C:/a','a\\b','.git/config','.env','.env.production','.ENV.test','secrets/token.json','a\nname','run-record.json','runtime-records/session.json','work/session.md','x/private-scenarios/client.json','approvals/release.json','a//b','a/./b'):
+        for path in ('../a','/a','C:/a','folder/file:stream','con.txt','folder/NUL','trailing.','trailing ','a\\b','.git/config','.env','.env.production','.ENV.test','secrets/token.json','a\nname','run-record.json','runtime-records/session.json','work/session.md','x/private-scenarios/client.json','approvals/release.json','a//b','a/./b'):
             with self.subTest(path=path),self.assertRaises(ResourceError):
                 safe_path(path)
 

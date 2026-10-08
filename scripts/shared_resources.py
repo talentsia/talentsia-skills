@@ -215,8 +215,10 @@ def safe_path(name: str) -> str:
     if not isinstance(name, str) or not name or '\\' in name or any(ord(c) < 32 or 127 <= ord(c) <= 159 for c in name):
         raise ResourceError(f'unsafe resource path: {name!r}')
     parts = name.split('/')
-    if name.startswith('/') or re.match(r'^[A-Za-z]:', name) or any(p in ('', '.', '..') for p in parts):
+    if name.startswith('/') or ':' in name or any(p in ('', '.', '..') or p.endswith((' ', '.')) for p in parts):
         raise ResourceError(f'unsafe resource path: {name!r}')
+    if any(re.fullmatch(r'(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?', p, re.I) for p in parts):
+        raise ResourceError(f'unsafe portable resource path: {name!r}')
     if any(p.lower() in FORBIDDEN or p.lower().startswith('.env.') or p.lower().endswith(('.key', '.pem', '.pyc', '.sqlite')) or re.fullmatch(r'(?:run|runtime|work)[-_]record(?:s)?(?:\.[^.]+)?', p.lower()) for p in parts):
         raise ResourceError(f'forbidden member: {name}')
     return name
