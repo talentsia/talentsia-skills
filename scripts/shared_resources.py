@@ -31,6 +31,184 @@ FORBIDDEN = {'.git', '.github', '.env', '.env.local', '.ds_store', '__pycache__'
 MAX_FILES = 10000
 MAX_BYTES = 100 * 1024 * 1024
 
+# Reviewed Talentsia Skill Builder 0.1.0 capability vocabulary, also present in
+# public capabilities/v1.json. A newer trusted pinned vocabulary can be supplied;
+# declarations themselves never create interfaces or grant tool access.
+BUILDER_CAPABILITIES = {
+    'documents.inspect': ('inspect', 'extract_text', 'metadata'),
+    'documents.register': ('register',), 'files.workspace': ('list', 'read', 'write', 'move', 'mkdir'),
+    'host.observe': ('system', 'services', 'logs'), 'host.services.restart': ('restart',),
+    'operator.notify': ('notify',), 'memory.learn': ('learn', 'recall'),
+    'work.history.read': ('activity', 'outcomes'), 'team.read': ('roster', 'context', 'gaps'),
+    'artifacts.read': ('list', 'search', 'read'), 'artifacts.dispose': ('dispose',),
+    'work.handoff': ('delegate',), 'decisions.prepare': ('raise',), 'staffing.request': ('request',),
+    'commitments.mine': ('list', 'update'), 'intent.read': ('priorities', 'measures'),
+    'intent.propose': ('propose',), 'commitments.read': ('list',),
+    'commitments.write': ('record', 'update', 'date'), 'decisions.read': ('list',),
+    'briefs.write': ('brief', 'meeting_brief'), 'attention.read': ('inbox', 'attention'),
+    'attention.write': ('record',), 'calendar.read': ('today', 'week', 'meeting', 'categorise'),
+    'drafts.write': ('draft_reply',), 'ledger.entity.read': ('entity', 'partners'),
+    'ledger.chart.read': ('accounts',),
+    'ledger.reports.read': ('open_payables', 'entries', 'entry', 'expense_summary', 'financial_summary'),
+    'ledger.documents.lookup': ('find_by_document',), 'ledger.bills.write': ('record_bill', 'add_contact'),
+    'ledger.payments.write': ('record_payment', 'record_receipt'),
+    'ledger.statements.import': ('import', 'review_queue', 'categorise'), 'ledger.reconcile': ('reconcile',),
+    'ledger.review.flag': ('flag',), 'code.repo.read': ('repos', 'files', 'read', 'search'),
+    'code.repo.write': ('write', 'replace'), 'code.checks.run': ('check',),
+    'code.change.prepare': ('diff', 'prepare'), 'code.preview': ('preview',),
+    'tasks.write': ('create', 'update'),
+}
+
+
+def _capabilities(metadata, vocabulary):
+    values = metadata.get('requires', {}).get('capabilities')
+    if not isinstance(values, list) or any(not isinstance(v, str) for v in values) or len(set(values)) != len(values):
+        raise ResourceError('invalid required capability inventory')
+    interfaces = set()
+    for value in values:
+        interface, separator, version = value.partition('@')
+        if not separator or version != '1' or interface not in vocabulary:
+            raise ResourceError(f'unresolved required capability: {value}')
+        interfaces.add(interface)
+    return interfaces
+
+
+def _operation(value, interfaces, vocabulary):
+    if not isinstance(value, str) or value.count('/') != 1:
+        raise ResourceError(f'invalid tool operation: {value!r}')
+    interface, operation = value.split('/')
+    if interface not in interfaces or operation not in vocabulary.get(interface, ()):
+        raise ResourceError(f'unresolved or undeclared tool operation: {value}')
+
+
+def validate_builder_cases(value: dict, identifier: str, metadata: dict | None = None,
+                           capabilities: dict | None = None) -> None:
+    """Check authored graded case contracts, without executing or grading them.
+
+    Pass canonical builder metadata to enforce exact role/capability membership.
+    Standalone callers still receive schema, vocabulary and scenario checks.
+    """
+    vocabulary = BUILDER_CAPABILITIES if capabilities is None else capabilities
+    if not isinstance(value, dict) or value.get('schema') != 'talentsia-skill-evals/v1' or value.get('skill') != identifier:
+        raise ResourceError('evaluation schema or skill identity mismatch')
+    cases = value.get('cases')
+    if not isinstance(cases, list) or not 3 <= len(cases) <= 6:
+        raise ResourceError('builder evaluations require three to six cases')
+    interfaces = _capabilities(metadata, vocabulary) if metadata is not None else set(vocabulary)
+    agents = set(metadata.get('subagents', [])) if metadata is not None else None
+    seen, regression = set(), False
+    for case in cases:
+        if not isinstance(case, dict):
+            raise ResourceError('evaluation case must be an object')
+        identifier_case = case.get('id')
+        if not isinstance(identifier_case, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', identifier_case) or identifier_case in seen:
+            raise ResourceError('evaluation case IDs must be unique kebab names')
+        seen.add(identifier_case)
+        if not isinstance(case.get('title'), str) or not case['title'].strip():
+            raise ResourceError(f'{identifier_case}: missing case title')
+        if 'regression' in case and type(case['regression']) is not bool:
+            raise ResourceError(f'{identifier_case}: regression flag must be boolean')
+        regression |= case.get('regression') is True
+        given, expect = case.get('given'), case.get('expect')
+        if not isinstance(given, dict) or not isinstance(given.get('goal'), str) or not given['goal'].strip() or not isinstance(given.get('observations'), dict):
+            raise ResourceError(f'{identifier_case}: goal and observations are required')
+        if not isinstance(expect, dict) or not expect or set(expect) - {'calls', 'notCalls', 'agents', 'says', 'notSays'}:
+            raise ResourceError(f'{identifier_case}: invalid grading contract')
+        has_expectation = False
+        for key, expectations in expect.items():
+            if not isinstance(expectations, list) or any(not isinstance(x, str) or not x.strip() for x in expectations) or len(set(expectations)) != len(expectations):
+                raise ResourceError(f'{identifier_case}: invalid {key} expectations')
+            has_expectation |= bool(expectations)
+            for expected in expectations:
+                if key in {'calls', 'notCalls'}:
+                    _operation(expected, interfaces, vocabulary)
+                elif key == 'agents' and (not re.fullmatch(r'[a-z0-9-]{1,64}', expected) or agents is not None and expected not in agents):
+                    raise ResourceError(f'{identifier_case}: undeclared expected agent')
+        if not has_expectation or set(expect.get('calls', [])) & set(expect.get('notCalls', [])):
+            raise ResourceError(f'{identifier_case}: empty or contradictory grading contract')
+        for observation in given['observations']:
+            if not isinstance(observation, str) or not observation:
+                raise ResourceError(f'{identifier_case}: invalid observation key')
+            if observation.startswith('agent:'):
+                role = observation[6:]
+                if not re.fullmatch(r'[a-z0-9-]{1,64}', role) or agents is not None and role not in agents:
+                    raise ResourceError(f'{identifier_case}: undeclared observed agent')
+            elif '/' in observation:
+                _operation(observation, interfaces, vocabulary)
+    if not regression:
+        raise ResourceError('missing authored regression case')
+
+
+def validate_builder_skill(files: dict[str, bytes], metadata: dict,
+                           capabilities: dict | None = None) -> None:
+    """Validate the original builder entrypoint/role/case contract structurally.
+
+    This cannot certify prose quality, permissions, source truth, runtime behavior
+    or measured evaluations, and never updates status or approval records.
+    """
+    vocabulary = BUILDER_CAPABILITIES if capabilities is None else capabilities
+    validate_resources(files, metadata)
+    if metadata.get('schema') != 'talentsia-skill/v1' or not isinstance(metadata.get('id'), str) or not re.fullmatch(r'talentsia\.[a-z0-9-]+\.[a-z0-9-]+', metadata['id']):
+        raise ResourceError('invalid builder skill identity/schema')
+    if not isinstance(metadata.get('version'), str) or not re.fullmatch(r'\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?', metadata['version']):
+        raise ResourceError('invalid builder skill version')
+    if metadata.get('status') not in {'draft', 'released'}:
+        raise ResourceError('invalid builder skill status')
+    fields, body = _frontmatter(_text(files['SKILL.md'], 'SKILL.md'), 'SKILL.md')
+    if set(fields) != {'name', 'description'} or not isinstance(fields['name'], str) or not re.fullmatch(r'[a-z0-9-]{1,64}', fields['name']) or metadata['id'].split('.')[-1] != fields['name']:
+        raise ResourceError('builder frontmatter name or field mismatch')
+    if not isinstance(fields['description'], str) or not 1 <= len(fields['description']) <= 1024 or fields['description'] != metadata.get('summary'):
+        raise ResourceError('builder discovery description mismatch')
+    opening = re.sub(r'\A\s*# [^\n]+\n', '', body).strip()
+    intro = opening.split('\n\n')[0]
+    if not intro.startswith('Read [the shared method](references/core.md) before proceeding.'):
+        raise ResourceError('missing canonical shared-method entrypoint')
+    headings = re.findall(r'^## (.+)$', body, re.M)
+    order = ['When to use', 'Steps', 'Done when', 'Notes', 'A welcoming first turn', 'Handoffs']
+    if headings[:3] != order[:3] or len(set(headings)) != len(headings) or any(h not in order for h in headings) or [order.index(h) for h in headings] != sorted(order.index(h) for h in headings):
+        raise ResourceError('builder entrypoint sections missing, duplicated or out of order')
+    sections = {}
+    for index, heading in enumerate(headings):
+        start = body.index('## '+heading) + len('## '+heading)
+        end = body.index('## '+headings[index+1], start) if index+1 < len(headings) else len(body)
+        sections[heading] = body[start:end].strip()
+    if not sections['When to use'] or '\n\n' in sections['When to use']:
+        raise ResourceError('When to use must be one paragraph')
+    lines = [line for line in sections['Steps'].splitlines() if line.strip()]
+    steps = []
+    for index,line in enumerate(lines,1):
+        match = re.fullmatch(r'(\d+)\. (.+)', line)
+        if not match or match.group(1) != str(index) or len(match.group(2)) > 300:
+            raise ResourceError('builder steps must be numbered and at most 300 characters')
+        steps.append(match.group(2))
+    if not 1 <= len(steps) <= 8:
+        raise ResourceError('builder entrypoint requires one to eight steps')
+    done = [line[2:] for line in sections['Done when'].splitlines() if line.startswith('- ')]
+    if not done or any(not line.strip() for line in done) or done != metadata.get('verification'):
+        raise ResourceError('Done when and canonical verification disagree')
+    interfaces = _capabilities(metadata, vocabulary)
+    declared_agents = set(metadata.get('subagents', []))
+    for name,data in files.items():
+        # Runtime references can explain placeholder grammar with metavariables;
+        # executable entrypoint and role steps carry declarations to resolve.
+        if name != 'SKILL.md' and not re.fullmatch(r'agents/[^/]+\.md', name):
+            continue
+        text = _text(data,name)
+        for kind,target in re.findall(r'\{\{(tool|agent):([^}]+)\}\}', text):
+            if kind == 'tool':
+                _operation(target, interfaces, vocabulary)
+            elif target not in declared_agents or name.startswith('agents/'):
+                raise ResourceError(f'{name}: undeclared or recursive agent reference')
+    for role in declared_agents:
+        fields_role,_ = _frontmatter(_text(files[f'agents/{role}.md'],role),role)
+        for tool in fields_role['tools']:
+            _operation(tool,interfaces,vocabulary)
+        if not fields_role['input'] or fields_role['output'].get('type') != 'object' or not fields_role['output'].get('required'):
+            raise ResourceError('role requires nonempty input and object output with required fields')
+    if 'evals/cases.json' not in files:
+        raise ResourceError('missing authored evaluation cases')
+    validate_builder_cases(_json(files['evals/cases.json'],'evals/cases.json'),metadata['id'],metadata,vocabulary)
+
 
 def safe_path(name: str) -> str:
     """Validate an archive/resource member path without normalizing unsafe input."""

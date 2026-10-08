@@ -9,7 +9,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from shared_resources import ResourceError, archive, safe_path, validate_resources, verify_archive
+from shared_resources import ResourceError, archive, safe_path, validate_resources, verify_archive, validate_builder_skill, validate_builder_cases
 
 
 def fixture():
@@ -21,6 +21,26 @@ def fixture():
     role += '\n---\n\n## Steps\n\n1. Review evidence.\n\n## Done when\n\n- Return the cited result.\n'
     return {'SKILL.md': b'# Example\nAssign {{agent:analyst}}. Read [method](references/core.md#checks).\n',
             'agents/analyst.md': role.encode(), 'references/core.md': b'# Method\n## Checks\n'}, {'subagents': ['analyst']}
+
+
+def builder_fixture():
+    files,metadata = fixture()
+    metadata.update(schema='talentsia-skill/v1',id='talentsia.example.example',version='0.1.0',status='draft',
+                    summary='Review supplied material.',verification=['The result cites evidence.'],
+                    requires={'capabilities':['documents.inspect@1']})
+    files['SKILL.md'] = (b'---\nname: example\ndescription: "Review supplied material."\n---\n\n# Example\n\n'
+        b'Read [the shared method](references/core.md) before proceeding. Prepare a draft.\n\n'
+        b'## When to use\n\nUse for supplied material.\n\n## Steps\n\n'
+        b'1. Inspect with {{tool:documents.inspect/inspect}} then assign {{agent:analyst}}.\n\n'
+        b'## Done when\n\n- The result cites evidence.\n')
+    cases={'schema':'talentsia-skill-evals/v1','skill':metadata['id'],'cases':[]}
+    for index,name in enumerate(('regression-case','ordinary-case','boundary-case')):
+        cases['cases'].append({'id':name,'title':'Review supplied shapes','regression':index==0,
+            'given':{'goal':'Review supplied material.','observations':{'document':'One permitted excerpt.',
+                'documents.inspect/inspect':'Readable excerpt.','agent:analyst':{'result':'Cited observation.'}}},
+            'expect':{'calls':['documents.inspect/inspect'],'agents':['analyst'],'says':['The result cites evidence.']}})
+    files['evals/cases.json']=json.dumps(cases).encode()
+    return files,metadata
 
 
 class ResourceTests(unittest.TestCase):
@@ -119,6 +139,58 @@ class ResourceTests(unittest.TestCase):
                         z.writestr(entry,b'second')
                 with self.assertRaises(ResourceError):
                     verify_archive(path,hashlib.sha256(path.read_bytes()).hexdigest())
+
+
+class BuilderContractTests(unittest.TestCase):
+    def test_complete_builder_contract(self):
+        validate_builder_skill(*builder_fixture())
+
+    def test_verification_and_description_drift(self):
+        for key,value in [('verification',['Unrelated completion.']),('summary','Unrelated description.')]:
+            files,metadata=builder_fixture()
+            metadata[key]=value
+            with self.assertRaises(ResourceError):
+                validate_builder_skill(files,metadata)
+
+    def test_entrypoint_order_and_step_limits(self):
+        for old,new in [(b'## When to use',b'## Notes'),(b'1. Inspect',b'2. Inspect'),
+                        (b'Inspect with',b'x'*301+b' with')]:
+            files,metadata=builder_fixture()
+            files['SKILL.md']=files['SKILL.md'].replace(old,new)
+            with self.assertRaises(ResourceError):
+                validate_builder_skill(files,metadata)
+
+    def test_unknown_operations_and_undeclared_interfaces(self):
+        for old,new in [(b'documents.inspect/inspect',b'documents.inspect/invented'),
+                        (b'documents.inspect/inspect',b'files.workspace/write')]:
+            files,metadata=builder_fixture()
+            files['SKILL.md']=files['SKILL.md'].replace(old,new)
+            with self.assertRaises(ResourceError):
+                validate_builder_skill(files,metadata)
+
+    def test_missing_cases_schema_identity_regression_and_goal(self):
+        for mutation in ('schema','skill','regression','goal','observations','expect','id'):
+            files,metadata=builder_fixture()
+            cases=json.loads(files['evals/cases.json'])
+            if mutation in ('schema','skill'):
+                cases[mutation]='incorrect'
+            elif mutation=='regression':
+                for case in cases['cases']:case['regression']=False
+            elif mutation=='id':
+                cases['cases'][0]['id']='not a kebab id'
+            elif mutation=='expect':
+                del cases['cases'][0]['expect']
+            else:
+                del cases['cases'][0]['given'][mutation]
+            with self.subTest(mutation=mutation),self.assertRaises(ResourceError):
+                validate_builder_cases(cases,metadata['id'],metadata)
+
+    def test_cases_cannot_expect_undeclared_roles_or_calls(self):
+        for key,values in [('agents',['unknown']),('calls',['files.workspace/write']),('notCalls',['documents.inspect/nonexistent'])]:
+            files,metadata=builder_fixture()
+            cases=json.loads(files['evals/cases.json']);cases['cases'][0]['expect'][key]=values
+            with self.assertRaises(ResourceError):
+                validate_builder_cases(cases,metadata['id'],metadata)
 
 
 if __name__ == '__main__':
