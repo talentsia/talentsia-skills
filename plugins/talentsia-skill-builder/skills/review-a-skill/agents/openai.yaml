@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review a Skill"
+  short_description: "Quote contract and checklist findings with fixes"
+  default_prompt: "Use $review-a-skill to check this drafted skill against the contract and checklist."

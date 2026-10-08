@@ -1,0 +1,4 @@
+interface:
+  display_name: "Template Skill"
+  short_description: "Placeholder skill showing the pack layout"
+  default_prompt: "Use $template-skill to show how a skill in this pack reads its method, bounds its work and reports its result."

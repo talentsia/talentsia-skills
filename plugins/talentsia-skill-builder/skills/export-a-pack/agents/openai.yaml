@@ -1,0 +1,4 @@
+interface:
+  display_name: "Export a Pack"
+  short_description: "Assemble the distributable pack and hand over"
+  default_prompt: "Use $export-a-pack to assemble the distributable pack from these skills."

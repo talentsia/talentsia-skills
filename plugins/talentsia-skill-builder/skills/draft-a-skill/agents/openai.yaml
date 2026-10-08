@@ -1,0 +1,4 @@
+interface:
+  display_name: "Draft a Skill"
+  short_description: "Write skill files from an agreed scope"
+  default_prompt: "Use $draft-a-skill to write the skill files from this agreed scope."

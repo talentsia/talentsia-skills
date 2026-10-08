@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test a Skill"
+  short_description: "Rehearse graded cases before a model run"
+  default_prompt: "Use $test-a-skill to rehearse this skill's graded cases in the conversation."
