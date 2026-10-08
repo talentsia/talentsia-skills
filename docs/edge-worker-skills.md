@@ -180,6 +180,16 @@ python3 scripts/eval_edge_skills.py --fake
 - A skill the validator refuses is not evaluated. Exit status is 0 when every
   case passed, 1 when one failed, 2 when the run could not be trusted.
 
+### When a skill is released
+
+A skill moves from `draft` to `released` when, on the small local reference model
+(`qwen3.5:9b`), it passes at least two thirds of its cases, every case marked
+`"regression": true` passes, no case hit a model-server error, and it claims the
+`small-local` tier. Its pass rate is recorded in `model.evals` either way, so a
+draft says how far it has to go. The harness grades what the model does with no
+runtime help: on a device, settlement checks push a worker back when it says it
+did something it did not, so field results are usually better than these.
+
 ## 6. Capabilities
 
 [capabilities/v1.json](../capabilities/v1.json) is the vocabulary skills write

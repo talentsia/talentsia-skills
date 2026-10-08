@@ -2,7 +2,7 @@
   "schema": "talentsia-skill/v1",
   "id": "talentsia.engineering.run-a-scan",
   "version": "2.0.0",
-  "status": "draft",
+  "status": "released",
   "publisher": "talentsia",
   "tier": "free",
   "edition": "basic",
@@ -27,7 +27,9 @@
       "small-local",
       "frontier"
     ],
-    "evals": {}
+    "evals": {
+      "qwen3.5:9b": 1.0
+    }
   },
   "budget": {
     "entrypointTokens": 191,

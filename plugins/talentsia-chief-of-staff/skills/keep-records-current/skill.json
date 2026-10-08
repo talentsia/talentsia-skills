@@ -32,7 +32,9 @@
       "small-local",
       "frontier"
     ],
-    "evals": {}
+    "evals": {
+      "qwen3.5:9b": 0.67
+    }
   },
   "budget": {
     "entrypointTokens": 432,

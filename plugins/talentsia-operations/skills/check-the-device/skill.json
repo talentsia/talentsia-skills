@@ -2,7 +2,7 @@
   "schema": "talentsia-skill/v1",
   "id": "talentsia.operations.check-the-device",
   "version": "2.0.0",
-  "status": "draft",
+  "status": "released",
   "publisher": "talentsia",
   "tier": "free",
   "edition": "basic",
@@ -28,7 +28,9 @@
       "small-local",
       "frontier"
     ],
-    "evals": {}
+    "evals": {
+      "qwen3.5:9b": 0.67
+    }
   },
   "budget": {
     "entrypointTokens": 307,
